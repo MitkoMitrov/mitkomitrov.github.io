@@ -1,5 +1,5 @@
 import './style.css';
-import * as THREE from 'three';
+import * as THREE from './node_modules/three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 // Setup
@@ -65,9 +65,9 @@ scene.background = spaceTexture;
 
 // Avatar
 
-const mitkoTexture = new THREE.TextureLoader().load('test.png');
+const mitkoTexture = new THREE.TextureLoader().load('mitko.png');
 
-const mitko = new THREE.Mesh(new THREE.BoxGeometry(3, 4, 3), new THREE.MeshBasicMaterial({ map: mitkoTexture }));
+const mitko = new THREE.Mesh(new THREE.BoxGeometry(2, 3, 2), new THREE.MeshBasicMaterial({ map: mitkoTexture }));
 
 scene.add(mitko);
 
