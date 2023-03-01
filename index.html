@@ -1,132 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5J3W5EZLQL"></script>
-    <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-          gtag('config', 'G-5J3W5EZLQL');
-    </script>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.17e50649.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mitko's Website</title>
-    <script type="module" crossorigin src="/assets/index.88edf570.js"></script>
-    <link rel="modulepreload" href="/assets/vendor.ae18b56c.js">
-    <link rel="stylesheet" href="/assets/index.e0d4f5e8.css">
-  </head>
-  <body>
+        <link rel="stylesheet" href="assets/css/styles.css">
 
-    <canvas id="bg"></canvas>   
+        <!-- =====BOX ICONS===== -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <title>Mitko's portfolio</title>
+        <link rel="shortcut icon" href="D:\cv\web_site_portfolio\mitkomitrov.github.io\assets\img\bx-code-alt.svg"/>
 
-    <main>
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="#" class="nav__logo">Mitko</a>
+                </div>
 
-      <header>
-        <h1>Mitko Mitrov</h1>
-        <p>🚀 Welcome to my website!</p>
-      </header>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                        <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
+                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+            <!--===== HOME =====-->
+            <section class="home bd-grid" id="home">
+                <div class="home__data">
+                    <h1 class="home__title">Hi, I'am <span class="home__title-color">Mitko</span><br> Software engineer</h1>
+                    <a href="https://www.dropbox.com/s/utmfbqioz844ets/Mitko_Mitrov_CV.pdf?dl=0" target="_blank" class="button">My CV</a>
+                </div>
+                <div class="home__social">
+                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
+                    <a href="https://github.com/MitkoMitrov" target="_blank" class="home__social-icon"><i class='bx bxl-github' ></i></a>
+                    <button style="border: 0px; background-color: transparent;" onclick="copyToClickboard()" class="home__social-icon"><i class='bx bxl-gmail'></i></button>
+                </div>
+
+                <div class="home__img">
+                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <mask id="mask0" mask-type="alpha">
+                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
+                        </mask>
+                        <g mask="url(#mask0)">
+                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
+                            <image class="home__blob-img" x="50" y="60" href="assets/img/perfil.png"/>
+                        </g>
+                    </svg>
+                </div>
+            </section>
+
+            <!--===== ABOUT =====-->
+            <section class="about section " id="about">
+                <h2 class="section-title">About</h2>
+
+                <div class="about__container bd-grid">
+                    <div class="about__img">
+                        <img src="assets/img/about.jpg" alt="">
+                    </div>
+                    
+                    <div>
+                        <h2 class="about__subtitle">I'am Mitko</h2>
+                        <p class="about__text">
+                            I'm Mitko Mitrov, 25 years old, a graduate from the Faculty of Computer
+                            Science and Engineering in Skopje, Macedonia. <br>I'm a dedicated Web
+                            Developer, with experience in building and optimizing web applications for
+                            customers with various business objectives and from various industries. I
+                            have a proven track record as a team player, as I’ve worked with various
+                            internal cross-functional departments. I approach projects with the
+                            bigger picture in mind, to reach a high level of reusability, and of course,
+                            scalability.
+                        </p>           
+                    </div>                                   
+                </div>
+            </section>
+
+            <!--===== SKILLS =====-->
+            <section class="skills section" id="skills">
+                <h2 class="section-title">Skills</h2>
+                <div class="bd-grid">
+                    <h2 class="skills__subtitle">Profesional Skills</h2>
+                            <p class="skills__text ">Some of the projects I have worked on so far include an integrated banking system, a social network, mobile quiz application and machine learning and Image recognition powered
+                                Currency converter app.</p>
+                </div>
+                <div class="skill_section"> 
+                    <div class="skills__container skills-grid">
+                            <div class="skills__data">
+                                <div class="skills__names">
+                                    <i class='bx bxl-java skills__icon'></i>
+                                    <span class="skills__name">Java</span>
+                                </div>
+                                <div class="skills__bar skills__java"></div>
+                                <div>
+                                    <span class="skills__percentage">60%</span>
+                                </div>
+                                <button onClick="fun(1)" class="collapsible">
+                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
+                                </button>
+                            </div>
+                            <div class="content-1">
+                                <ul>
+                                    <li>OOP concepts</li>
+                                    <li>Algorithms</li>
+                                    <li>Data structures</li>
+                                    <li>Java IO</li>
+                                    <li>Multithreading</li>
+                                </ul>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__names">
+                                    <i class='bx bxl-php skills__icon'></i>
+                                    <span class="skills__name">PHP/Laravel</span>
+                                </div>
+                                <div class="skills__bar skills__php"></div>
+                                <div>
+                                    <span class="skills__percentage">70%</span>
+                                </div>
+                                <button onClick="fun(2)" class="collapsible">
+                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
+                                </button>
+                            </div>
+                            <div class="content-2">
+                                <ul>
+                                    <li>At most, coding business logic</li>
+                                    <li>Register for a new user and verify via e-mail</li>
+                                    <li>Generating reports in all most used formats</li>
+                                    <li>Automation of printing payment slips</li>
+                                </ul>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__names">
+                                    <i class='bx bxl-javascript skills__icon' ></i>
+                                    <span class="skills__name">JavaSript/VueJS</span>
+                                </div>
+                                <div class="skills__bar skills__js"></div>
+                                <div>
+                                    <span class="skills__percentage">80%</span>
+                                </div>
+                                <button onClick="fun(3)" class="collapsible">
+                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
+                                </button>
+                            </div>
+                            <div class="content-3">
+                                <ul>
+                                    <li>Login/Sign up forms & validations</li>
+                                    <li>Handle APIs and security</li>
+                                    <li>Handling cross-communication between vue components</li>
+                                    <li>Refactor of old Vue.js code</li>
+                                    <li>Vue Bootstrap</li>
+                                    <li>Integrating existing vue component</li>
+                                    <li>Design layout for payment slips</li>
+                                </ul>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__names">
+                                    <i class='bx bx-data skills__icon'></i>
+                                    <span class="skills__name">SQL Platforms</span>
+                                </div>
+                                <div class="skills__bar skills__sql">
+                                    
+                                </div>
+                                <div>
+                                    <span class="skills__percentage">50%</span>
+                                </div>
+                                <button onClick="fun(4)" class="collapsible">
+                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
+                                </button>
+                            </div>
+                            <div class="content-4">
+                                <ul>
+                                    <li>ER Diagram(similar to UML)</li>
+                                    <li>DDL / DML</li>
+                                    <li>Modeling database structure for new modules and link with existing</li>
+                                    <li>Change and upgrade in existing database relations</li>
+                                    <li>Using Eloquent as an object relational mapper (ORM)</li>
+                                </ul>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__names">
+                                    <i class='bx bx-code-curly skills__icon'></i>
+                                    <span class="skills__name">Kotlin</span>
+                                </div>
+                                <div class="skills__bar skills__kotlin">
+                                    
+                                </div>
+                                <div>
+                                    <span class="skills__percentage">50%</span>
+                                </div>
+                                <button onClick="fun(5)" class="collapsible">
+                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
+                                </button>
+                            </div>
+                            <div class="content-5">
+                                <ul>
+                                    <li>Diploma thesis coded in Kotlin</li>
+                                    <li>Integrate existing android projects and upgrade</li>
+                                    <li>APIs integration</li>
+                                    <li>Coded many projects for educational purposes</li>
+                                </ul>
+                            </div>
+                            <div class="skills__data">
+                                <div class="skills__names">
+                                    <i class='bx bx-code-curly skills__icon'></i>
+                                    <span class="skills__name">React Native</span>
+                                </div>
+                                <div class="skills__bar skills__react-native"></div>
+                                <div>
+                                    <span class="skills__percentage">50%</span>
+                                </div>
+                                <button onClick="fun(6)" class="collapsible">
+                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
+                                </button>
+                            </div>
+                            <div class="content-6">
+                                <ul>
+                                    <li>Firebase setup</li>
+                                    <li>Firebase user authentication</li>
+                                    <li>Generation of PDF file as Certificate</li>
+                                    <li>Publish on Google Play</li>
+                                </ul>
+                            </div>
+                    </div>
+                    <div>              
+                        <img src="assets/img/logos/skills.png" alt="" class="skills__img" style="width: 550px; height: 400px;">
+                    </div>
+                </div>
+            </section>
+            
+
+            <!--===== WORK =====-->
+            <section class="work section" id="work">
+                <h2 class="section-title">Work</h2>
+
+                <div class="work__container bd-grid">
+                    <a href="https://spdcomputing.com/en/bank3000" target="_blank" class="work__img">
+                        <img src="assets/img/work1.jpg">
+                    </a>
+                    <a href="https://playercoach.pro/" target="_blank" class="work__img">
+                        <img src="assets/img/player_coach.png" alt="">
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.youAble" target="_blank" class="work__img">
+                        <img src="assets/img/YouABLE.png" alt="">
+                    </a>
+                    <a href="https://github.com/MitkoMitrov/ConvertAmountApp" target="_blank" class="work__img">
+                        <img src="assets/img/scan_app.jpg" alt="">
+                    </a>
+                    </div>
+            </section>
+
+            <!--===== CONTACT =====-->
+            <section class="contact section" id="contact">
+                <h2 class="section-title">Contact</h2>
+
+                <div class="contact__container bd-grid">
+                    <!--
+                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" ><i class='bx bxl-linkedin'></i></a>
+                    <a style="cursor: pointer;" ><i class='bx bxl-gmail'></i></a>
+                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank"><i class='bx bxl-upwork' ></i></a>
+                -->
+                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class=""><i style="color: #0072b1" class='bx bxl-linkedin'></i></a>
+                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank"><i style="color:#73bb44" class='bx bxl-upwork' ></i></a>
+                    <a onclick="copyToClickboard()" href="javascript:void(0);"><i style="color: #EA4335;" class='bx bxl-gmail'></i></a>
+            
+                </div>
+            </section>
+        </main>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <p class="footer__copy">&#169; Mitko Mitrov</p>
+        </footer>
 
 
-      <blockquote>
-        <p>Hello, this is my portfolio... the cool one!</p>
-      </blockquote>
+        <!--===== SCROLL REVEAL =====-->
+        <script src="https://unpkg.com/scrollreveal"></script>
 
-      <section>
-        <h2>📜 About me</h2>
-        <p>My name is Mitko Mitrov I am 24 years old, currently a Student at the Faculty of Computer Science and
-          Engineering in Skopje, Macedonia</p>
-        <p>
-          I'm a dedicated Web Developer, with experience in building and optimizing web
-          applications/platforms for customers with various business objectives. Proven team player when working with
-          internal cross-functional departments.
-        </p>
+        <!--===== MAIN JS =====-->
+        <script src="assets/js/main.js"></script>
+        <script src="https://use.fontawesome.com/4def9a2359.js"></script>
+        
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5J3W5EZLQL"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-        <p>
-          I approach projects with the bigger picture in mind, to reach high level of
-          reusability. Some of the projects I have worked on so far: integrated banking system, social network, coding 
-        </p>
-        <p>
-          I strive to create elegant solutions that surprise and delight users, while keeping complex technical dependencies in mind for implementation, scalability and developer sanity.
-        </p>
-      </section>
+        gtag('config', 'G-5J3W5EZLQL');
+        </script>
 
-      <section class="light">
-        <h2>👩🏽‍🚀 Projects</h2>
-
-        <p>
-            I have almost 2 years experience in developing integrated <b>integrated banking system</b>. Including assembling database architecture,
-            creating custom business logic and other OOP patterns.
-        </p>
-
-        <p>
-          Developing social networks for educational purpose.
-        </p>
-
-        <p>
-          Coding various calculators to double-check my mathematical solvings.
-          E.G: 
-          <ul>
-            <li> Dijkstra's algorithm </li>
-            <li> Convertors for RC DC & SM number systems </li>
-            <li> Scheduling patters such as Round Robin, FCFS, Shortest remaining time First and etc.</li>
-            <li> Banker's algorithm for resolving deadlocks</li>
-          </ul>
-        </p>
-      </section>
-
-      <blockquote>
-        <p>20 minutes of doing something is better than 20 hours of thinking of doing something <br>-Unknown</p>
-      </blockquote>
-
-      <section class="left">
-        <h2> Work History</h2>
-
-        <h3>SPD Computing</h3>
-        <p>
-          <span>October 2019 - August 2021</span><br/>
-          Worked as a <b>PHP/LARAVEL Developer</b>
-        </p>
-        <ul>
-          <li>Programming server-side web applications</li>
-          <li>Database manipulation in PL/SQL</li>
-          <li>automation reports generating</li>
-        </ul>
-        <h3>Freelancer</h3>
-        <p>
-          <span>August 2021 - Present</span><br/>
-          Working with next technologies:
-          <ul>
-            <li>PHP/LARAVEL</li>
-            <li>Python</li>
-            <li>HTML/CSS</li>
-            <li>Javascript</li>
-            <li>VueJS</li>
-            <li>API's</li>
-            <li>SQL</li>
-          </ul>
-        </p>
-
-      </section>
-
-      <section>
-        <h2>Have an interesting project? Contact me.</h2>
-        <div style="text-align: center;">
-          
-            <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/"><img src="/assets/linkedin.61dd4a9f.png" style="width: 100px; height: 100px;"></a>
-            <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170"><img src="/assets/upwork.d2fc02e2.jpg" style="width: 100px; height: 100px;"></a>
-            <br/>
-            Or by email: mitkomitrov09@gmail.com
-        </div>
-
-      </section>
-    </main>
-    
-    
-
-
-
-  </body>
+    </body>
 </html>
