@@ -61,7 +61,7 @@ function fun(arg){
         //console.log(content[0].style);
         if(content[0].style.visibility == "hidden" || content[0].style.visibility == ""){
             content[0].style.visibility = "visible";
-            content[0].style.maxHeight = "300px";
+            content[0].style.maxHeight = "500px";
             content[0].style.transition = ".3s";
         }else{
             content[0].style.visibility = "hidden";
