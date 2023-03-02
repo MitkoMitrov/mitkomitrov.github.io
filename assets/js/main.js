@@ -68,12 +68,6 @@ function fun(arg){
             content[0].style.maxHeight = "0px";
         }
 }
-function copyToClickboard() {
-    // Get the text field
-    var copyText = "mitkomitrov09@gmail.com";
-    navigator.clipboard.writeText(copyText);
-    alert("Copied the clipboard: " + copyText);
-  }
 
 sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
