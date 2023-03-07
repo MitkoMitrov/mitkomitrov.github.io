@@ -67,7 +67,7 @@ a {
 
 img {
   max-width: 100%;
-  height: auto;
+  max-height: 75%;
   display: block;
 }
 
@@ -378,12 +378,15 @@ img {
 /* ===== WORK =====*/
 .work__container {
   row-gap: 2rem;
+  justify-content: center;
 }
 
 .work__img {
   box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
   border-radius: .5rem;
   overflow: hidden;
+  width: 300px;
+  height: 500px;
 }
 
 .work__img img {
@@ -392,6 +395,14 @@ img {
 
 .work__img img:hover {
   transform: scale(1.1);
+}
+.worked_on, .using_technologies{
+  padding-left: 1.5rem;
+  list-style-type: circle;
+  font-size: 14px;
+}
+.using_technologies{
+  font-weight:600;
 }
 
 /* ===== CONTACT =====*/
