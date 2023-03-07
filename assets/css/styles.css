@@ -50,6 +50,10 @@ body {
   font-size: var(--normal-font-size);
   color: var(--second-color);
 }
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 h1, h2, p {
   margin: 0;
@@ -275,7 +279,7 @@ img {
 }
 
 .about__img img {
-  width: 200px;
+  max-width: 300px;
   border-radius: .5rem;
 }
 
