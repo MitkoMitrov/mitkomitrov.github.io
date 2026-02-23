@@ -11,7 +11,7 @@
 
         <!-- =====BOX ICONS===== -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <title>Mitko's portfolio</title>
+        <title>Mitko's Portfolio</title>
         <link rel="shortcut icon" href="assets/img/bx-code-alt.svg"/>
 
     </head>
@@ -29,304 +29,482 @@
     <body>
         <!--===== HEADER =====-->
         <header class="l-header">
-            <nav class="nav bd-grid">
-                <div>
-                    <a href="#" class="nav__logo">Mitko</a>
-                </div>
+            <nav class="nav container">
+                <div class="nav__wrapper">
+                    <!-- Logo Placeholder -->
+                    <div class="nav__logo-container">
+                        <a href="#home" class="nav__logo">
+                            <span class="nav__logo-text">M</span>
+                            <span class="nav__logo-dot"></span>
+                        </a>
+                    </div>
 
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                        <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                        <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-                    </ul>
-                </div>
+                    <!-- Navigation Menu -->
+                    <div class="nav__menu" id="nav-menu">
+                        <ul class="nav__list">
+                            <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                            <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                            <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                            <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
+                            <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                        </ul>
+                    </div>
 
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
+                    <!-- Menu Toggle -->
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class='bx bx-menu'></i>
+                    </div>
                 </div>
             </nav>
         </header>
 
         <main class="l-main">
-            <!--===== HOME =====-->
-            <section class="home bd-grid" id="home">
-                <div class="home__data">
-                    <h1 class="home__title">Hi, I am <span class="home__title-color">Mitko</span><br> Software engineer</h1>
-                    <a href="https://www.dropbox.com/s/ihimhyaevjvvvd4/Mitko_Mitrov_CV.pdf?dl=0" target="_blank" class="button">Curriculum Vitae</a>
-                </div>
-                <div class="home__social">
-                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="https://github.com/MitkoMitrov" target="_blank" class="home__social-icon"><i class='bx bxl-github' ></i></a>
-                    <a href="mailto:mitkomitrov09@gmail.com" target="_blank" class="home__social-icon"><i class='bx bxl-gmail'></i></a>  
-                    </button>
-                </div>
-
-                <div class="home__img">
-                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                            <image class="home__blob-img" x="50" y="60" href="assets/img/perfil.png"/>
-                        </g>
-                    </svg>
-                </div>
-            </section>
-
-            <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">About</h2>
-
-                <div class="about__container bd-grid">
-                    <div class="about__img">
-                        <img src="assets/img/about.jpg" alt="">
+            <!--===== HERO SECTION =====-->
+            <section class="hero" id="home">
+                <div class="container">
+                    <div class="hero__wrapper">
+                        <div class="hero__content">
+                            <div class="hero__badge">Welcome to my portfolio</div>
+                            <h1 class="hero__title">
+                                Hi, I'm <span class="hero__accent">Mitko</span><br>
+                                <span class="hero__subtitle">Full-Stack Developer</span>
+                            </h1>
+                            <p class="hero__description">
+                                Building elegant, scalable web applications with modern technologies
+                            </p>
+                            <div class="hero__cta">
+                                <a href="https://www.dropbox.com/s/ihimhyaevjvvvd4/Mitko_Mitrov_CV.pdf?dl=0" target="_blank" class="btn btn-primary">
+                                    <i class='bx bx-download'></i> Download CV
+                                </a>
+                                <a href="#work" class="btn btn-outline">
+                                    View My Work
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="hero__visual">
+                            <div class="hero__image-wrapper">
+                                <div class="hero__placeholder">
+                                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <linearGradient id="placeholder-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#4F82FF;stop-opacity:1" />
+                                                <stop offset="100%" style="stop-color:#2D5FBF;stop-opacity:1" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <img src="assets/img/perfil.png" alt="Mitko Mitrov" class="hero__image">
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div>
-                        <h2 class="about__subtitle">Let me introduce myself</h2>
-                        <p class="about__text">
-                            I'm Mitko Mitrov, 25 years old, a graduate of the Faculty of Computer Science and Engineering in Skopje, Macedonia.
-                            I'm a dedicated Web Developer, with experience in building and optimizing web applications for customers 
-                            with business objectives from various industries. I have a proven track record as a team player, 
-                            as I’ve worked with many internal cross-functional departments. I approach projects with the bigger 
-                            picture in mind, to reach a high level of reusability, and of course, scalability. 
-                            I'm open to working with technologies that are not listest in my skillset and also upgrading my knowledge.
-                        </p>
-                    </div>                                   
+
+                    <!-- Social Links -->
+                    <div class="hero__socials">
+                        <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class="social-link" title="LinkedIn">
+                            <i class='bx bxl-linkedin-square'></i>
+                        </a>
+                        <a href="https://github.com/MitkoMitrov" target="_blank" class="social-link" title="GitHub">
+                            <i class='bx bxl-github'></i>
+                        </a>
+                        <a href="mailto:mitkomitrov09@gmail.com" class="social-link" title="Email">
+                            <i class='bx bxs-envelope'></i>
+                        </a>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="scroll-indicator">
+                        <span>Scroll to explore</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </div>
                 </div>
             </section>
 
-            <!--===== SKILLS =====-->
+            <!--===== ABOUT SECTION =====-->
+            <section class="about section" id="about">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">About Me</h2>
+                        <p class="section-subtitle">Get to know more about my journey and expertise</p>
+                    </div>
+
+                    <div class="about__grid">
+                        <div class="about__content">
+                            <h3 class="about__heading">Who I Am</h3>
+                            <p class="about__text">
+                                I'm Mitko Mitrov, a passionate full-stack developer with a strong foundation in computer science from the 
+                                Faculty of Computer Science and Engineering in Skopje, Macedonia.
+                            </p>
+                            <p class="about__text">
+                                I specialize in building robust, scalable web applications using modern technologies and best practices. I thrive 
+                                in collaborative environments and have successfully worked with cross-functional teams to deliver high-impact solutions.
+                            </p>
+                            <p class="about__text">
+                                My approach combines technical excellence with a focus on user experience and business objectives. I'm continuously 
+                                learning and adapting to new technologies to stay at the forefront of web development.
+                            </p>
+
+                            <div class="about__stats">
+                                <div class="stat">
+                                    <h4 class="stat__number">4+</h4>
+                                    <p class="stat__label">Years Experience</p>
+                                </div>
+                                <div class="stat">
+                                    <h4 class="stat__number">20+</h4>
+                                    <p class="stat__label">Projects Completed</p>
+                                </div>
+                                <div class="stat">
+                                    <h4 class="stat__number">15+</h4>
+                                    <p class="stat__label">Technologies</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about__image">
+                            <img src="assets/img/about.jpg" alt="Mitko Mitrov">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--===== SKILLS SECTION =====-->
             <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
-                <div class="bd-grid">
-                    <h2 class="skills__subtitle">Profesional Skills</h2>
-                            <p class="skills__text ">Some of the projects I have worked on so far include an integrated banking system, a social network,  
-                                a mobile quiz application, and a machine learning and Image recognition powered Currency converter app.</p>
-                </div>
-                <div class="skill_section"> 
-                    <div class="skills__container skills-grid">
-                            <div class="skills__data">
-                                <div class="skills__names">
-                                    <i class='bx bxl-java skills__icon'></i>
-                                    <span class="skills__name">Java</span>
-                                </div>
-                                <div class="skills__bar skills__java"></div>
-                                <div>
-                                    <span class="skills__percentage">60%</span>
-                                </div>
-                                <button onClick="fun(1)" class="collapsible">
-                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
-                                </button>
-                            </div>
-                            <div class="content-1">
-                                <ul>
-                                    <li>OOP concepts</li>
-                                    <li>Algorithms</li>
-                                    <li>Data structures</li>
-                                    <li>Java IO</li>
-                                    <li>Multithreading</li>
-                                    <li>Streams</li>
-                                    <li>Spring boot Web app as part of faculty project</li>
-                                </ul>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__names">
-                                    <i class='bx bxl-php skills__icon'></i>
-                                    <span class="skills__name">PHP/Laravel</span>
-                                </div>
-                                <div class="skills__bar skills__php"></div>
-                                <div>
-                                    <span class="skills__percentage">70%</span>
-                                </div>
-                                <button onClick="fun(2)" class="collapsible">
-                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
-                                </button>
-                            </div>
-                            <div class="content-2">
-                                <ul>
-                                    <li>At most, coding business logic</li>
-                                    <li>Register for a new user and verify via e-mail</li>
-                                    <li>Generating reports in all most used formats</li>
-                                    <li>Automation of printing payment slips</li>
-                                </ul>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__names">
-                                    <i class='bx bxl-javascript skills__icon' ></i>
-                                    <span class="skills__name">JavaSript/VueJS</span>
-                                </div>
-                                <div class="skills__bar skills__js"></div>
-                                <div>
-                                    <span class="skills__percentage">80%</span>
-                                </div>
-                                <button onClick="fun(3)" class="collapsible">
-                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
-                                </button>
-                            </div>
-                            <div class="content-3">
-                                <ul>
-                                    <li>Login/Sign up forms & validations</li>
-                                    <li>Handle APIs and security</li>
-                                    <li>Handling cross-communication between vue components</li>
-                                    <li>Refactor of old Vue.js code</li>
-                                    <li>Vue Bootstrap</li>
-                                    <li>Integrating existing vue component</li>
-                                    <li>Design layout for payment slips</li>
-                                </ul>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__names">
-                                    <i class='bx bx-data skills__icon'></i>
-                                    <span class="skills__name">SQL Platforms</span>
-                                </div>
-                                <div class="skills__bar skills__sql">
-                                    
-                                </div>
-                                <div>
-                                    <span class="skills__percentage">50%</span>
-                                </div>
-                                <button onClick="fun(4)" class="collapsible">
-                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
-                                </button>
-                            </div>
-                            <div class="content-4">
-                                <ul>
-                                    <li>ER Diagram(similar to UML)</li>
-                                    <li>DDL / DML</li>
-                                    <li>Modeling database structure for new modules and link with existing</li>
-                                    <li>Change and upgrade in existing database relations</li>
-                                    <li>Using Eloquent as an object relational mapper (ORM)</li>
-                                </ul>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__names">
-                                    <i class='bx bx-code-curly skills__icon'></i>
-                                    <span class="skills__name">Kotlin</span>
-                                </div>
-                                <div class="skills__bar skills__kotlin">
-                                    
-                                </div>
-                                <div>
-                                    <span class="skills__percentage">50%</span>
-                                </div>
-                                <button onClick="fun(5)" class="collapsible">
-                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
-                                </button>
-                            </div>
-                            <div class="content-5">
-                                <ul>
-                                    <li>Diploma thesis coded in Kotlin</li>
-                                    <li>Integrate existing android projects and upgrade</li>
-                                    <li>APIs integration</li>
-                                    <li>Coded many projects for educational purposes</li>
-                                </ul>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__names">
-                                    <i class='bx bx-code-curly skills__icon'></i>
-                                    <span class="skills__name">React Native</span>
-                                </div>
-                                <div class="skills__bar skills__react-native"></div>
-                                <div>
-                                    <span class="skills__percentage">50%</span>
-                                </div>
-                                <button onClick="fun(6)" class="collapsible">
-                                    <img class="arrow-down" src="./assets/img/bxs-down-arrow.svg">
-                                </button>
-                            </div>
-                            <div class="content-6">
-                                <ul>
-                                    <li>Firebase setup</li>
-                                    <li>Firebase user authentication</li>
-                                    <li>Generation of PDF file as Certificate</li>
-                                    <li>Publish on Google Play</li>
-                                </ul>
-                            </div>
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Skills & Expertise</h2>
+                        <p class="section-subtitle">Technologies and tools I work with</p>
                     </div>
-                    <div>              
-                        <img src="assets/img/logos/skills.png" alt="" class="skills__img" style="width: 550px; height: 400px;">
+
+                    <div class="skills__grid">
+                        <!-- Frontend -->
+                        <div class="skill-card">
+                            <div class="skill-card__icon">
+                                <i class='bx bx-palette'></i>
+                            </div>
+                            <h3 class="skill-card__title">Frontend</h3>
+                            <div class="skill-card__tags">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">React</span>
+                                <span class="tag">Vue.js</span>
+                                <span class="tag">Next.js</span>
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">Bootstrap</span>
+                            </div>
+                        </div>
+
+                        <!-- Backend -->
+                        <div class="skill-card">
+                            <div class="skill-card__icon">
+                                <i class='bx bx-code-curly'></i>
+                            </div>
+                            <h3 class="skill-card__title">Backend</h3>
+                            <div class="skill-card__tags">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Laravel</span>
+                                <span class="tag">PHP</span>
+                                <span class="tag">Java</span>
+                                <span class="tag">Kotlin</span>
+                                <span class="tag">GraphQL</span>
+                                <span class="tag">REST APIs</span>
+                            </div>
+                        </div>
+
+                        <!-- Databases -->
+                        <div class="skill-card">
+                            <div class="skill-card__icon">
+                                <i class='bx bx-data'></i>
+                            </div>
+                            <h3 class="skill-card__title">Databases</h3>
+                            <div class="skill-card__tags">
+                                <span class="tag">MySQL</span>
+                                <span class="tag">PostgreSQL</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">SQL</span>
+                                <span class="tag">PL-SQL</span>
+                            </div>
+                        </div>
+
+                        <!-- Mobile -->
+                        <div class="skill-card">
+                            <div class="skill-card__icon">
+                                <i class='bx bx-mobile-alt'></i>
+                            </div>
+                            <h3 class="skill-card__title">Mobile</h3>
+                            <div class="skill-card__tags">
+                                <span class="tag">React Native</span>
+                                <span class="tag">Android (Kotlin)</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">Cross-platform</span>
+                            </div>
+                        </div>
+
+                        <!-- Tools & DevOps -->
+                        <div class="skill-card">
+                            <div class="skill-card__icon">
+                                <i class='bx bx-wrench'></i>
+                            </div>
+                            <h3 class="skill-card__title">Tools & DevOps</h3>
+                            <div class="skill-card__tags">
+                                <span class="tag">Git</span>
+                                <span class="tag">Docker</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">GitHub</span>
+                                <span class="tag">Linux</span>
+                                <span class="tag">CI/CD</span>
+                            </div>
+                        </div>
+
+                        <!-- ML & AI -->
+                        <div class="skill-card">
+                            <div class="skill-card__icon">
+                                <i class='bx bx-brain'></i>
+                            </div>
+                            <h3 class="skill-card__title">ML & AI</h3>
+                            <div class="skill-card__tags">
+                                <span class="tag">TensorFlow</span>
+                                <span class="tag">OpenCV</span>
+                                <span class="tag">Machine Learning</span>
+                                <span class="tag">Image Recognition</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
             
 
-            <!--===== WORK =====-->
+<!--===== WORK/PROJECTS SECTION =====-->
             <section class="work section" id="work">
-                <h2 class="section-title">Work</h2>
-
-                <div class="work__container bd-grid">
-                    <a href="https://spdcomputing.com/en/bank3000" target="_blank" class="work__img">
-                        <img src="assets/img/logos/scaled/spd.PNG">
-                        <p style="margin-top: 1rem; padding-left: 1rem;">Worked on: </p>
-                        <ul class="worked_on">
-                            <li>Printing payment slips</li>
-                            <li>Banking foreign exchange operations</li>
-                            <li>Generating reports</li>
-                        </ul>
-                    <p>Using: </p>
-                    <p class="using_technologies">PHP, PL-SQL, JS, HTML, CSS</p>
-                    </a>
-                    
-                    <a href="https://playercoach.pro/" target="_blank" class="work__img">
-                        <img src="assets/img/logos/scaled/player_coach.PNG" alt="">
-                        <p style="margin-top: 1rem; padding-left: 1rem;">Worked on: </p>
-                        <ul class="worked_on">
-                            <li>Booking module</li>
-                            <li>Memberships module</li>
-                            <li>Import/Export data from CSV files</li>
-                        </ul>
-                    <p>Using: </p>
-                    <p class="using_technologies">Laravel, Vue.js, mySql, Eloquent</p>
-                    </a>
-                    <a href="https://play.google.com/store/apps/details?id=com.youAble" target="_blank" class="work__img">
-                        <img src="assets/img/YouABLE.png" alt="">
-                        <p style="margin-top: 1rem; padding-left: 1rem;">Worked on: </p>
-                        <ul class="worked_on">
-                            <li>Firebase Authentication</li>
-                            <li>Firebase Realtime Database stores</li>
-                            <li>Generation of PDF file</li>
-                        </ul>
-                    <p>Using: </p><p class="using_technologies">React-Native</p>
-                    </a>
-                    <a href="https://github.com/MitkoMitrov/ConvertAmountApp" target="_blank" class="work__img">
-                        <img src="assets/img/logos/scaled/scan_app.PNG" alt="">
-                        <p style="margin-top: 1rem; padding-left: 1rem;">Worked on: </p>
-                        <ul class="worked_on">
-                            <li>Integrate android.x camera api</li>
-                            <li>Preprocessing / Postprocessing image</li>
-                            <li>Use the TensorFlow machine learning model for number recognition</li>
-                        </ul>
-                    <p>Using: </p><p class="using_technologies">Kotlin, OpenCV, Tensoflow Lite</p>
-                    </a>
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Featured Projects</h2>
+                        <p class="section-subtitle">A selection of my recent work and achievements</p>
                     </div>
+
+                    <div class="projects__grid">
+                        <!-- Project 1: SPD Bank3000 -->
+                        <div class="project-card">
+                            <div class="project-card__image">
+                                <img src="assets/img/logos/scaled/spd.PNG" alt="SPD Bank3000">
+                                <div class="project-card__overlay">
+                                    <a href="https://spdcomputing.com/en/bank3000" target="_blank" class="project-card__link">
+                                        <i class='bx bx-link-external'></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-card__content">
+                                <h3 class="project-card__title">SPD Bank3000</h3>
+                                <p class="project-card__description">Enterprise banking system with payment processing, reporting, and foreign exchange operations</p>
+                                <div class="project-card__tech">
+                                    <span class="badge">PHP</span>
+                                    <span class="badge">PL-SQL</span>
+                                    <span class="badge">JavaScript</span>
+                                </div>
+                                <ul class="project-card__features">
+                                    <li><i class='bx bx-check'></i> Payment slip generation & printing</li>
+                                    <li><i class='bx bx-check'></i> Foreign exchange operations</li>
+                                    <li><i class='bx bx-check'></i> Advanced reporting</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Project 2: PlayerCoach -->
+                        <div class="project-card">
+                            <div class="project-card__image">
+                                <img src="assets/img/logos/scaled/player_coach.PNG" alt="PlayerCoach">
+                                <div class="project-card__overlay">
+                                    <a href="https://playercoach.pro/" target="_blank" class="project-card__link">
+                                        <i class='bx bx-link-external'></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-card__content">
+                                <h3 class="project-card__title">PlayerCoach</h3>
+                                <p class="project-card__description">Booking and membership management platform for sports and fitness professionals</p>
+                                <div class="project-card__tech">
+                                    <span class="badge">Laravel</span>
+                                    <span class="badge">Vue.js</span>
+                                    <span class="badge">MySQL</span>
+                                </div>
+                                <ul class="project-card__features">
+                                    <li><i class='bx bx-check'></i> Booking module</li>
+                                    <li><i class='bx bx-check'></i> Membership management</li>
+                                    <li><i class='bx bx-check'></i> CSV import/export</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Project 3: YouABLE -->
+                        <div class="project-card">
+                            <div class="project-card__image">
+                                <img src="assets/img/YouABLE.png" alt="YouABLE">
+                                <div class="project-card__overlay">
+                                    <a href="https://play.google.com/store/apps/details?id=com.youAble" target="_blank" class="project-card__link">
+                                        <i class='bx bx-link-external'></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-card__content">
+                                <h3 class="project-card__title">YouABLE</h3>
+                                <p class="project-card__description">Mobile education platform with real-time database and certificate generation</p>
+                                <div class="project-card__tech">
+                                    <span class="badge">React Native</span>
+                                    <span class="badge">Firebase</span>
+                                    <span class="badge">PDF</span>
+                                </div>
+                                <ul class="project-card__features">
+                                    <li><i class='bx bx-check'></i> Firebase authentication</li>
+                                    <li><i class='bx bx-check'></i> Real-time database</li>
+                                    <li><i class='bx bx-check'></i> PDF certificates</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Project 4: ML Currency Converter -->
+                        <div class="project-card">
+                            <div class="project-card__image">
+                                <img src="assets/img/logos/scaled/scan_app.PNG" alt="ML Currency Converter">
+                                <div class="project-card__overlay">
+                                    <a href="https://github.com/MitkoMitrov/ConvertAmountApp" target="_blank" class="project-card__link">
+                                        <i class='bx bx-link-external'></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="project-card__content">
+                                <h3 class="project-card__title">ML Currency Converter</h3>
+                                <p class="project-card__description">Android app with machine learning for currency recognition via image processing</p>
+                                <div class="project-card__tech">
+                                    <span class="badge">Kotlin</span>
+                                    <span class="badge">TensorFlow</span>
+                                    <span class="badge">OpenCV</span>
+                                </div>
+                                <ul class="project-card__features">
+                                    <li><i class='bx bx-check'></i> Camera integration</li>
+                                    <li><i class='bx bx-check'></i> Image preprocessing</li>
+                                    <li><i class='bx bx-check'></i> ML currency recognition</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <!--===== CONTACT =====-->
+            <!--===== CONTACT SECTION =====-->
             <section class="contact section" id="contact">
-                <h2 class="section-title">Contact</h2>
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Get In Touch</h2>
+                        <p class="section-subtitle">Let's connect and discuss your next project</p>
+                    </div>
 
-                <div class="contact__container bd-grid">
-                    <!--
-                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" ><i class='bx bxl-linkedin'></i></a>
-                    <a style="cursor: pointer;" ><i class='bx bxl-gmail'></i></a>
-                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank"><i class='bx bxl-upwork' ></i></a>
-                -->
-                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class=""><i style="color: #0072b1" class='bx bxl-linkedin'></i></a>
-                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank"><i style="color:#73bb44" class='bx bxl-upwork' ></i></a>
-                    <a href="mailto:mitkomitrov09@gmail.com"><i style="color: #EA4335;" class='bx bxl-gmail'></i></a>
+                    <div class="contact__wrapper">
+                        <div class="contact__info">
+                            <div class="contact-item">
+                                <div class="contact-item__icon">
+                                    <i class='bx bxs-envelope'></i>
+                                </div>
+                                <div class="contact-item__content">
+                                    <h4>Email</h4>
+                                    <a href="mailto:mitkomitrov09@gmail.com">mitkomitrov09@gmail.com</a>
+                                </div>
+                            </div>
 
+                            <div class="contact-item">
+                                <div class="contact-item__icon">
+                                    <i class='bx bxl-linkedin-square'></i>
+                                </div>
+                                <div class="contact-item__content">
+                                    <h4>LinkedIn</h4>
+                                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank">Connect with me</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-item__icon">
+                                    <i class='bx bxl-github'></i>
+                                </div>
+                                <div class="contact-item__content">
+                                    <h4>GitHub</h4>
+                                    <a href="https://github.com/MitkoMitrov" target="_blank">View my work</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-item__icon">
+                                    <i class='bx bxl-upwork'></i>
+                                </div>
+                                <div class="contact-item__content">
+                                    <h4>Upwork</h4>
+                                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank">Hire me</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact__cta">
+                            <h3>Ready to collaborate?</h3>
+                            <p>I'm always interested in hearing about new projects and opportunities.</p>
+                            <a href="mailto:mitkomitrov09@gmail.com" class="btn btn-primary btn-large">
+                                <i class='bx bx-send'></i> Send me an email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact__socials">
+                        <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class="social-circle">
+                            <i class='bx bxl-linkedin-square'></i>
+                        </a>
+                        <a href="https://github.com/MitkoMitrov" target="_blank" class="social-circle">
+                            <i class='bx bxl-github'></i>
+                        </a>
+                        <a href="mailto:mitkomitrov09@gmail.com" class="social-circle">
+                            <i class='bx bxs-envelope'></i>
+                        </a>
+                        <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank" class="social-circle">
+                            <i class='bx bxl-upwork'></i>
+                        </a>
+                    </div>
                 </div>
             </section>
         </main>
 
         <!--===== FOOTER =====-->
         <footer class="footer">
-            <p class="footer__copy">&#169; Mitko Mitrov</p>
+            <div class="container">
+                <div class="footer__content">
+                    <div class="footer__section">
+                        <h4 class="footer__heading">Mitko Mitrov</h4>
+                        <p class="footer__text">Full-Stack Developer | Building modern web experiences</p>
+                    </div>
+                    <div class="footer__section">
+                        <h4 class="footer__heading">Quick Links</h4>
+                        <ul class="footer__links">
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#work">Projects</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h4 class="footer__heading">Connect</h4>
+                        <ul class="footer__links">
+                            <li><a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank">LinkedIn</a></li>
+                            <li><a href="https://github.com/MitkoMitrov" target="_blank">GitHub</a></li>
+                            <li><a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank">Upwork</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer__bottom">
+                    <p>&copy; 2026 Mitko Mitrov. All rights reserved.</p>
+                    <div class="footer__social">
+                        <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                        <a href="https://github.com/MitkoMitrov" target="_blank"><i class='bx bxl-github'></i></a>
+                        <a href="mailto:mitkomitrov09@gmail.com"><i class='bx bxs-envelope'></i></a>
+                    </div>
+                </div>
+            </div>
         </footer>
 
         <!--===== SCROLL REVEAL =====-->
