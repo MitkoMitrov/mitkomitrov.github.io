@@ -1489,118 +1489,255 @@ ul, ol {
 /*===== CONTACT SECTION =====*/
 .contact {
   background: var(--bg-light);
+  padding: var(--spacing-3xl) 0;
 }
 
-.contact__wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-4xl);
-  margin-bottom: var(--spacing-4xl);
-  align-items: start;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-2xl);
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.col-md-6 {
+  width: 50%;
+}
+
+.col-lg-11 {
+  width: 91.66666667%;
+}
+
+.col-lg-10 {
+  width: 83.33333333%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-stretch {
+  align-items: stretch;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mb-5 {
+  margin-bottom: 3rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.ps-3 {
+  padding-left: 1rem;
+}
+
+.p-4 {
+  padding: 1.5rem;
+}
+
+.p-md-5 {
+  padding: 3rem;
+}
+
+.py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.g-0 {
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .col-md-6 {
+    width: 100%;
+  }
+
+  .p-md-5 {
+    padding: 1.5rem;
   }
 }
 
-.contact__info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
+.contact-wrapper {
+  background: var(--bg-white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
 
-.contact-item {
+.contact-form-wrap,
+.contact-info-wrap {
   display: flex;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-lg);
-  background: var(--bg-white);
+  flex-direction: column;
+}
+
+.contact-form-wrap h3,
+.contact-info-wrap h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-lg);
+}
+
+.contact-form-wrap p,
+.contact-info-wrap p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid #e0e0e0;
   border-radius: var(--radius-lg);
-  transition: var(--transition-base);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  transition: all var(--transition-base);
+  background: var(--bg-white);
+  color: var(--text-dark);
+
+  &::placeholder {
+    color: var(--text-light);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 130, 255, 0.1);
+  }
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.info-box {
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(79, 130, 255, 0.02) 0%, rgba(79, 130, 255, 0.04) 100%);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
 
   &:hover {
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, rgba(79, 130, 255, 0.05) 0%, rgba(79, 130, 255, 0.08) 100%);
+    transform: translateY(-2px);
   }
 }
 
-.contact-item__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: var(--primary-light);
-  border-radius: var(--radius-lg);
+.info-icon {
+  width: auto;
+  height: auto;
+  min-width: auto;
+  background: transparent;
+  border-radius: 0;
   color: var(--primary-color);
-  font-size: var(--font-size-xl);
-  flex-shrink: 0;
+  font-size: 24px;
 }
 
-.contact-item__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.info-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-xs);
+  margin: 0 0 var(--spacing-xs) 0;
+}
 
-  h4 {
-    font-size: var(--font-size-base);
+.info-content {
+  flex: 1;
+
+  p {
+    margin: 0 0 var(--spacing-xs) 0;
     color: var(--text-dark);
-    margin-bottom: var(--spacing-xs);
   }
 
   a {
     font-size: var(--font-size-sm);
-    color: var(--text-light);
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    font-weight: var(--font-weight-semibold);
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: width var(--transition-base);
+    }
 
     &:hover {
-      color: var(--primary-color);
+      color: var(--primary-dark);
+
+      &::after {
+        width: 100%;
+      }
     }
   }
 }
 
-.contact__cta {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--spacing-2xl);
-  background: var(--bg-white);
-  border-radius: var(--radius-xl);
-  text-align: center;
-  box-shadow: var(--shadow-md);
-
-  h3 {
-    font-size: var(--font-size-2xl);
-    color: var(--text-dark);
-    margin-bottom: var(--spacing-md);
+@media (max-width: 768px) {
+  .col-md-6 {
+    width: 100%;
   }
 
-  p {
-    color: var(--text-light);
-    margin-bottom: var(--spacing-lg);
+  .row {
+    margin-right: -0.25rem;
+    margin-left: -0.25rem;
   }
-}
 
-.contact__socials {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-lg);
-  flex-wrap: wrap;
-}
+  .row > * {
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+  }
 
-.social-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  color: var(--bg-white);
-  font-size: var(--font-size-2xl);
-  transition: var(--transition-base);
+  .p-4 {
+    padding: 1rem;
+  }
 
-  &:hover {
-    background: var(--primary-dark);
-    transform: translateY(-4px);
+  .py-5 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 }
 

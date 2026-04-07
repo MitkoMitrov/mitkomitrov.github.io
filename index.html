@@ -393,76 +393,108 @@
             <!--===== CONTACT SECTION =====-->
             <section class="contact section" id="contact">
                 <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Get In Touch</h2>
-                        <p class="section-subtitle">Let's connect and discuss your next project</p>
-                    </div>
-
-                    <div class="contact__wrapper">
-                        <div class="contact__info">
-                            <div class="contact-item">
-                                <div class="contact-item__icon">
-                                    <i class='bx bxs-envelope'></i>
-                                </div>
-                                <div class="contact-item__content">
-                                    <h4>Email</h4>
-                                    <a href="mailto:mitkomitrov09@gmail.com">mitkomitrov09@gmail.com</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-item__icon">
-                                    <i class='bx bxl-linkedin-square'></i>
-                                </div>
-                                <div class="contact-item__content">
-                                    <h4>LinkedIn</h4>
-                                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank">Connect with me</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-item__icon">
-                                    <i class='bx bxl-github'></i>
-                                </div>
-                                <div class="contact-item__content">
-                                    <h4>GitHub</h4>
-                                    <a href="https://github.com/MitkoMitrov" target="_blank">View my work</a>
-                                </div>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-item__icon">
-                                    <i class='bx bxl-upwork'></i>
-                                </div>
-                                <div class="contact-item__content">
-                                    <h4>Upwork</h4>
-                                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank">Hire me</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact__cta">
-                            <h3>Ready to collaborate?</h3>
-                            <p>I'm always interested in hearing about new projects and opportunities.</p>
-                            <a href="mailto:mitkomitrov09@gmail.com" class="btn btn-primary btn-large">
-                                <i class='bx bx-send'></i> Send me an email
-                            </a>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center mb-5">
+                            <h2 class="section-title">Get in Touch</h2>
+                            <p class="section-subtitle">I'd love to hear from you. Let's create something great together!</p>
                         </div>
                     </div>
 
-                    <div class="contact__socials">
-                        <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class="social-circle">
-                            <i class='bx bxl-linkedin-square'></i>
-                        </a>
-                        <a href="https://github.com/MitkoMitrov" target="_blank" class="social-circle">
-                            <i class='bx bxl-github'></i>
-                        </a>
-                        <a href="mailto:mitkomitrov09@gmail.com" class="social-circle">
-                            <i class='bx bxs-envelope'></i>
-                        </a>
-                        <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank" class="social-circle">
-                            <i class='bx bxl-upwork'></i>
-                        </a>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-11">
+                            <div class="contact-wrapper">
+                                <div class="row g-0">
+                                    <!-- Contact Form -->
+                                    <div class="col-md-6 d-flex align-items-stretch">
+                                        <div class="contact-form-wrap w-100 p-md-5 p-4 py-5">
+                                            <h3 class="mb-4">Send me a message</h3>
+                                            <div id="form-message-warning" class="mb-4"></div> 
+                                            <div id="form-message-success" class="mb-4" style="display:none;">
+                                                Your message was sent, thank you!
+                                            </div>
+                                            <form method="POST" id="contactForm" name="contactForm" class="contactForm" novalidate="novalidate">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12"> 
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <textarea name="message" class="form-control" id="message" cols="30" rows="6" placeholder="Your Message" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Send Message" class="btn btn-primary btn-large">
+                                                            <div class="submitting"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- Contact Info -->
+                                    <div class="col-md-6 d-flex align-items-stretch">
+                                        <div class="contact-info-wrap w-100 p-md-5 p-4 py-5">
+                                            <h3 class="mb-4">Contact Information</h3>
+                                            <p class="mb-5">Let's connect! Reach out through any of these channels.</p>
+                                            
+                                            <div class="info-box d-flex align-items-start mb-4">
+                                                <div class="info-icon d-flex align-items-center justify-content-center">
+                                                    <i class='bx bxs-envelope'></i>
+                                                </div>
+                                                <div class="info-content ps-3">
+                                                    <p class="info-label">Email</p>
+                                                    <a href="mailto:mitkomitrov09@gmail.com">mitkomitrov09@gmail.com</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="info-box d-flex align-items-start mb-4">
+                                                <div class="info-icon d-flex align-items-center justify-content-center">
+                                                    <i class='bx bxl-linkedin'></i>
+                                                </div>
+                                                <div class="info-content ps-3">
+                                                    <p class="info-label">LinkedIn</p>
+                                                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" rel="noopener noreferrer">Connect with me</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="info-box d-flex align-items-start mb-4">
+                                                <div class="info-icon d-flex align-items-center justify-content-center">
+                                                    <i class='bx bxl-github'></i>
+                                                </div>
+                                                <div class="info-content ps-3">
+                                                    <p class="info-label">GitHub</p>
+                                                    <a href="https://github.com/MitkoMitrov" target="_blank" rel="noopener noreferrer">View my projects</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="info-box d-flex align-items-start">
+                                                <div class="info-icon d-flex align-items-center justify-content-center">
+                                                    <i class='bx bxl-upwork'></i>
+                                                </div>
+                                                <div class="info-content ps-3">
+                                                    <p class="info-label">Upwork</p>
+                                                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank" rel="noopener noreferrer">Hire me</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html > 
+<head>
+    <meta name="viewport" content="width-device-width, initial scale=1.0">
+    <title>CV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ <style>
+ @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-color: lightblue;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+}
+.container{
+    position: relative;
+    width: 100%;
+    margin:50px;
+    max-width: 1000px;
+    min-height: 1000px; 
+    background-color:#fff ;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    box-shadow: 0 35px 55px rgba(0,0,0,0.1);
+    
+}
+.container .left-Side{
+position: relative;
+background: #003147;
+padding: 28px;
+}
+.profileText{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.profileText .imgBx{
+    position: relative;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    overflow:hidden;
+}
+.profileText .imgBx img{
+    position: absolute;
+    top:0;
+    left: 0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+.profileText h2{
+color: #fff;
+font-size:1.5em;
+margin-top:20px;
+text-transform:uppercase;
+text-align:center;
+font-weight: 600;
+line-height: 1.4 em;
+
+}
+.profileText h2 span{
+    font-size:0.8em;
+    font-weight: 300;
+}
+.contactInfo{
+    padding-top: 40px;
+
+}
+.title{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 20px;   
+}
+.contactInfo ul{
+    position: relative
+}
+.contactInfo ul li{
+    position: relative;
+    list-style: none;
+    margin:10px 0;
+    cursor:pointer;
+}
+.contactInfo ul li .icon{
+    display:inline-block;
+    width:30px;
+    font-size:18px;
+    color: #03a9f4;
+}
+.contactInfo ul li span{
+    color: #fff;
+    font-weight: 300;
+
+} 
+.contactInfo.education li{
+margin-bottom:15px;
+}
+.professinal_skills{
+    font-weight: bold;
+    color: black;
+}
+    .contactInfo.education h5{
+        color: #03d8f4;
+        font-weight:500;
+    }
+    .contactInfo.education h4:nth-child(2){
+        color:#fff;
+        font-weight: 500;
+
+    }
+    .contactInfo.education h4{
+        color:#fff;
+        font-weight: 300;
+
+    }
+    .contactInfo.language .percent{
+        position: relative;
+        width:100%;
+        height: 6px;
+        background:#081921;
+        display:block;
+        margin-top:5px;
+    }
+
+    .contactInfo.language .percent div{
+        position:absolute;
+        top:0;
+        left:0;
+        height:100%;
+        background: #03a9f4;
+    }
+    .skills_info{
+        position: relative;
+        width:100%;
+        height: 6px;
+        background:#081921;
+        display:block;
+        margin-top:5px;
+    }
+
+.container .right-Side{
+    position: relative;
+    background:#fff;
+    padding: 40px;
+    }
+    .about{
+        margin-bottom:50p;
+    }
+.about:last-child{
+    margin-bottom:0;
+
+}
+.title2{
+    color:#003147;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom:10px;
+}
+.title2 ul li .icon{
+    display:inline-block;
+    width:30px;
+    font-size:14px;
+    color: #03a9f4;
+}
+.about .box{
+    display:flex;
+    flex-direction: row;
+    margin:20px 0;
+
+}
+.about .box .year_company{
+    min-width: 150px;
+
+}
+.about .box .year_company h5{
+    text-transform: uppercase;
+    color:#848c90;
+font-weight: 600;
+}
+.about .box .text .skills_text h4{
+    text-transform: uppercase;
+    color: #2a7da2;
+    font-size:14px;
+}
+.skills_text{
+    padding: 15px;
+}
+
+.skills .box{
+    position: relative;
+    width:100%;
+    display:grid;
+    grid-template-columns:150px 1fr;
+    align-items: center;
+}
+.skills .box h4{
+    text-transform: uppercase;
+    color:#848c99;
+    font-weight: 500;
+}
+
+.skills .box  .percent{
+    position:relative;
+    width:100%;
+    height:10px;
+    background: #f0f0f0;
+}
+   
+.skills .box .percent div{
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    background: #03a9f4;
+
+}
+   .interest ul{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+
+   }
+   .interest ul li{
+    list-style:none;
+    color:#333;
+    font-weight: 500;
+    margin:10px 0 ;
+   }
+
+   .interest ul li .fa{
+    color:#03a9f4;
+    font-size:14px;
+    width:20px;
+
+   }
+
+   @media(max-width:1000px) {
+    .container{
+        margin:10px;
+        grid-template-columns: repeat(1,1fr);
+    }
+    .interest ul{
+        grid-template-columns: repeat(2,1fr);
+    }
+   }
+
+   @media(max-width:600px) {
+    
+    .about .box{
+        flex-direction: column;
+     
+    }   
+    .about .box .year_company{
+        margin-bottom: 5px;
+
+    }
+    .interest ul{
+        grid-template-columns: repeat(1,1fr);
+
+    }
+    .skills .box{
+        grid-template-columns: repeat(1,1fr);
+    }
+   }
+   .using_technologies{
+		margin-left: 15px;
+	}
+ 
+ </style>
+</head>
+    <body>
+        <div class="container">
+
+         <div class="left-Side">
+             <div class="profileText">
+                <div class="imgBx">
+                    <img src="https://i.postimg.cc/qR5RmY3G/mitko-mitrov.jpg">
+                </div>
+                <h2>Mitko Mitrov<br> <span> Software engineering</span></h2>
+             </div>
+
+            <div class="contactInfo">
+                <h3 class="title">contact Info</h3>
+                <ul>
+                    <li>
+                        <span class="icon"> <i class="fa fa-phone-square" aria-hidden="true"></i></span>   
+                        <span class="text">+389 76 430 990</span>
+                    </li>
+                    <li>
+                        <span class="icon"> <i class="fa fa-envelope" aria-hidden="true"></i></span>
+                        <span class="text">mitkomitrov09@gmail.com</span>
+                    </li>
+                    <li>
+                        <span class="icon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                        <span class="text">Website:<a href="http://mitkomitrov.github.io" target="_blank">mitkomitrov.github.io</a></span>
+                    </li>
+                    <li>
+                        <span class="icon"><i class="fa fa-location-pin"></i></span>
+                        <span class="text">Skopje,Macedonia</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contactInfo education">
+                <h3 class="title">Education</h3>
+                <ul>
+					<li> 
+						<h5>2016-2022</h5>
+						<h4>Faculty of Computer Science & Engineering <br>Skopje, Macedonia</h4>
+					</li>
+					<li>
+						<h5>2012-2016</h5>
+						<h4>High school</h4>
+						<h4>Vasil Antevski - Dren</h4>
+					</li>
+                </ul>
+            </div>
+			
+            <div class="contactInfo language">
+                <h3 class="title">Languages</h3>
+                <ul>
+					<li>
+						<span class="text">English</span>
+						<span class="percent"> <div style="width:100%;"></div></span>
+					</li>
+					<li>
+						<span class="text">German</span>
+						<span class="percent"><div style="width:50%;"></div></span>
+					</li>
+                </ul>
+            </div>
+        </div>
+
+<div class="right-Side">
+    <div class="about">
+        <h2 class="title2">Profile</h2>
+        <p>I'm Mitko Mitrov, 25 years old, a graduate of the Faculty of Computer Science and Engineering in Skopje, Macedonia.
+            I'm a dedicated Web Developer, with experience in building and optimizing web applications for customers 
+            with business objectives from various industries. I have a proven track record as a team player, 
+            as I've worked with many internal cross-functional departments. I approach projects with the bigger 
+            picture in mind, to reach a high level of reusability, and of course, scalability. </br>
+        </p>
+        <br/>
+    </div>
+
+    <div class="about">
+        <h2 class="title2">Profesional skills</h2>
+        <div class="box">
+            <div class="text"> 
+                <h3>Java</h3>
+                <ul class="using_technologies">
+                    <li>OOP concepts</li>
+                    <li>Algorithms</li>
+                    <li>Data structures</li>
+                    <li>Java IO</li>
+                    <li>Multithreading</li>
+                    <li>Streams</li>
+                    <li>Spring boot Web app as part of faculty project</li>
+                </ul>
+            </div>
+        </div>
+        <div class="box">
+            <div class="text"> 
+                <h3>PHP/Laravel</h3>
+                <ul class="using_technologies">
+                    <li>At most, coding business logic</li>
+                    <li>Register for a new user and verify via e-mail</li>
+                    <li>Generating reports in all most used formats</li>
+                    <li>Automation of printing payment slips</li>
+                </ul>
+            </div>
+        </div>
+        <div class="box">
+            <div class="text"> 
+                <h3>JavaSript/VueJS</h3>
+                <ul class="using_technologies">
+                    <li>Login/Sign up forms & validations</li>
+                    <li>Handle APIs and security</li>
+                    <li>Handling cross-communication between vue components</li>
+                    <li>Refactor of old Vue.js code</li>
+                    <li>Vue Bootstrap</li>
+                    <li>Integrating existing vue component</li>
+                    <li>Design layout for payment slips</li>
+                </ul>
+            </div>
+        </div>
+        <div class="box">
+            <div class="text"> 
+                <h3>Sql platforms</h3>
+                <ul class="using_technologies">
+                    <li>ER Diagram(similar to UML)</li>
+                    <li>DDL / DML</li>
+                    <li>Modeling database structure for new modules and link with existing</li>
+                    <li>Change and upgrade in existing database relations</li>
+                    <li>Using Eloquent as an object relational mapper (ORM)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="box">
+            <div class="text"> 
+                <h3>Kotlin</h3>
+                <ul class="using_technologies">
+                    <li>Diploma thesis coded in Kotlin</li>
+                    <li>Integrate existing android projects and upgrade</li>
+                    <li>APIs integration</li>
+                    <li>Coded many projects for educational purposes</li>
+                </ul>
+            </div>
+        </div>
+        <div class="box">
+            <div class="text"> 
+                <h3>React-Native</h3>
+                <ul class="using_technologies">
+                    <li>Firebase setup</li>
+                    <li>Firebase user authentication</li>
+                    <li>Generation of PDF file as Certificate</li>
+                    <li>Publish on Google Play</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="about">
+        <h2 class="title2">Experience</h2>
+        <p>Marketing gate</p>
+        <div class="box">
+            <div class="year_company"> 
+                <h5>September 2022 - December 2022</h5>
+            </div>
+            <div class="text"> 
+                <h4>Android Developer</h4>
+                <p>Worked on educational quiz application <b>YouAble</b> using React Native.
+                Google play <a href="https://play.google.com/store/apps/details?id=com.youAble">link</a>.
+                </p>
+            </div>
+        </div>
+        
+        <p>UpWork</p>
+        <div class="box">
+            <div class="year_company">
+                <h5>September 2021-Present</h5>
+            </div>
+            <div class="text"> 
+                <h4>Full stack Developer</h4>
+                            <p>Worked on many projects. Currently work on sport social platform <a href="https://playercoach.pro/">
+                playercoach.pro</a> using Laravel, MySql, VueJS and BootstrapVue. </p>
+            </div>
+        </div>
+        <p>SPD Computing</p>
+        <div class="box">
+            <div class="year_company">
+                <h5>October, 2019 <br>- May, 2021</h5>
+            </div>
+            <div class="text"> 
+                <h4>Full stack Developer</h4>
+                <p>Worked on integrated banking system using PHP, Javascript, PL-SQL.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="about">
+        <h2 class="title2">Android projects</h2>
+        <p style="font-weight:bold">Diploma thesis - Machine learning and Image recognition powered Currency converter app</p>
+        <div class="box">
+            <p>
+            Application for converting an amount of money in various currencies using a scanning tool.
+            I used Kotlin as a programming language, TensorFlow for the machine-learning part, and OpenCV for processing the images. Also, The app uses API calls for currency information.
+            Source code, architecture of the solution and demo video of the application are on this <a href="https://github.com/MitkoMitrov/ConvertAmountApp">link</a>.
+            <br/>
+            I worked on this application for about 6 months.
+            </p></br>
+        </div>	
+    </div>
+</div>
+</div>       
+</body>
+</html>
