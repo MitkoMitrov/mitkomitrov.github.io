@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html > 
+<head>
+    <meta name="viewport" content="width-device-width, initial scale=1.0">
+    <title>CV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ <style>
+ @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-color: lightblue;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+}
+.container{
+    position: relative;
+    width: 100%;
+    margin:50px;
+    max-width: 1100px;
+    min-height: 1000px; 
+    background-color:#fff ;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    box-shadow: 0 35px 55px rgba(0,0,0,0.1);
+    
+}
+.container .left-Side{
+position: relative;
+background: #003147;
+padding: 28px;
+}
+.profileText{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.profileText .imgBx{
+    position: relative;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    overflow:hidden;
+}
+.profileText .imgBx img{
+    position: absolute;
+    top:0;
+    left: 0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+.profileText h2{
+color: #fff;
+font-size:1.5em;
+margin-top:20px;
+text-transform:uppercase;
+text-align:center;
+font-weight: 600;
+line-height: 1.4 em;
+
+}
+.profileText h2 span{
+    font-size:0.8em;
+    font-weight: 300;
+}
+.contactInfo{
+    padding-top: 40px;
+
+}
+.title{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 20px;   
+}
+.contactInfo ul{
+    position: relative
+}
+.contactInfo ul li{
+    position: relative;
+    list-style: none;
+    margin:10px 0;
+    cursor:pointer;
+}
+.contactInfo ul li .icon{
+    display:inline-block;
+    width:30px;
+    font-size:18px;
+    color: #03a9f4;
+}
+.contactInfo ul li span{
+    color: #fff;
+    font-weight: 300;
+
+} 
+.contactInfo.education li{
+margin-bottom:15px;
+}
+.professinal_skills{
+    font-weight: bold;
+    color: black;
+}
+    .contactInfo.education h5{
+        color: #03d8f4;
+        font-weight:500;
+    }
+    .contactInfo.education h4:nth-child(2){
+        color:#fff;
+        font-weight: 500;
+
+    }
+    .contactInfo.education h4{
+        color:#fff;
+        font-weight: 300;
+
+    }
+    .contactInfo.language .percent{
+        position: relative;
+        width:100%;
+        height: 6px;
+        background:#081921;
+        display:block;
+        margin-top:5px;
+    }
+
+    .contactInfo.language .percent div{
+        position:absolute;
+        top:0;
+        left:0;
+        height:100%;
+        background: #03a9f4;
+    }
+    .skills_info{
+        position: relative;
+        width:100%;
+        height: 6px;
+        background:#081921;
+        display:block;
+        margin-top:5px;
+    }
+
+.container .right-Side{
+    position: relative;
+    background:#fff;
+    padding: 30px;
+    }
+    .about{
+        margin-bottom:50p;
+    }
+.about:last-child{
+    margin-bottom:0;
+
+}
+.title2{
+    color:#003147;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom:10px;
+}
+.title2 ul li .icon{
+    display:inline-block;
+    width:30px;
+    font-size:14px;
+    color: #03a9f4;
+}
+.about .box{
+    display:flex;
+    flex-direction: row;
+    margin:20px 0;
+
+}
+.about .box .year_company{
+    min-width: 170px;
+
+}
+.about .box .year_company h5{
+    text-transform: uppercase;
+    color:#848c90;
+font-weight: 600;
+}
+.about .box .text .skills_text h4{
+    text-transform: uppercase;
+    color: #2a7da2;
+    font-size:14px;
+}
+.skills_text{
+    padding: 15px;
+}
+
+.skills .box{
+    position: relative;
+    width:100%;
+    display:grid;
+    grid-template-columns:150px 1fr;
+    align-items: center;
+}
+.skills .box h4{
+    text-transform: uppercase;
+    color:#848c99;
+    font-weight: 500;
+}
+
+.skills .box  .percent{
+    position:relative;
+    width:100%;
+    height:10px;
+    background: #f0f0f0;
+}
+   
+.skills .box .percent div{
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    background: #03a9f4;
+    }
+   .interest ul{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+   }
+   .interest ul li{
+    list-style:none;
+    color:#333;
+    font-weight: 500;
+    margin:10px 0 ;
+   }
+
+   .interest ul li .fa{
+    color:#03a9f4;
+    font-size:14px;
+    width:20px;
+   }
+
+    a:link { color: blue; }    /* Unvisited */
+    a:visited { color: blue; } /* Clicked/Visited */
+    a:hover { color: white; }    /* Mouse over */
+    a:active { color: yellow; } /* Moment of click */
+
+   @media(max-width:1000px) {
+    .container{
+        margin:10px;
+        grid-template-columns: repeat(1,1fr);
+    }
+    .interest ul{
+        grid-template-columns: repeat(2,1fr);
+    }
+   }
+
+   @media(max-width:600px) {
+    
+    .about .box{
+        flex-direction: column;
+     
+    }   
+    .about .box .year_company{
+        margin-bottom: 5px;
+
+    }
+    .interest ul{
+        grid-template-columns: repeat(1,1fr);
+
+    }
+    .skills .box{
+        grid-template-columns: repeat(1,1fr);
+    }
+   }
+   .using_technologies{
+		margin-left: 15px;
+	}
+ 
+ </style>
+</head>
+    <body>
+        <div class="container">
+            <div class="left-Side">
+                <div class="profileText">
+                    <div class="imgBx">
+                        <img src="https://i.postimg.cc/qR5RmY3G/mitko-mitrov.jpg" alt="Mitko Mitrov">
+                    </div>
+                    <h2>Mitko Mitrov<br><span>Software Engineer</span></h2>
+                </div>
+
+                <div class="contactInfo">
+                    <h3 class="title">Contact Info</h3>
+                    <ul>
+                        <li><span class="icon"><i class="fa fa-phone-square" aria-hidden="true"></i></span><span class="text">+389 76 430 990</span></li>
+                        <li><span class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></span><span class="text">mitkomitrov09@gmail.com</span></li>
+                        <li><span class="icon"><i class="fa fa-globe" aria-hidden="true"></i></span><span class="text">Portfolio: <a href="http://www.mitko.mk" target="_blank">mitko.mk</a></span></li>
+                        <li><span class="icon"><i class="fa fa-location-pin"></i></span><span class="text">Skopje, Macedonia</span></li>
+                    </ul>
+                </div>
+
+                <div class="contactInfo education">
+                    <h3 class="title">Education</h3>
+                    <ul>
+                        <li>
+                            <h5>2016 – 2022</h5>
+                            <h4>Bachelor’s Degree in Computer Science &amp; Engineering</h4>
+                            <h4>Faculty of Computer Science &amp; Engineering, Skopje, Macedonia</h4>
+                        </li>
+                        <li>
+                            <h5>2012 – 2016</h5>
+                            <h4>High School Diploma</h4>
+                            <h4>Vasil Antevski – Dren, Skopje, Macedonia</h4>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="contactInfo language">
+                    <h3 class="title">Languages</h3>
+                    <ul>
+                        <li><span class="text">English – Fluent</span><span class="percent"><div style="width:100%;"></div></span></li>
+                        <li><span class="text">German – Intermediate</span><span class="percent"><div style="width:50%;"></div></span></li>
+                    </ul>
+                </div>
+
+                <!-- CERTIFICATIONS -->
+                <div class="contactInfo certifications">
+                    <h3 class="title">Certifications (6)</h3>
+                    <ul>
+                        <li><a href="https://www.coursera.org/account/accomplishments/verify/5OH4VY20HC12" target="_blank">Foundations of Coding Full-Stack</a></li>
+                        <li><a href="https://www.coursera.org/account/accomplishments/verify/S47O8NGN5JC3" target="_blank">Introduction to Programming With C#</a></li>
+                        <li><a href="https://www.coursera.org/account/accomplishments/verify/O90EEL6PR4B4" target="_blank">Introduction to Web Development</a></li>
+                        <li><a href="https://www.coursera.org/account/accomplishments/verify/M2VL6AGU390B" target="_blank">Blazor for Front-End Development</a></li>
+                        <li><a href="https://www.coursera.org/account/accomplishments/verify/PI4SCL8CN2HP" target="_blank">Back-End Development with .NET</a></li>
+                        <li><a href="https://www.coursera.org/account/accomplishments/verify/MWOOXHM3M7ON" target="_blank">Database Integration and Management</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right-Side">
+
+                <!-- PROFILE -->
+                <div class="about">
+                    <h2 class="title2">Profile</h2>
+                    <p>
+                        Software Engineer with 6+ years of experience in full-stack development, with the last 3+ years deeply focused on building scalable multi-tenant applications using .NET technologies. Specialized in C#, .NET, Blazor, and React, delivering production-grade solutions from scratch with strong emphasis on clean architecture, semantic correctness, and long-term maintainability. </br>
+                        Worked on web solutions supporting 5,000–10,000 daily active users and developed standalone features used across 25+ kiosk machines in a real production environment.</br>
+                        Actively mentored junior frontend and backend developers, helping them improve code quality, architectural thinking, and problem-solving skills.</br>
+                        Strong advocate for business-oriented development — I focus on building solutions that optimize performance, cost, scalability, and future maintainability rather than delivering quick fixes. Experienced across multiple stacks (Laravel, Vue.js, Kotlin, PHP, PL/SQL), but currently dedicated to mastering the modern .NET ecosystem. </br>
+                        Driven by continuous improvement and deep technical mastery to become an outstanding software engineer. 
+                    </p>
+                </div>
+                </br>
+                <!-- Technical SKILLS -->
+                <div class="about">
+                    <h2 class="title2">Technical Skills</h2>
+
+                    <div class="box">
+                        <div class="text">
+                            <h3>C# / .NET</h3>
+                            <ul class="using_technologies">
+                                <li>.NET 6/7/8 • ASP.NET Core Web API (production) • Blazor Server</li>
+                                <li>EF Core (production) • Redis (caching/sessions/queues) • SignalR (real-time)</li>
+                                <li>Docker (development/packaging) • Nginx (deployment/runtime)</li>
+                                <li>.NET MAUI Windows kiosk app (production) incl. thermal printer + bill acceptor integration</li>
+                                <li>NUnit regression suite to compare legacy vs new API responses during migration</li>
+                                <li>Multi-tenant frontend integration: tenant-specific behavior via .env API targets + CI/CD variables</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="text">
+                            <h3>React &amp; JavaScript</h3>
+                            <ul class="using_technologies">
+                                <li>React (JavaScript) with Redux Toolkit + RTK Query (API integration + caching)</li>
+                                <li>Custom reusable UI components built from scratch; ESLint rules to keep codebase consistent</li>
+                                <li>Multi-tenant frontend adaptation: reused shared code/CSS classes, swapped tenant config + API base URL via .env</li>
+                                <li>SSR with Inertia.js (personal project)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="text">
+                            <h3>Other</h3>
+                            <ul class="using_technologies">
+                                <li>Database environment migration: cloned staging/production schemas + tables + stored procedures into local for parity debugging</li>
+                                <li>Python + OpenAI API (automation side project)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPERIENCE -->
+                <div class="about">
+                    <h2 class="title2">Professional Experience</h2>
+
+                    <!-- Meta5Team -->
+                    <div class="box">
+                        <div class="year_company">
+                            <h5>March 2022 – </br> Present</h5>
+                            <h4>Software Engineer </br> – Meta5Team</h4>
+                        </div>
+                        <div class="text">
+                            <ul>
+                                <li>Designed and implemented multi-tenant frontend architecture for the existing React application, enabling better scalability, tenant isolation, and long-term maintainability.</li>
+                                <li>Migrated legacy backend from code-behind architecture to clean .NET REST API architecture, greatly improving scalability, maintainability, and testability of the multi-tenant system.</li>
+                                <li>Built complete frontend application from scratch using React and Blazor based on Figma designs, delivering modern and responsive user interfaces.</li>
+                                <li>Developed and maintained high-traffic Cashier module (deposit & withdrawal) supporting 5,000–10,000 daily active users using .NET, React, and MySQL.</li>
+                                <li>Designed and implemented .NET MAUI desktop application for kiosk machines, including thermal printer integration successfully deployed on 25+ production kiosks.</li>
+                                <li>Architected and built a sophisticated multi-channel logging system covering kiosk status, user flows, and peripheral device behavior; implemented different storage strategies (local TXT, SQLite, SignalR real-time streaming) resulting in significantly improved observability, debugging speed, and system reliability.</li>
+                                <li>Integrated automated comparison tests between legacy and new implementations, ensuring zero breaking changes during major architectural migration.</li>
+                                <li>Actively mentored junior developers and supported the onboarding process for design team members.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Upwork -->
+                    <div class="box">
+                        <div class="year_company">
+                            <h5>September 2021 – Present</h5>
+                            <h4>Full Stack </br> Developer – Freelance </br> (Upwork)</h4>
+                        </div>
+                        <div class="text">
+                            <ul>
+                                <li>Developed and enhanced <a href="https://playercoach.pro/" target="_blank">PlayerCoach.pro</a>, a full-featured sports platform targeted at the Canadian market for court booking, tennis tournament scheduling, and coach portfolio management using Laravel and Vue.js.</li>
+                                <li>Built key modules including contact forms, advanced booking system, and dynamic user flows from requirements to production.</li>
+                                <li>Designed and implemented new database structures and reusable Vue.js components, improving development speed and consistency across the platform.</li>
+                                <li>Built and maintained backend services and frontend interfaces while rapidly adapting to new client requirements and technologies.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SPD Computing (added back as requested) -->
+                    <div class="box">
+                        <div class="year_company">
+                            <h5>October 2019 – May 2021</h5>
+                            <h4>Full Stack</br>Developer – SPD Computing </br> (Part-time)</h4>
+                        </div>
+                        <div class="text">
+                            <ul></ul>
+                                <li>Worked on integrated banking system serving 12–15 bank branches, migrating legacy VB.NET components to PHP + PL/SQL architecture.</li>
+                                <li>Automated generation of 100+ bank reports (CSV, PDF, Word, Excel) and official payment slips used across all branches.</li>
+                                <li>Designed and implemented automated printing solutions for payment forms (PP10, PP30, PP40, PP50) and foreign exchange transactions, significantly reducing manual workload.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOTABLE PROJECTS -->
+                <div class="about">
+                    <h2 class="title2">Notable Projects</h2>
+                    
+                    <p style="font-weight:bold">Diploma Thesis – Machine Learning Powered Currency Converter (Kotlin Android)</p>
+                    <div class="box">
+                        <div class="text">
+                            <p>Android app using TensorFlow Lite and OpenCV for banknote scanning and real-time currency conversion.</p>
+                            <p><strong>GitHub:</strong> <a href="https://github.com/MitkoMitrov/ConvertAmountApp" target="_blank">ConvertAmountApp</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDE & PERSONAL PROJECTS -->
+                <div class="about">
+                    <h2 class="title2">Side &amp; Personal Projects</h2>
+
+                    <p style="font-weight:bold">WhoWinSelections.com – Election News Aggregator</p>
+                    <div class="box">
+                        <div class="text">
+                            <p>Real-time aggregator scraping 100+ news websites with smart categorization algorithm (February – November 2024).</p>
+                            <ul>
+                                <li>Built with Laravel + React + Inertia.js (SSR)</li>
+                                <li>Reached ~1,000 daily users (15% returning) and successfully handled traffic spikes via Nginx optimization</li>
+                                <li>Improved UI/UX design and managed marketing budget</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p style="font-weight:bold">AI Bot for Daily Stock Reports</p>
+                    <div class="box">
+                        <div class="text">
+                            <p>Fully automated stock report generator using OpenAI API (September 2024 – February 2025).</p>
+                            <ul>
+                                <li>Fetches API data, structures prompts, and delivers intelligent daily reports</li>
+                                <li>Built in Python with Git/GitHub</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+    </body>
+</html>
