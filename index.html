@@ -1,549 +1,646 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv='cache-control' content='no-cache'> 
-        <meta http-equiv='expires' content='0'> 
-        <meta http-equiv='pragma' content='no-cache'>
-        
-        <link rel="stylesheet" href="assets/css/styles.css">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mitko Mitrov — Software Engineer | .NET, React & Blazor</title>
+<meta name="description" content="Portfolio of Mitko Mitrov, a software engineer with 6+ years building scalable multi-tenant .NET, React and Blazor applications." />
+<meta name="author" content="Mitko Mitrov" />
+<link rel="canonical" href="https://mitko.mk/" />
+<meta property="og:title" content="Mitko Mitrov — Software Engineer" />
+<meta property="og:description" content="6+ years engineering scalable .NET, React and Blazor systems." />
+<meta property="og:type" content="website" />
 
-        <!-- =====BOX ICONS===== -->
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <title>Mitko's Portfolio</title>
-        <link rel="shortcut icon" href="assets/img/bx-code-alt.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-    </head>
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5J3W5EZLQL"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Mitko Mitrov","jobTitle":"Software Engineer","email":"mailto:mitkomitrov09@gmail.com","telephone":"+38976430990","url":"https://mitko.mk","address":{"@type":"PostalAddress","addressLocality":"Skopje","addressCountry":"MK"},"knowsAbout":[".NET","C#","Blazor","React","ASP.NET Core","EF Core","SignalR"]}
+</script>
 
-        gtag('config', 'G-5J3W5EZLQL');
-    </script>
+<style>
+/* ============================================================
+   Architectural Editorial — design system
+   All colors HSL.
+   ============================================================ */
+:root{
+  --vellum: hsl(42 20% 95%);
+  --ink: hsl(240 6% 6%);
+  --steel: hsl(240 4% 45%);
+  --hazard: hsl(18 100% 50%);
+  --paper: hsl(0 0% 100%);
+  --muted: hsl(42 12% 88%);
+  --muted-fg: hsl(240 4% 40%);
+  --border: hsla(240, 6%, 6%, 0.12);
+  --border-soft: hsla(240, 6%, 6%, 0.15);
+  --border-dashed: hsla(240, 6%, 6%, 0.15);
+}
 
-    <body>
-        <!--===== HEADER =====-->
-        <header class="l-header">
-            <nav class="nav container">
-                <div class="nav__wrapper">
-                    <!-- Logo Placeholder -->
-                    <div class="nav__logo-container">
-                        <a href="#home" class="nav__logo">
-                            <span class="nav__logo-text">M</span>
-                            <span class="nav__logo-dot"></span>
-                        </a>
-                    </div>
+*{box-sizing:border-box;margin:0;padding:0;border-color:var(--border);}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{overflow-x:hidden;}
+body{
+  background:var(--vellum);
+  color:var(--ink);
+  font-family:"Space Grotesk", system-ui, -apple-system, sans-serif;
+  font-feature-settings:"ss01","cv11";
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+  min-height:100dvh;
+}
+::selection{background:var(--hazard);color:var(--paper);}
+a{color:inherit;text-decoration:none;}
+ul,ol{list-style:none;}
+img,svg{display:block;max-width:100%;}
 
-                    <!-- Navigation Menu -->
-                    <div class="nav__menu" id="nav-menu">
-                        <ul class="nav__list">
-                            <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
-                            <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                            <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                            <li class="nav__item"><a href="#work" class="nav__link">Work</a></li>
-                            <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-                        </ul>
-                    </div>
+.mono{font-family:"JetBrains Mono", ui-monospace, monospace;}
+.label-mono{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:var(--muted-fg);}
+.hazard{color:var(--hazard);}
+.muted{color:var(--muted-fg);}
 
-                    <!-- Menu Toggle -->
-                    <div class="nav__toggle" id="nav-toggle">
-                        <i class='bx bx-menu'></i>
-                    </div>
-                </div>
-            </nav>
-        </header>
+.blueprint-grid{
+  background-image:
+    linear-gradient(to right, hsla(240,6%,6%,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, hsla(240,6%,6%,0.04) 1px, transparent 1px);
+  background-size:40px 40px;
+}
+.technical-border{border-color:var(--border-soft);}
 
-        <main class="l-main">
-            <!--===== HERO SECTION =====-->
-            <section class="hero" id="home">
-                <div class="container">
-                    <div class="hero__wrapper">
-                        <div class="hero__content">
-                            <div class="hero__badge">Welcome to my portfolio</div>
-                            <h1 class="hero__title">
-                                Hi, I'm <span class="hero__accent">Mitko</span><br>
-                                <span class="hero__subtitle">Full-Stack Developer</span>
-                            </h1>
-                            <p class="hero__description">
-                                Building elegant, scalable web applications with modern technologies
-                            </p>
-                            <div class="hero__cta">
-                                <a href="https://www.dropbox.com/s/ihimhyaevjvvvd4/Mitko_Mitrov_CV.pdf?dl=0" target="_blank" class="btn btn-primary">
-                                    <i class='bx bx-download'></i> Download CV
-                                </a>
-                                <a href="#work" class="btn btn-outline">
-                                    View My Work
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="hero__visual">
-                            <div class="hero__image-wrapper">
-                                <div class="hero__placeholder">
-                                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                        <defs>
-                                            <linearGradient id="placeholder-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                <stop offset="0%" style="stop-color:#4F82FF;stop-opacity:1" />
-                                                <stop offset="100%" style="stop-color:#2D5FBF;stop-opacity:1" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <img src="assets/img/perfil.png" alt="Mitko Mitrov" class="hero__image">
-                            </div>
-                        </div>
-                    </div>
+/* ============================================================
+   Layout primitives
+   ============================================================ */
+.container{padding:0 24px;}
+@media(min-width:1024px){.container{padding:0 40px;}}
 
-                    <!-- Social Links -->
-                    <div class="hero__socials">
-                        <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" class="social-link" title="LinkedIn">
-                            <i class='bx bxl-linkedin-square'></i>
-                        </a>
-                        <a href="https://github.com/MitkoMitrov" target="_blank" class="social-link" title="GitHub">
-                            <i class='bx bxl-github'></i>
-                        </a>
-                        <a href="mailto:mitkomitrov09@gmail.com" class="social-link" title="Email">
-                            <i class='bx bxs-envelope'></i>
-                        </a>
-                    </div>
+section.section{padding:80px 24px;border-top:1px solid var(--border-soft);}
+@media(min-width:1024px){section.section{padding:120px 40px;}}
 
-                    <!-- Scroll Indicator -->
-                    <div class="scroll-indicator">
-                        <span>Scroll to explore</span>
-                        <i class='bx bx-chevron-down'></i>
-                    </div>
-                </div>
-            </section>
+.section-header{
+  display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:48px;
+}
+@media(min-width:768px){.section-header{grid-template-columns:1fr 2fr;gap:48px;margin-bottom:64px;}}
+.section-index{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:0.25em;color:var(--hazard);text-transform:uppercase;}
+.section-title{font-size:clamp(2.25rem, 5vw, 4rem);font-weight:700;letter-spacing:-0.03em;line-height:0.95;}
+.section-subtitle{margin-top:16px;color:var(--muted-fg);max-width:48ch;font-size:15px;}
 
-            <!--===== ABOUT SECTION =====-->
-            <section class="about section" id="about">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">About Me</h2>
-                        <p class="section-subtitle">Get to know more about my journey and expertise</p>
-                    </div>
+/* ============================================================
+   NAV
+   ============================================================ */
+nav.nav{
+  position:sticky;top:0;z-index:50;
+  background:hsla(42,20%,95%,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border-soft);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+@media(min-width:1024px){.nav-inner{padding:18px 40px;}}
+.nav-brand{display:flex;align-items:baseline;gap:10px;font-weight:700;letter-spacing:-0.02em;}
+.nav-brand .dot{width:8px;height:8px;background:var(--hazard);border-radius:50%;display:inline-block;}
+.nav-links{display:none;gap:32px;font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;}
+@media(min-width:768px){.nav-links{display:flex;}}
+.nav-links a{color:var(--muted-fg);transition:color .2s;}
+.nav-links a:hover{color:var(--hazard);}
+.nav-cta{
+  font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;
+  border:1px solid var(--ink);padding:8px 14px;transition:.2s;
+}
+.nav-cta:hover{background:var(--ink);color:var(--paper);}
 
-                    <div class="about__grid">
-                        <div class="about__content">
-                            <h3 class="about__heading">Who I Am</h3>
-                            <p class="about__text">
-                                I'm Mitko Mitrov, a passionate full-stack developer with a strong foundation in computer science from the 
-                                Faculty of Computer Science and Engineering in Skopje, Macedonia.
-                            </p>
-                            <p class="about__text">
-                                I specialize in building robust, scalable web applications using modern technologies and best practices. I thrive 
-                                in collaborative environments and have successfully worked with cross-functional teams to deliver high-impact solutions.
-                            </p>
-                            <p class="about__text">
-                                My approach combines technical excellence with a focus on user experience and business objectives. I'm continuously 
-                                learning and adapting to new technologies to stay at the forefront of web development.
-                            </p>
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;padding:100px 24px 120px;overflow:hidden;}
+@media(min-width:1024px){.hero{padding:140px 40px 160px;}}
+.hero-grid{position:absolute;inset:0;opacity:.7;pointer-events:none;}
+.hero-inner{position:relative;display:grid;grid-template-columns:1fr;gap:48px;}
+@media(min-width:1024px){.hero-inner{grid-template-columns:3fr 1fr;gap:64px;}}
 
-                            <div class="about__stats">
-                                <div class="stat">
-                                    <h4 class="stat__number">4+</h4>
-                                    <p class="stat__label">Years Experience</p>
-                                </div>
-                                <div class="stat">
-                                    <h4 class="stat__number">20+</h4>
-                                    <p class="stat__label">Projects Completed</p>
-                                </div>
-                                <div class="stat">
-                                    <h4 class="stat__number">15+</h4>
-                                    <p class="stat__label">Technologies</p>
-                                </div>
-                            </div>
-                        </div>
+.hero-eyebrow{
+  display:flex;align-items:center;gap:12px;margin-bottom:32px;
+  font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.25em;color:var(--muted-fg);
+}
+.hero-eyebrow .pulse{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 
-                        <div class="about__image">
-                            <img src="assets/img/about.jpg" alt="Mitko Mitrov">
-                        </div>
-                    </div>
-                </div>
-            </section>
+.hero h1{
+  font-size:clamp(3rem, 11vw, 9rem);
+  line-height:0.85;letter-spacing:-0.05em;font-weight:700;
+  text-transform:uppercase;
+}
+.hero h1 .stroke{
+  -webkit-text-stroke:1.5px var(--ink);color:transparent;
+}
+.hero h1 .accent{color:var(--hazard);}
 
-            <!--===== SKILLS SECTION =====-->
-            <section class="skills section" id="skills">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Skills & Expertise</h2>
-                        <p class="section-subtitle">Technologies and tools I work with</p>
-                    </div>
+.hero-tagline{
+  margin-top:40px;max-width:60ch;font-size:clamp(1rem, 1.4vw, 1.25rem);
+  line-height:1.55;color:hsla(240,6%,6%,0.85);
+}
+.hero-tagline strong{color:var(--ink);font-weight:600;}
 
-                    <div class="skills__grid">
-                        <!-- Frontend -->
-                        <div class="skill-card">
-                            <div class="skill-card__icon">
-                                <i class='bx bx-palette'></i>
-                            </div>
-                            <h3 class="skill-card__title">Frontend</h3>
-                            <div class="skill-card__tags">
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">TypeScript</span>
-                                <span class="tag">React</span>
-                                <span class="tag">Vue.js</span>
-                                <span class="tag">Next.js</span>
-                                <span class="tag">HTML/CSS</span>
-                                <span class="tag">Bootstrap</span>
-                            </div>
-                        </div>
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px;}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ink);color:var(--paper);
+  padding:14px 22px;font-family:"JetBrains Mono",monospace;font-size:12px;
+  text-transform:uppercase;letter-spacing:0.2em;transition:.2s;
+}
+.btn-primary:hover{background:var(--hazard);}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--ink);padding:14px 22px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.2em;transition:.2s;
+}
+.btn-ghost:hover{background:var(--ink);color:var(--paper);}
 
-                        <!-- Backend -->
-                        <div class="skill-card">
-                            <div class="skill-card__icon">
-                                <i class='bx bx-code-curly'></i>
-                            </div>
-                            <h3 class="skill-card__title">Backend</h3>
-                            <div class="skill-card__tags">
-                                <span class="tag">Node.js</span>
-                                <span class="tag">Laravel</span>
-                                <span class="tag">PHP</span>
-                                <span class="tag">Java</span>
-                                <span class="tag">Kotlin</span>
-                                <span class="tag">GraphQL</span>
-                                <span class="tag">REST APIs</span>
-                            </div>
-                        </div>
+/* spec rail */
+.spec-rail{
+  border-top:1px solid var(--ink);padding-top:24px;
+  display:flex;flex-direction:column;gap:18px;
+}
+@media(min-width:1024px){.spec-rail{border-top:none;border-left:1px solid var(--ink);padding:0 0 0 24px;}}
+.spec-rail .spec{display:flex;flex-direction:column;gap:4px;padding-bottom:14px;border-bottom:1px dashed var(--border-soft);}
+.spec:last-child{border-bottom:none;}
+.spec dt{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted-fg);}
+.spec dd{font-size:14px;font-weight:600;letter-spacing:-0.01em;}
 
-                        <!-- Databases -->
-                        <div class="skill-card">
-                            <div class="skill-card__icon">
-                                <i class='bx bx-data'></i>
-                            </div>
-                            <h3 class="skill-card__title">Databases</h3>
-                            <div class="skill-card__tags">
-                                <span class="tag">MySQL</span>
-                                <span class="tag">PostgreSQL</span>
-                                <span class="tag">Firebase</span>
-                                <span class="tag">MongoDB</span>
-                                <span class="tag">SQL</span>
-                                <span class="tag">PL-SQL</span>
-                            </div>
-                        </div>
+/* hero stats */
+.hero-stats{
+  margin-top:64px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border-soft);
+  border:1px solid var(--border-soft);
+}
+@media(min-width:768px){.hero-stats{grid-template-columns:repeat(4,1fr);}}
+.hero-stats .stat{background:var(--vellum);padding:18px;min-width:0;}
+.stat .num{font-size:clamp(1.75rem,4vw,3rem);font-weight:700;letter-spacing:-0.04em;line-height:1;}
+.stat .num .accent{color:var(--hazard);}
+.stat .lbl{margin-top:8px;font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted-fg);overflow-wrap:break-word;}
 
-                        <!-- Mobile -->
-                        <div class="skill-card">
-                            <div class="skill-card__icon">
-                                <i class='bx bx-mobile-alt'></i>
-                            </div>
-                            <h3 class="skill-card__title">Mobile</h3>
-                            <div class="skill-card__tags">
-                                <span class="tag">React Native</span>
-                                <span class="tag">Android (Kotlin)</span>
-                                <span class="tag">Firebase</span>
-                                <span class="tag">Cross-platform</span>
-                            </div>
-                        </div>
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid{display:grid;grid-template-columns:1fr;gap:40px;}
+@media(min-width:768px){.about-grid{grid-template-columns:3fr 2fr;}}
+.about-text{display:flex;flex-direction:column;gap:24px;font-size:16px;line-height:1.7;color:hsla(240,6%,6%,0.85);}
+@media(min-width:1024px){.about-text{font-size:18px;}}
+.about-text strong{color:var(--ink);font-weight:600;}
+.about-text .accent{color:var(--hazard);font-weight:600;}
+.about-text p:last-child{color:var(--muted-fg);}
 
-                        <!-- Tools & DevOps -->
-                        <div class="skill-card">
-                            <div class="skill-card__icon">
-                                <i class='bx bx-wrench'></i>
-                            </div>
-                            <h3 class="skill-card__title">Tools & DevOps</h3>
-                            <div class="skill-card__tags">
-                                <span class="tag">Git</span>
-                                <span class="tag">Docker</span>
-                                <span class="tag">AWS</span>
-                                <span class="tag">GitHub</span>
-                                <span class="tag">Linux</span>
-                                <span class="tag">CI/CD</span>
-                            </div>
-                        </div>
+.facts{
+  border-top:1px solid var(--border-soft);padding-top:32px;display:flex;flex-direction:column;gap:20px;
+}
+@media(min-width:768px){.facts{border-top:none;border-left:1px solid var(--border-soft);padding:0 0 0 32px;}}
+.fact{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:1px dashed var(--border-soft);}
+.fact dt{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted-fg);}
+.fact dd{font-size:14px;font-weight:600;letter-spacing:-0.01em;}
 
-                        <!-- ML & AI -->
-                        <div class="skill-card">
-                            <div class="skill-card__icon">
-                                <i class='bx bx-brain'></i>
-                            </div>
-                            <h3 class="skill-card__title">ML & AI</h3>
-                            <div class="skill-card__tags">
-                                <span class="tag">TensorFlow</span>
-                                <span class="tag">OpenCV</span>
-                                <span class="tag">Machine Learning</span>
-                                <span class="tag">Image Recognition</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
+/* ============================================================
+   EXPERIENCE
+   ============================================================ */
+.timeline{display:flex;flex-direction:column;gap:48px;}
+.role{display:grid;grid-template-columns:1fr;gap:24px;}
+@media(min-width:768px){.role{grid-template-columns:3fr 9fr;gap:24px;}}
+.role-meta .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--hazard);}
+.role-meta .period{margin-top:8px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted-fg);}
+.role-body{border-top:2px solid var(--ink);padding-top:20px;transition:border-color .2s;}
+.role:hover .role-body{border-color:var(--hazard);}
+.role-body h3{font-size:clamp(1.5rem,2.4vw,1.875rem);font-weight:700;letter-spacing:-0.02em;line-height:1.1;}
+.role-body .company{margin-top:6px;font-family:"JetBrains Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted-fg);}
+.role-body ul{margin-top:20px;display:flex;flex-direction:column;gap:12px;}
+.role-body li{display:flex;gap:16px;font-size:14.5px;line-height:1.65;color:hsla(240,6%,6%,0.8);}
+@media(min-width:1024px){.role-body li{font-size:15px;}}
+.role-body li .num{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--hazard);padding-top:6px;flex-shrink:0;}
 
-<!--===== WORK/PROJECTS SECTION =====-->
-            <section class="work section" id="work">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Featured Projects</h2>
-                        <p class="section-subtitle">A selection of my recent work and achievements</p>
-                    </div>
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills{display:flex;flex-direction:column;gap:48px;}
+.skill-row{display:grid;grid-template-columns:1fr;gap:24px;}
+@media(min-width:768px){.skill-row{grid-template-columns:3fr 9fr;}}
+.skill-row .head .lbl{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--hazard);margin-bottom:8px;display:block;}
+.skill-row .head h3{font-size:clamp(1.25rem,2vw,1.5rem);font-weight:700;letter-spacing:-0.02em;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--border-soft);padding-top:20px;}
+@media(min-width:768px){.skill-tags{border-top:none;border-left:1px solid var(--border-soft);padding:0 0 0 24px;}}
+.skill-tags li{
+  padding:6px 12px;border:1px solid hsla(240,6%,6%,0.2);
+  font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;
+  transition:.2s;cursor:default;
+}
+.skill-tags li:hover{background:var(--ink);color:var(--paper);}
 
-                    <div class="projects__grid">
-                        <!-- Project 1: SPD Bank3000 -->
-                        <div class="project-card">
-                            <div class="project-card__image">
-                                <img src="assets/img/logos/scaled/spd.PNG" alt="SPD Bank3000">
-                                <div class="project-card__overlay">
-                                    <a href="https://spdcomputing.com/en/bank3000" target="_blank" class="project-card__link">
-                                        <i class='bx bx-link-external'></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-card__content">
-                                <h3 class="project-card__title">SPD Bank3000</h3>
-                                <p class="project-card__description">Enterprise banking system with payment processing, reporting, and foreign exchange operations</p>
-                                <div class="project-card__tech">
-                                    <span class="badge">PHP</span>
-                                    <span class="badge">PL-SQL</span>
-                                    <span class="badge">JavaScript</span>
-                                </div>
-                                <ul class="project-card__features">
-                                    <li><i class='bx bx-check'></i> Payment slip generation & printing</li>
-                                    <li><i class='bx bx-check'></i> Foreign exchange operations</li>
-                                    <li><i class='bx bx-check'></i> Advanced reporting</li>
-                                </ul>
-                            </div>
-                        </div>
+/* ============================================================
+   WORK
+   ============================================================ */
+.work-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);}
+@media(min-width:768px){.work-grid{grid-template-columns:repeat(2,1fr);}}
+.proj{background:var(--vellum);padding:28px;display:flex;flex-direction:column;gap:20px;min-height:280px;transition:background .2s;cursor:default;}
+@media(min-width:1024px){.proj{padding:32px;}}
+.proj:hover{background:var(--paper);}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.proj-top .code{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--hazard);}
+.proj-top .arrow{color:var(--muted-fg);transition:.2s;font-size:20px;line-height:1;}
+.proj:hover .proj-top .arrow{color:var(--hazard);transform:rotate(12deg);}
+.proj-meta{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted-fg);}
+.proj h3{margin-top:4px;font-size:clamp(1.5rem,2.4vw,1.875rem);font-weight:700;letter-spacing:-0.02em;line-height:1.1;}
+.proj-desc{font-size:14px;line-height:1.65;color:hsla(240,6%,6%,0.8);flex:1;}
+.proj-stack{display:flex;flex-wrap:wrap;gap:6px;padding-top:14px;border-top:1px dashed var(--border-soft);}
+.proj-stack li{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.05em;padding:4px 8px;background:hsla(240,6%,6%,0.05);}
 
-                        <!-- Project 2: PlayerCoach -->
-                        <div class="project-card">
-                            <div class="project-card__image">
-                                <img src="assets/img/logos/scaled/player_coach.PNG" alt="PlayerCoach">
-                                <div class="project-card__overlay">
-                                    <a href="https://playercoach.pro/" target="_blank" class="project-card__link">
-                                        <i class='bx bx-link-external'></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-card__content">
-                                <h3 class="project-card__title">PlayerCoach</h3>
-                                <p class="project-card__description">Booking and membership management platform for sports and fitness professionals</p>
-                                <div class="project-card__tech">
-                                    <span class="badge">Laravel</span>
-                                    <span class="badge">Vue.js</span>
-                                    <span class="badge">MySQL</span>
-                                </div>
-                                <ul class="project-card__features">
-                                    <li><i class='bx bx-check'></i> Booking module</li>
-                                    <li><i class='bx bx-check'></i> Membership management</li>
-                                    <li><i class='bx bx-check'></i> CSV import/export</li>
-                                </ul>
-                            </div>
-                        </div>
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-wrap{display:flex;flex-direction:column;gap:48px;}
+.contact-cta{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  padding:40px 0;transition:.2s;
+}
+@media(min-width:1024px){.contact-cta{padding:64px 0;}}
+.contact-cta:hover{border-color:var(--hazard);}
+.contact-cta:hover .talk{color:var(--hazard);}
+.contact-cta:hover .arrow{color:var(--hazard);transform:rotate(45deg);}
+.contact-cta .talk{
+  font-size:clamp(3rem, 12vw, 7rem);font-weight:700;letter-spacing:-0.04em;
+  text-transform:uppercase;line-height:0.85;word-break:break-word;transition:.2s;
+}
+.contact-cta .arrow{font-size:48px;line-height:1;flex-shrink:0;transition:.3s;}
+@media(min-width:1024px){.contact-cta .arrow{font-size:80px;}}
 
-                        <!-- Project 3: YouABLE -->
-                        <div class="project-card">
-                            <div class="project-card__image">
-                                <img src="assets/img/YouABLE.png" alt="YouABLE">
-                                <div class="project-card__overlay">
-                                    <a href="https://play.google.com/store/apps/details?id=com.youAble" target="_blank" class="project-card__link">
-                                        <i class='bx bx-link-external'></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-card__content">
-                                <h3 class="project-card__title">YouABLE</h3>
-                                <p class="project-card__description">Mobile education platform with real-time database and certificate generation</p>
-                                <div class="project-card__tech">
-                                    <span class="badge">React Native</span>
-                                    <span class="badge">Firebase</span>
-                                    <span class="badge">PDF</span>
-                                </div>
-                                <ul class="project-card__features">
-                                    <li><i class='bx bx-check'></i> Firebase authentication</li>
-                                    <li><i class='bx bx-check'></i> Real-time database</li>
-                                    <li><i class='bx bx-check'></i> PDF certificates</li>
-                                </ul>
-                            </div>
-                        </div>
+.channels{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);}
+@media(min-width:640px){.channels{grid-template-columns:repeat(3,1fr);}}
+.channel{background:var(--vellum);padding:24px;display:flex;gap:16px;align-items:flex-start;transition:background .2s;}
+.channel:hover{background:var(--paper);}
+.channel .ico{color:var(--hazard);font-size:18px;margin-top:2px;}
+.channel .lbl{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--muted-fg);}
+.channel .val{margin-top:4px;font-size:15px;font-weight:600;letter-spacing:-0.01em;}
 
-                        <!-- Project 4: ML Currency Converter -->
-                        <div class="project-card">
-                            <div class="project-card__image">
-                                <img src="assets/img/logos/scaled/scan_app.PNG" alt="ML Currency Converter">
-                                <div class="project-card__overlay">
-                                    <a href="https://github.com/MitkoMitrov/ConvertAmountApp" target="_blank" class="project-card__link">
-                                        <i class='bx bx-link-external'></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="project-card__content">
-                                <h3 class="project-card__title">ML Currency Converter</h3>
-                                <p class="project-card__description">Android app with machine learning for currency recognition via image processing</p>
-                                <div class="project-card__tech">
-                                    <span class="badge">Kotlin</span>
-                                    <span class="badge">TensorFlow</span>
-                                    <span class="badge">OpenCV</span>
-                                </div>
-                                <ul class="project-card__features">
-                                    <li><i class='bx bx-check'></i> Camera integration</li>
-                                    <li><i class='bx bx-check'></i> Image preprocessing</li>
-                                    <li><i class='bx bx-check'></i> ML currency recognition</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+.edu-lang{display:grid;grid-template-columns:1fr;gap:32px;padding-top:32px;border-top:1px solid var(--border-soft);}
+@media(min-width:768px){.edu-lang{grid-template-columns:1fr 1fr;}}
+.edu-lang h4{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:var(--muted-fg);margin-bottom:12px;}
+.edu li{margin-bottom:14px;font-size:14px;}
+.edu li .name{font-weight:600;}
+.edu li .meta{margin-top:4px;font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted-fg);}
+.langs li{display:flex;justify-content:space-between;border-bottom:1px dashed var(--border-soft);padding-bottom:8px;margin-bottom:8px;font-size:14px;}
+.langs li .lvl{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted-fg);}
 
-            <!--===== CONTACT SECTION =====-->
-            <section class="contact section" id="contact">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 text-center mb-5">
-                            <h2 class="section-title">Get in Touch</h2>
-                            <p class="section-subtitle">I'd love to hear from you. Let's create something great together!</p>
-                        </div>
-                    </div>
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{background:var(--ink);color:var(--paper);}
+.ticker-wrap{overflow:hidden;border-top:1px solid hsla(0,0%,100%,0.1);border-bottom:1px solid hsla(0,0%,100%,0.1);padding:14px 0;}
+.ticker{display:flex;gap:48px;white-space:nowrap;animation:marquee 40s linear infinite;font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.3em;}
+.ticker span{display:flex;align-items:center;gap:48px;}
+.ticker .dot{width:4px;height:4px;background:var(--hazard);border-radius:50%;display:inline-block;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
 
-                    <div class="row justify-content-center">
-                        <div class="col-lg-11">
-                            <div class="contact-wrapper">
-                                <div class="row g-0">
-                                    <!-- Contact Form -->
-                                    <div class="col-md-6 d-flex align-items-stretch">
-                                        <div class="contact-form-wrap w-100 p-md-5 p-4 py-5">
-                                            <h3 class="mb-4">Send me a message</h3>
-                                            <div id="form-message-warning" class="mb-4"></div> 
-                                            <div id="form-message-success" class="mb-4" style="display:none;">
-                                                Your message was sent, thank you!
-                                            </div>
-                                            <form method="POST" id="contactForm" name="contactForm" class="contactForm" novalidate="novalidate">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12"> 
-                                                        <div class="form-group">
-                                                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <textarea name="message" class="form-control" id="message" cols="30" rows="6" placeholder="Your Message" required></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <input type="submit" value="Send Message" class="btn btn-primary btn-large">
-                                                            <div class="submitting"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+.foot-grid{padding:40px 24px;display:grid;grid-template-columns:1fr;gap:32px;align-items:end;}
+@media(min-width:1024px){.foot-grid{padding:40px 40px;grid-template-columns:repeat(3,1fr);}}
+.foot-lbl{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:hsla(0,0%,100%,0.5);}
+.foot-h{margin-top:8px;font-size:1.5rem;font-weight:700;letter-spacing:-0.03em;text-transform:uppercase;}
+.foot-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:14px;margin-top:8px;}
+.foot-links a{transition:color .2s;}
+.foot-links a:hover{color:var(--hazard);}
+.foot-status{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;}
+@media(min-width:1024px){.foot-right{text-align:right;}.foot-right .foot-status{justify-content:flex-end;}}
+.foot-status .dot{width:6px;height:6px;border-radius:50%;background:#34d399;animation:pulse 2s infinite;}
+.foot-status .txt{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;}
+</style>
+</head>
+<body>
 
-                                    <!-- Contact Info -->
-                                    <div class="col-md-6 d-flex align-items-stretch">
-                                        <div class="contact-info-wrap w-100 p-md-5 p-4 py-5">
-                                            <h3 class="mb-4">Contact Information</h3>
-                                            <p class="mb-5">Let's connect! Reach out through any of these channels.</p>
-                                            
-                                            <div class="info-box d-flex align-items-start mb-4">
-                                                <div class="info-icon d-flex align-items-center justify-content-center">
-                                                    <i class='bx bxs-envelope'></i>
-                                                </div>
-                                                <div class="info-content ps-3">
-                                                    <p class="info-label">Email</p>
-                                                    <a href="mailto:mitkomitrov09@gmail.com">mitkomitrov09@gmail.com</a>
-                                                </div>
-                                            </div>
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand"><span class="dot"></span>MITKO.MK</a>
+    <ul class="nav-links">
+      <li><a href="#about">01 About</a></li>
+      <li><a href="#experience">02 Experience</a></li>
+      <li><a href="#skills">03 Stack</a></li>
+      <li><a href="#work">04 Work</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Contact ↗</a>
+  </div>
+</nav>
 
-                                            <div class="info-box d-flex align-items-start mb-4">
-                                                <div class="info-icon d-flex align-items-center justify-content-center">
-                                                    <i class='bx bxl-linkedin'></i>
-                                                </div>
-                                                <div class="info-content ps-3">
-                                                    <p class="info-label">LinkedIn</p>
-                                                    <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank" rel="noopener noreferrer">Connect with me</a>
-                                                </div>
-                                            </div>
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-grid blueprint-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="pulse"></span>
+        <span>SYS_001 / Available for engagements · 2026</span>
+      </div>
 
-                                            <div class="info-box d-flex align-items-start mb-4">
-                                                <div class="info-icon d-flex align-items-center justify-content-center">
-                                                    <i class='bx bxl-github'></i>
-                                                </div>
-                                                <div class="info-content ps-3">
-                                                    <p class="info-label">GitHub</p>
-                                                    <a href="https://github.com/MitkoMitrov" target="_blank" rel="noopener noreferrer">View my projects</a>
-                                                </div>
-                                            </div>
+      <h1>
+        Mitko<br/>
+        <span class="stroke">Mitrov</span><br/>
+        <span class="accent">Software</span><br/>
+        Engineer.
+      </h1>
 
-                                            <div class="info-box d-flex align-items-start">
-                                                <div class="info-icon d-flex align-items-center justify-content-center">
-                                                    <i class='bx bxl-upwork'></i>
-                                                </div>
-                                                <div class="info-content ps-3">
-                                                    <p class="info-label">Upwork</p>
-                                                    <a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank" rel="noopener noreferrer">Hire me</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+      <p class="hero-tagline">
+        I architect and ship <strong>scalable multi-tenant systems</strong> on the modern .NET stack —
+        from <strong>5K–10K daily-active</strong> web platforms to <strong>25+ production kiosks</strong>
+        running .NET MAUI. Six years in, still optimising for code that's good a year from now.
+      </p>
 
-        <!--===== FOOTER =====-->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer__content">
-                    <div class="footer__section">
-                        <h4 class="footer__heading">Mitko Mitrov</h4>
-                        <p class="footer__text">Full-Stack Developer | Building modern web experiences</p>
-                    </div>
-                    <div class="footer__section">
-                        <h4 class="footer__heading">Quick Links</h4>
-                        <ul class="footer__links">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#skills">Skills</a></li>
-                            <li><a href="#work">Projects</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer__section">
-                        <h4 class="footer__heading">Connect</h4>
-                        <ul class="footer__links">
-                            <li><a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank">LinkedIn</a></li>
-                            <li><a href="https://github.com/MitkoMitrov" target="_blank">GitHub</a></li>
-                            <li><a href="https://www.upwork.com/freelancers/~018df51bc5ad143170" target="_blank">Upwork</a></li>
-                        </ul>
-                    </div>
-                </div>
+      <div class="hero-cta-row">
+        <a href="#work" class="btn-primary">View Work →</a>
+        <a href="#contact" class="btn-ghost">Get in touch ↗</a>
+      </div>
+    </div>
 
-                <div class="footer__bottom">
-                    <p>&copy; 2026 Mitko Mitrov. All rights reserved.</p>
-                    <div class="footer__social">
-                        <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/" target="_blank"><i class='bx bxl-linkedin'></i></a>
-                        <a href="https://github.com/MitkoMitrov" target="_blank"><i class='bx bxl-github'></i></a>
-                        <a href="mailto:mitkomitrov09@gmail.com"><i class='bx bxs-envelope'></i></a>
-                    </div>
-                </div>
+    <dl class="spec-rail">
+      <div class="spec"><dt>Role</dt><dd>Software Engineer</dd></div>
+      <div class="spec"><dt>Stack</dt><dd>.NET · React · Blazor</dd></div>
+      <div class="spec"><dt>Location</dt><dd>Skopje, MK / Europe</dd></div>
+      <div class="spec"><dt>Experience</dt><dd>6+ years</dd></div>
+      <div class="spec"><dt>Status</dt><dd>Open to work</dd></div>
+    </dl>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><div class="num"><span class="accent">10K</span></div><div class="lbl">Daily users / served</div></div>
+    <div class="stat"><div class="num">25<span class="accent">+</span></div><div class="lbl">Production kiosks</div></div>
+    <div class="stat"><div class="num">100<span class="accent">+</span></div><div class="lbl">Bank reports automated</div></div>
+    <div class="stat"><div class="num">6<span class="accent">YR</span></div><div class="lbl">Full-stack experience</div></div>
+  </div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section class="section container" id="about">
+  <div class="section-header">
+    <div><div class="section-index">01 / Profile</div></div>
+    <div>
+      <h2 class="section-title">Profile</h2>
+      <p class="section-subtitle">A short brief on who I am and how I work.</p>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Software Engineer</strong> with 6+ years in full-stack development — the last three deeply focused on scalable multi-tenant applications using the modern .NET stack.</p>
+      <p>I've shipped web platforms supporting <span class="accent">5,000–10,000 daily active users</span> and built standalone features running on <span class="accent">25+ production kiosks</span>. I care about clean architecture, semantic correctness, and code that's still good a year from now.</p>
+      <p>I mentor junior frontend and backend developers, and I lean toward business-oriented engineering — solutions that optimize performance, cost, scalability and maintainability over quick fixes.</p>
+    </div>
+    <dl class="facts">
+      <div class="fact"><dt>Based</dt><dd>Skopje, MK / Europe</dd></div>
+      <div class="fact"><dt>Years coding</dt><dd>6+</dd></div>
+      <div class="fact"><dt>Languages</dt><dd>EN · DE · MK</dd></div>
+      <div class="fact"><dt>Education</dt><dd>BSc CS&E</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="section container" id="experience">
+  <div class="section-header">
+    <div><div class="section-index">02 / Timeline</div></div>
+    <div>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-subtitle">A timeline of what I've shipped and shaped.</p>
+    </div>
+  </div>
+
+  <ol class="timeline">
+    <li class="role">
+      <div class="role-meta">
+        <p class="tag">01 / Role</p>
+        <p class="period">Mar 2022 — Present</p>
+      </div>
+      <div class="role-body">
+        <h3>Software Engineer</h3>
+        <p class="company">@ Meta5Team</p>
+        <ul>
+          <li><span class="num">01</span><span>Designed and implemented multi-tenant frontend architecture for an existing React application — better scalability, tenant isolation, and long-term maintainability.</span></li>
+          <li><span class="num">02</span><span>Migrated legacy backend from code-behind to clean .NET REST API architecture for the multi-tenant system.</span></li>
+          <li><span class="num">03</span><span>Built complete frontend application from scratch with React and Blazor based on Figma designs.</span></li>
+          <li><span class="num">04</span><span>Developed and maintained the high-traffic Cashier module (deposit & withdrawal) supporting 5,000–10,000 daily active users (.NET, React, MySQL).</span></li>
+          <li><span class="num">05</span><span>Designed and shipped a .NET MAUI desktop app for kiosk machines, including thermal printer integration — deployed on 25+ production kiosks.</span></li>
+          <li><span class="num">06</span><span>Architected a multi-channel logging system (local TXT, SQLite, SignalR real-time streaming) — significantly improved observability and debugging speed.</span></li>
+          <li><span class="num">07</span><span>Integrated automated comparison tests between legacy and new implementations to guarantee zero breaking changes during migration.</span></li>
+          <li><span class="num">08</span><span>Mentored junior developers and supported onboarding of design team members.</span></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="role">
+      <div class="role-meta">
+        <p class="tag">02 / Role</p>
+        <p class="period">Sep 2021 — Present</p>
+      </div>
+      <div class="role-body">
+        <h3>Full Stack Developer · Freelance</h3>
+        <p class="company">@ Upwork</p>
+        <ul>
+          <li><span class="num">01</span><span>Developed and enhanced PlayerCoach.pro — a Canadian sports platform for court booking, tennis tournament scheduling, and coach portfolios (Laravel, Vue.js).</span></li>
+          <li><span class="num">02</span><span>Built core modules: contact forms, advanced booking system, and dynamic user flows.</span></li>
+          <li><span class="num">03</span><span>Designed reusable Vue.js components and database structures, improving development speed and consistency.</span></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="role">
+      <div class="role-meta">
+        <p class="tag">03 / Role</p>
+        <p class="period">Oct 2019 — May 2021</p>
+      </div>
+      <div class="role-body">
+        <h3>Full Stack Developer · Part-time</h3>
+        <p class="company">@ SPD Computing</p>
+        <ul>
+          <li><span class="num">01</span><span>Worked on an integrated banking system serving 12–15 bank branches; migrated legacy VB.NET components to PHP + PL/SQL.</span></li>
+          <li><span class="num">02</span><span>Automated generation of 100+ bank reports (CSV, PDF, Word, Excel) and official payment slips.</span></li>
+          <li><span class="num">03</span><span>Built automated printing solutions for payment forms (PP10, PP30, PP40, PP50) and FX transactions, removing significant manual work.</span></li>
+        </ul>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="section container" id="skills">
+  <div class="section-header">
+    <div><div class="section-index">03 / Stack</div></div>
+    <div>
+      <h2 class="section-title">Stack</h2>
+      <p class="section-subtitle">Tools I reach for, grouped by domain.</p>
+    </div>
+  </div>
+
+  <div class="skills">
+    <div class="skill-row">
+      <div class="head"><span class="lbl">Module</span><h3>C# / .NET</h3></div>
+      <ul class="skill-tags">
+        <li>.NET 6/7/8</li><li>ASP.NET Core Web API</li><li>Blazor Server</li><li>EF Core</li>
+        <li>Redis (cache · sessions · queues)</li><li>SignalR</li><li>Docker</li><li>Nginx</li>
+        <li>.NET MAUI (Windows kiosk)</li><li>NUnit regression suites</li><li>Multi-tenant CI/CD</li>
+      </ul>
+    </div>
+
+    <div class="skill-row">
+      <div class="head"><span class="lbl">Module</span><h3>React & JavaScript</h3></div>
+      <ul class="skill-tags">
+        <li>React (JS)</li><li>Redux Toolkit</li><li>RTK Query</li><li>Custom UI systems</li>
+        <li>ESLint governance</li><li>Multi-tenant frontend adaptation</li><li>SSR with Inertia.js</li>
+      </ul>
+    </div>
+
+    <div class="skill-row">
+      <div class="head"><span class="lbl">Module</span><h3>Other</h3></div>
+      <ul class="skill-tags">
+        <li>Laravel · PHP</li><li>Vue.js</li><li>Kotlin (Android)</li><li>PL/SQL · MySQL</li>
+        <li>Python + OpenAI API</li><li>TensorFlow Lite</li><li>OpenCV</li> <li>OpenAI Api</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section class="section container" id="work">
+  <div class="section-header">
+    <div><div class="section-index">04 / Selected</div></div>
+    <div>
+      <h2 class="section-title">Work</h2>
+      <p class="section-subtitle">Selected projects, side projects and experiments.</p>
+    </div>
+  </div>
+
+  <ul class="work-grid">
+    <li class="proj">
+      <div class="proj-top"><span class="code">PRJ_01</span><span class="arrow">↗</span></div>
+      <div>
+        <p class="proj-meta">Election News Aggregator · Feb — Nov 2024</p>
+        <h3>WhoWinSelections.com</h3>
+      </div>
+      <p class="proj-desc">Real-time news aggregator scraping 100+ sources with a smart categorization algorithm. Reached ~1,000 daily users (15% returning) and handled traffic spikes via Nginx tuning.</p>
+      <ul class="proj-stack"><li>Laravel</li><li>React</li><li>Inertia.js (SSR)</li><li>Nginx</li></ul>
+    </li>
+
+    <li class="proj">
+      <div class="proj-top"><span class="code">PRJ_02</span><span class="arrow">↗</span></div>
+      <div>
+        <p class="proj-meta">Automated AI pipeline · Sep 2024 — Feb 2025</p>
+        <h3>AI Daily Stock Reports</h3>
+      </div>
+      <p class="proj-desc">Fully automated stock report generator. Fetches market data, structures prompts to the OpenAI API, and delivers intelligent daily reports.</p>
+      <ul class="proj-stack"><li>Python</li><li>OpenAI API</li><li>GitHub Actions</li></ul>
+    </li>
+
+    <li class="proj">
+      <div class="proj-top"><span class="code">PRJ_03</span><span class="arrow">↗</span></div>
+      <div>
+        <p class="proj-meta">Diploma Thesis · ML Currency Converter · 2022</p>
+        <h3>ConvertAmountApp</h3>
+      </div>
+      <p class="proj-desc">Android app using TensorFlow Lite and OpenCV for banknote scanning and real-time currency conversion.</p>
+      <ul class="proj-stack"><li>Kotlin</li><li>TensorFlow Lite</li><li>OpenCV</li></ul>
+    </li>
+
+    <li class="proj">
+      <div class="proj-top"><span class="code">PRJ_04</span><span class="arrow">↗</span></div>
+      <div>
+        <p class="proj-meta">Production observability · Meta5Team</p>
+        <h3>Kiosk Logging Subsystem</h3>
+      </div>
+      <p class="proj-desc">Multi-channel logging architecture across kiosk status, user flows and peripheral devices — TXT, SQLite, and SignalR streaming. Cut debugging time dramatically.</p>
+      <ul class="proj-stack"><li>.NET MAUI</li><li>SignalR</li><li>SQLite</li></ul>
+    </li>
+  </ul>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="section container" id="contact">
+  <div class="section-header">
+    <div><div class="section-index">05 / Contact</div></div>
+    <div>
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">Currently open to work.</p>
+    </div>
+  </div>
+
+  <div class="contact-wrap">
+    <a href="mailto:mitkomitrov09@gmail.com" class="contact-cta">
+      <span class="talk">Let's talk.</span>
+      <span class="arrow">↗</span>
+    </a>
+
+    <ul class="channels">
+      <a href="mailto:mitkomitrov09@gmail.com"><li class="channel"><span class="ico">✉</span><div><div class="lbl">Email</div><div class="val">mitkomitrov09@gmail.com</div></div></li></a>
+      <a href="tel:+38976430990">
+        <li class="channel">
+          <span class="ico">☎</span>
+          <div>
+            <div class="lbl">Phone</div>
+            <div class="val">+389 76 430 990</div>
             </div>
-        </footer>
+        </li>
+      </a>
 
-        <!--===== SCROLL REVEAL =====-->
-        <script src="https://unpkg.com/scrollreveal"></script>
+      <a href="https://www.linkedin.com/in/mitko-mitrov-14aa3b191/?skipRedirect=true" target="_blank">
+        <li class="channel">
+          <span class="ico">💼</span>
+          <div>
+            <div class="lbl">LinkedIn</div>
+            <div class="val">Mitko Mitrov</div>
+          </div>
+        </li>
+      </a>
+    </ul>
 
-        <!--===== MAIN JS =====-->
-        <script src="assets/js/main.js"></script>
-        <script src="https://use.fontawesome.com/4def9a2359.js"></script>
-    </body>
+    <div class="edu-lang">
+      <div class="edu">
+        <h4>Education</h4>
+        <ul>
+          <li><div class="name">BSc Computer Science & Engineering</div><div class="meta">FCSE Skopje · 2016 – 2022</div></li>
+          <li><div class="name">High School Diploma</div><div class="meta">Vasil Antevski – Dren · 2012 – 2016</div></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Languages</h4>
+        <ul class="langs">
+          <li><span><strong>English</strong></span><span class="lvl">Fluent</span></li>
+          <li><span><strong>German</strong></span><span class="lvl">Intermediate</span></li>
+          <li><span><strong>Macedonian</strong></span><span class="lvl">Native</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>.NET 8 <span class="dot"></span></span><span>C# <span class="dot"></span></span><span>Blazor <span class="dot"></span></span><span>React <span class="dot"></span></span><span>EF Core <span class="dot"></span></span><span>SignalR <span class="dot"></span></span><span>Redis <span class="dot"></span></span><span>MAUI <span class="dot"></span></span><span>Docker <span class="dot"></span></span><span>Multi-tenant <span class="dot"></span></span><span>Clean Architecture <span class="dot"></span></span>
+      <span>.NET 8 <span class="dot"></span></span><span>C# <span class="dot"></span></span><span>Blazor <span class="dot"></span></span><span>React <span class="dot"></span></span><span>EF Core <span class="dot"></span></span><span>SignalR <span class="dot"></span></span><span>Redis <span class="dot"></span></span><span>MAUI <span class="dot"></span></span><span>Docker <span class="dot"></span></span><span>Multi-tenant <span class="dot"></span></span><span>Clean Architecture <span class="dot"></span></span>
+      <span>.NET 8 <span class="dot"></span></span><span>C# <span class="dot"></span></span><span>Blazor <span class="dot"></span></span><span>React <span class="dot"></span></span><span>EF Core <span class="dot"></span></span><span>SignalR <span class="dot"></span></span><span>Redis <span class="dot"></span></span><span>MAUI <span class="dot"></span></span><span>Docker <span class="dot"></span></span><span>Multi-tenant <span class="dot"></span></span><span>Clean Architecture <span class="dot"></span></span>
+    </div>
+  </div>
+
+  <div class="foot-grid">
+    <div>
+      <p class="foot-lbl" id="copyright">© 2026 / Mitko Mitrov</p>
+      <p class="foot-h">Built with care.</p>
+    </div>
+    <div>
+      <p class="foot-lbl">Quick Links</p>
+      <div class="foot-links">
+        <a href="#about">About</a><a href="#experience">Experience</a>
+        <a href="#work">Work</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot-right">
+      <p class="foot-lbl">Status</p>
+      <p class="foot-status"><span class="dot"></span><span class="txt">Available for work</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('copyright').textContent = '© ' + new Date().getFullYear() + ' / Mitko Mitrov';
+</script>
+</body>
 </html>
