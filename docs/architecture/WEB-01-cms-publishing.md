@@ -114,6 +114,12 @@ Proposals only; other cards were not edited.
 5. **WEB-08**: verify actual Studio saved/error/offline/conflict behavior across independent sessions and physical PCs. Native drafts separate from live content; forbid private asset uploads with ordinary CDN storage.
 6. **WEB-09**: prove the disabled webhook design in isolation; one snapshot, exact revision binding, stale/duplicate/unpublish handling, serialized deployment and truthful Studio status. Resolve final-check ordering race before promising monotonic updates. Keep WEB-01 open until its integration gates pass.
 
+## Owner setup follow-up — 2026-11-04
+
+The owner supplied project ID `o3i9jgij`, named **mitko.mk**, and created the disposable `web01` dataset. An unauthenticated request to `https://o3i9jgij.api.sanity.io/v2025-02-19/data/query/web01?query=count%28%2A%29&perspective=published` returned **HTTP 200**, result **0**. This proves the dataset endpoint is reachable and empty for this published query. It does not prove draft privacy or membership enforcement.
+
+Studio and CLI configuration now default to these public identifiers. The Astro site still defaults to synthetic offline fixtures; live published reads require explicit opt-in. The configured Studio build succeeded; its browser startup displays “Connect this Studio to your project” and requests the exact CORS origin `http://127.0.0.1:4173`. The real SDK published-article read also returned zero articles without credentials. No token, CORS setting, membership, hosted Studio deployment or cloud content was changed by the agent. Owner login and the remaining acceptance gates above are still unverified.
+
 ## Official references (checked 2026-11-04)
 
 - **S1** [Sanity pricing](https://www.sanity.io/pricing)
