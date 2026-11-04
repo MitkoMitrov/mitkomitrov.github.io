@@ -1,0 +1,13 @@
+<!doctype html><html><body>
+<h2>Cache invalidation in practice</h2>
+<p>Use <strong>explicit expiry</strong> and <em>measure the result</em>. Read the <a href="https://redis.io/docs/">Redis documentation</a>.</p>
+<p style="font-size:14px">Small operational note.</p>
+<p style="font-size:24px">Large takeaway: cache only what you can rebuild.</p>
+<ul><li>Choose a key.</li><li>Set a bounded TTL.</li></ul>
+<table><thead><tr><th>Operation</th><th>Cost</th></tr></thead><tbody><tr><td>Cache hit</td><td>One lookup</td></tr><tr><td>Cache miss</td><td>Lookup + rebuild</td></tr></tbody></table>
+<p>The key is <code>article:42</code>.</p>
+<pre><code class="language-csharp">if (count &lt; 2 &amp;&amp; key != "")
+{
+    Console.WriteLine("&lt;cache&gt; &amp; ready");
+}</code></pre>
+</body></html>

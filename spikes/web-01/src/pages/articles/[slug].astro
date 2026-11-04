@@ -1,0 +1,20 @@
+---
+import {loadArticles} from '../../../lib/content.mjs';
+import {renderBody} from '../../../lib/render.mjs';
+export async function getStaticPaths() {
+  return (await loadArticles()).map(article => ({params:{slug:article.slug.current},props:{article}}));
+}
+const {article} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="robots" content="noindex"/><title>{article.title} — WEB-01 prototype</title><meta name="description" content={article.summary}/></head>
+<body>
+<main><p class="label">WEB-01 · Static rendering experiment · Synthetic public content</p>
+<article data-revision={article._rev}><header><p class="topic">{article.topic}</p><h1>{article.title}</h1><p class="summary">{article.summary}</p></header><div class="body" set:html={renderBody(article.body)}/></article>
+<footer>Local prototype. Cloud authentication and publishing are unverified.</footer></main>
+</body>
+</html>
+<style is:global>
+:root{font-family:system-ui,sans-serif;color:#17243a;background:#f4f6f9;line-height:1.65}body{margin:0}main{max-width:800px;margin:auto;padding:32px 20px}article{padding:32px;background:white;border:1px solid #d7deeb;border-radius:12px;min-width:0}.label,footer{font-size:.85rem;color:#52637a}h1{font-size:2.5rem;line-height:1.15;margin:.4em 0}h2{font-size:1.6rem;margin-top:1.6em}h3{font-size:1.25rem}.topic{font-weight:700;color:#146356}.summary{color:#52637a}header{border-bottom:1px solid #d7deeb;padding-bottom:12px}.text-small{font-size:14px}.text-large{font-size:24px}a{color:#1852a6}code{font-family:ui-monospace,monospace;background:#eef2f7;padding:.15em .3em;border-radius:3px}.table-scroll{overflow-x:auto;max-width:100%;margin:24px 0}table{border-collapse:collapse;min-width:420px;width:100%}td,th{border:1px solid #bdc9d9;text-align:left;padding:8px 14px}th{background:#eef2f7}td p,th p{margin:0}.code{margin:24px 0;min-width:0;border-radius:8px;background:#17243a;color:#e7effc;overflow:hidden}.code figcaption{padding:6px 14px;background:#27364d;font-size:.85rem}pre{overflow-x:auto;padding:16px;margin:0}pre code{padding:0;background:none;color:inherit}footer{margin-top:24px}@media(max-width:600px){article{padding:20px}h1{font-size:2rem}}
+</style>

@@ -1,0 +1,21 @@
+{
+  "NOTE": "DESIGN ONLY. Do not apply to production. Add Authorization in Sanity Manage, never in this file.",
+  "name": "WEB-01 isolated publish experiment",
+  "type": "document",
+  "dataset": "web01",
+  "url": "https://api.github.com/repos/OWNER/ISOLATED_TEST_REPOSITORY/dispatches",
+  "httpMethod": "POST",
+  "includeDrafts": false,
+  "includeAllVersions": false,
+  "isDisabledByUser": true,
+  "rule": {
+    "on": ["create", "update"],
+    "filter": "_type == 'article' && !(_id in path('drafts.**')) && !(_id in path('versions.**'))",
+    "projection": "{\"event_type\": \"sanity-published\", \"client_payload\": {\"id\": _id, \"rev\": _rev}}"
+  },
+  "headers": {
+    "Accept": "application/vnd.github+json",
+    "Content-Type": "application/json",
+    "X-GitHub-Api-Version": "2026-03-10"
+  }
+}
