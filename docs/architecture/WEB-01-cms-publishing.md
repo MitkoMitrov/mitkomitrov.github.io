@@ -1,8 +1,8 @@
 # WEB-01 — CMS and publishing architecture
 
-Checked **2026-11-04**. [Ticket](https://trello.com/c/VKnVvr9f). **Verdict: partially validated; leave WEB-01 open.**
+Initial documentation checked **2026-11-04**; live evidence updated **2026-11-15**. [Ticket](https://trello.com/c/VKnVvr9f). **Verdict: partially validated; leave WEB-01 open.**
 
-Recommend **Astro static generation + Sanity Studio/Content Lake Free + a managed publish webhook to GitHub Actions + GitHub Pages**. This avoids owning an editorial database and authentication system. It is a candidate architecture, not an end-to-end validated integration. Actual Word paste, cloud permissions, cross-session persistence, conflicts and deployment remain acceptance gates.
+Recommend **Astro static generation + Sanity Studio/Content Lake Free + a managed publish webhook to GitHub Actions + GitHub Pages**. This avoids owning an editorial database and authentication system. It is a candidate architecture, not an end-to-end validated integration. Owner editor access and anonymous draft API denial now have live evidence. The owner-supplied paste result loses required formatting; authenticated non-member access, complete cross-session persistence, conflicts and deployment remain acceptance gates.
 
 ## Repository audit (observed)
 
@@ -29,7 +29,7 @@ Official sources below were checked on 2026-11-04. Free tiers and prices can cha
 | Cost/card/limits | $0 Free, no card advertised [S1,S2]. 20 seats, two public datasets, 10k documents, 2k attributes/dataset, two webhooks, 250k API and 1m CDN requests/month, 100GB assets and 100GB bandwidth/month. Free has no overages. Private datasets and Editor role require Growth ($15/seat/month); custom roles Enterprise; built-in backups absent; draft review history three days. [S1,S3] | CMS core is MIT, no CMS seat/usage fee or card [D1]. Git hosting, auth proxy and CI retain their own limits. Existing public repo is a privacy mismatch. Separate private content repo is possible at $0, but adds auth, export and public-site delivery setup. No Turbo subscription assumed. [D2,G3] | Spark requires no payment method. Firestore: one free database, 1GiB, 50k reads/20k writes/20k deletes daily, 10GiB outbound/month [F1,F2]. Non-phone Auth included; Identity Platform lists 50k MAU and provider limits. Functions require Blaze/billing [F3]. An external trusted trigger service is needed to retain no-billing Spark. |
 | Headings, bold/italic, lists, links | Native Portable Text [S4] | Richtext widget supports these and saves Markdown [D3] | OSS editor extensions; UI wiring required [T1] |
 | Table/header, sizes, inline/code blocks | Current Studio has opt-in table editing; official code-input plugin. Named small/normal/large block styles configured; inline code supported [S4]. No paid extension used. | Inline code and code-block component documented; arbitrary font sizes are not standard Markdown. Tables/custom styles require integration; not prototyped [D3]. | Table/header, FontSize/TextStyle, inline code and language-aware code-block extensions available; choose and configure schema/renderer [T1]. |
-| Word paste | Semantic conversion plausible, exact fidelity unproven. Surrogate importer preserves tested structure with explicit rules; not connected to Studio paste. | Word/table/size fidelity unverified; Markdown cannot represent arbitrary Word formatting alone. | Basic HTML paste possible. Vendor's enhanced Word Paste Handler is paid Team; not assumed free [T2]. |
+| Word paste | Current owner-supplied paste result flattens the table, list and code and loses the large size; fails required fidelity. Surrogate importer preserves tested structure with explicit rules but is not connected to Studio paste. See live evidence below. | Word/table/size fidelity unverified; Markdown cannot represent arbitrary Word formatting alone. | Basic HTML paste possible. Vendor's enhanced Word Paste Handler is paid Team; not assumed free [T2]. |
 | Owner/security | Sanity sign-in and server-side project membership; owner sole admin, no other members, no shared write tokens [S5]. Public project ID is not a secret. | GitHub OAuth and write access, plus OAuth proxy or hosted auth provider [D2]. UI hiding is not security. | Firebase Auth + owner UID rules enforced in Firestore; server IAM separately [F4]. Must implement/test rules, not just login UI. |
 | Private drafts/published edits | `drafts.` namespace is denied to anonymous APIs even in public datasets; edits stay in draft until native Publish. Published data becomes publicly queryable before Pages is live [S6]. **Asset CDN files are public**, even for private datasets; omit private media [S7]. | Draft saves create branches/PRs. In this public repo, bodies and unpublished revisions become public immediately [D4]. A private content repository is essential. | Private draft collection with owner rules; separate immutable published revisions. Every transition is our code to maintain. |
 | Cross-PC/save/conflict | Native hosted real-time storage/editor; genuine reload, save/error signals and stale-session behavior still must be exercised. Conditional mutations can reject stale `_rev` with 409 [S8]; this alone does not prove Studio's reconnect behavior. | Git provides cloud persistence on save; explicit commits, not assumed keystroke autosave. Old-session conflict UI unverified; git conflicts still need handling. | Implement saving/error/retry UI, transactions/version preconditions and restore path. Existing editor does not supply a CMS workflow. |
@@ -59,19 +59,19 @@ Only `spikes/web-01/` plus this report are added. It uses locked npm dependencie
 | Acceptance area | Evidence | Status |
 | --- | --- | --- |
 | Title/slug/summary/topic and rich data schema | `schema.mjs`; Studio bundle compiled | Pass for configuration/build; editor interaction unverified |
-| Headings, sizes, marks/list/link/table/header/inline code/C# block | HTML surrogate → Portable Text → JSON save/reload → renderer; test verifies exact code text, indentation and symbols | Pass for offline surrogate, not Word/Studio clipboard |
+| Headings, sizes, marks/list/link/table/header/inline code/C# block | HTML surrogate → Portable Text → JSON save/reload → renderer; exact code text tested. Owner paste screenshot separately shows formatting loss | Pass offline; fail for required paste fidelity in current editor; see live evidence |
 | Full static crawlable body | Astro output `/articles/a-bounded-cache/index.html`, no scripts; browser inspection shows table/header, sizes and code | Pass for fixture |
 | Draft exclusion | Actual test build injects a synthetic draft canary; output/manifest exclude it and no draft URL exists | Pass for local build boundary; no cloud ACL proof |
 | Unsafe input | Renderer escapes hostile text/code, suppresses javascript links; unknown content fails | Pass for tested payloads, not a complete editor security audit |
 | Save/reload/export/restore | Local JSON edit/reload and NDJSON deep-equality round trip | Pass locally; cloud persistence/restore unverified |
-| Genuine login; anon/non-owner draft API denial | No project/session/credentials available | Unverified |
-| Separate-session resume and old-revision conflict | No authenticated browser sessions available | Unverified; two physical PCs not tested |
+| Genuine login; anon/non-owner draft API denial | Owner CLI login/deploy output and authenticated editor screenshots; anonymous direct draft read omitted for permission, export empty, dry-run update 403 | Pass for owner workflow and tested anonymous boundary; authenticated non-member unverified |
+| Separate-session resume and old-revision conflict | Owner private-window screenshot restores title/slug/summary of same document | Pass for visible metadata in separate-session surrogate; body, stale-session conflicts and two physical PCs unverified |
 | Unpublished revision of a live article stays private | Documented Sanity model only | Unverified on live service |
 | Publish/retry/failure adapter | Mock HTTP transport asserts no draft call, stable ID/rev, no body; rejects 401/offline; stale-revision build fails | Pass for mock/build contract; real trigger unverified |
 | Queued/failed/live feedback and ordering | Mapper test; proposed workflow contract | Unverified end-to-end |
 | $0 recurring setup | Official plan review; no billing enabled/resources created | Plausible, service setup unverified |
 
-Actual clipboard from Word was **not** tested: no Word app/document/session is available. The checked-in surrogate is simplified semantic HTML, not a captured Word clipboard payload. Default conversion loses custom font-size styles; explicit offline rules map only 14px/24px paragraphs. Word pt sizes, mixed inline sizes, fonts, colors, merged cells, images, complex Word lists and layout are not proven. In Studio, manually choose named sizes, insert/review tables and paste code into the code-input object with language selected until clipboard behavior is validated. These are disclosed manual steps, not proof of satisfying WEB-07. Offline conversion rules are not wired into Studio. No paid paste extension used. Syntax highlighting/copy button belongs to WEB-04, not this recognisable-code spike.
+At the initial offline run, actual clipboard from Word was **not** tested. The later owner-supplied result after the Word-paste instructions is recorded below; it fails visible required formatting. The agent did not observe the clipboard payload or source app. The checked-in surrogate is simplified semantic HTML, not a captured Word clipboard payload. Default conversion loses custom font-size styles; explicit offline rules map only 14px/24px paragraphs. Word pt sizes, mixed inline sizes, fonts, colors, merged cells, images, complex Word lists and layout are not proven. In Studio, manually choose named sizes, insert/review tables and paste code into the code-input object with language selected until clipboard behavior is validated. These are disclosed manual steps, not proof of satisfying WEB-07. Offline conversion rules are not wired into Studio. No paid paste extension used. Syntax highlighting/copy button belongs to WEB-04, not this recognisable-code spike.
 
 ### Reproduce (from repository root)
 
@@ -132,7 +132,7 @@ Next evidence: create one synthetic unpublished article, wait for the editor's s
 
 ## Draft privacy API evidence — 2026-11-15
 
-Owner-reported evidence: the synthetic article was saved and survived refresh. Document ID supplied by the owner: `925a90b1-5681-4ca0-be1a-409c010fe4c8`. This is an owner report, not an agent-observed authenticated session. The independent/private-browser resume check has not yet been confirmed.
+Owner-reported evidence: the synthetic article was saved and survived refresh. Document ID supplied by the owner: `925a90b1-5681-4ca0-be1a-409c010fe4c8`. This is an owner report, not an agent-observed authenticated session. The later private-browser screenshot confirms restoration of visible metadata only; see the next section.
 
 Live checks used `https://o3i9jgij.api.sanity.io/v2025-02-19`, dataset `web01`, with **no Authorization header or cookies**:
 
@@ -150,6 +150,32 @@ Live checks used `https://o3i9jgij.api.sanity.io/v2025-02-19`, dataset `web01`, 
 The mutation request was validation-only, using Sanity's documented `dryRun=true`; no content was changed. The exact draft read was denied by API permissions, not merely hidden by the UI. These checks verify anonymous read/export exclusion and denial of the tested dry-run update. They do not establish non-member authenticated access, second-session restoration, stale-editor conflicts, editing of published content, Word fidelity or publishing/deployment.
 
 Reproduction: anonymous GET the exact Doc and Export paths above; the query endpoint is `/data/query/web01` with `query=count(*[_type == "article" && slug.current == "web01-draft-test"])` and `perspective=raw` (also test `published`). The dry-run JSON was `{"mutations":[{"patch":{"id":"drafts.925a90b1-5681-4ca0-be1a-409c010fe4c8","set":{"title":"WEB-01 draft test"}}}]}`. Keep the article unpublished until published/draft separation is tested deliberately. WEB-01 remains open.
+
+## Owner browser and paste evidence — 2026-11-15
+
+The owner supplied a private-window screenshot of the same document. It shows authenticated editor access, a Draft badge and restored title, slug and summary. This is separate-session evidence for those visible fields, not two physical PCs or proof that every body field survived reload.
+
+For the Word-paste check, a one-page synthetic DOCX was supplied with headings, 10.5pt/18pt text, bold/italic, a genuine link, a bullet list, a two-column table with header row, inline monospace text and a C#-labelled indented code sample containing `<`, `>`, `&&` and quotes. Its source structure and rendered page were inspected. It contains only synthetic test content. The owner was instructed to open it in Microsoft Word, copy all, paste normally into Body, wait for autosave and refresh.
+
+The subsequent owner screenshot shows the following result. This is an owner-run browser test with screenshot evidence, not an agent-observed Word clipboard capture. The source application, clipboard HTML/MIME types, paste shortcut and completion of refresh are not independently established.
+
+| Element | Visible result | Acceptance |
+| --- | --- | --- |
+| Table/header | Operation, Cost and cell values appear as separate paragraphs; no table grid/structure | Fail |
+| Bullet list | Both items remain as text without visible bullets | Fail |
+| Large font size | The 18pt/24px line appears at ordinary paragraph size | Fail |
+| Heading 3 | “Read path” appears as ordinary text | Fail for visible styling |
+| Inline code | `article:42` appears as ordinary paragraph text | Fail for visible styling |
+| Code block/language | Code appears as paragraph text; no code object or language badge; indentation not visibly retained | Fail |
+| Special characters | Visible code retains less-than, ampersands, quotes and the Console.WriteLine text | Pass for visible characters only; exact stored text unverified |
+| Heading 2, bold/italic, link | Above the supplied viewport | Unverified |
+| Save/reload of pasted body | Footer says “Edited just now”; no after-refresh capture supplied | Unverified |
+
+**Decision:** the current Studio configuration does not satisfy the requested Word-paste fidelity. Do not describe the offline surrogate importer as proof of live paste, or silently weaken the requirement. The screenshot alone does not distinguish a plain-text clipboard from rich HTML rejected by the configured editor; one controlled rich-paste check is needed before adding custom paste code.
+
+Smallest proposed compromise: retain Sanity's existing editor, choose named sizes/headings, recreate the table using its native Table control and insert code through the official Code object with language selected. These manual steps still need save/reload/static-render verification and owner acceptance if used instead of preserving Word formatting. No paid extension has been introduced; no claim that payment fixes this result is supported. If faithful one-paste import is mandatory, WEB-07 needs a bounded clipboard/import proof before committing to this stack. Do not build a custom editorial system merely to hide this failed gate.
+
+Next controlled check: in Word copy only a bold sentence plus its italic phrase and paste normally into a fresh Body paragraph (avoid “paste as plain text”). Observe formatting before editing. If that also flattens, test the same content in another browser to distinguish clipboard/browser behavior from Studio configuration. Retain this original failure as evidence. Keep the synthetic article unpublished. Non-member permissions, conflicts, live-article draft isolation, real publish/build/status and cloud restore remain unverified. This evidence update changes documentation only; the earlier nine automated test results were not rerun or expanded.
 
 ## Official references (checked 2026-11-04)
 
