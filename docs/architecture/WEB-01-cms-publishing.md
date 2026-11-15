@@ -175,7 +175,43 @@ The subsequent owner screenshot shows the following result. This is an owner-run
 
 Smallest proposed compromise: retain Sanity's existing editor, choose named sizes/headings, recreate the table using its native Table control and insert code through the official Code object with language selected. These manual steps still need save/reload/static-render verification and owner acceptance if used instead of preserving Word formatting. No paid extension has been introduced; no claim that payment fixes this result is supported. If faithful one-paste import is mandatory, WEB-07 needs a bounded clipboard/import proof before committing to this stack. Do not build a custom editorial system merely to hide this failed gate.
 
-Next controlled check: in Word copy only a bold sentence plus its italic phrase and paste normally into a fresh Body paragraph (avoid “paste as plain text”). Observe formatting before editing. If that also flattens, test the same content in another browser to distinguish clipboard/browser behavior from Studio configuration. Retain this original failure as evidence. Keep the synthetic article unpublished. Non-member permissions, conflicts, live-article draft isolation, real publish/build/status and cloud restore remain unverified. This evidence update changes documentation only; the earlier nine automated test results were not rerun or expanded.
+The owner subsequently reports that bold and italic also failed to survive the short paste check. Record this as a further failed owner-run paste result. The clipboard's actual HTML/MIME types remain unknown. Keep the original failure as evidence and keep the synthetic article unpublished. Non-member permissions, conflicts, live-article draft isolation, real publish/build/status and cloud restore remain unverified.
+
+## Paste diagnosis and deferred owner checklist — 2026-11-15
+
+Repository inspection confirms that the article schema permits `strong`/`em`, and no custom paste handler was stripping formatting. The disabled typography plugin controls character substitutions such as smart quotes; it is not a rich-paste switch. The locked Studio implementation registers its HTML deserializer separately and calls `@portabletext/html` 2.0.2. The same dependency, reached through the existing schema-aware block-tools adapter, retains bold and italic for semantic HTML and a synthetic Word-shaped HTML example without custom rules. These results narrow the problem but do not establish what the owner's browser received.
+
+Added a small diagnostic only to the isolated Studio's Body input: `PasteProbeInput.tsx` and `lib/paste-probe.mjs`. It records three local booleans (HTML/plain text/Portable Text present), renders a status message and falls through synchronously to native paste handling. It does not retain, log, export or transmit the clipboard contents, add credentials, replace the editor, or implement a custom importer. The schema used by the offline renderer remains unchanged. It is built and committed, **not yet deployed to the hosted Studio or verified through an authenticated browser**. It is instrumentation, not a formatting fix.
+
+Validation from `spikes/web-01`: `npm test` **12 passed, 0 failed**, including the existing nine tests and three new paste-diagnostic/conversion tests; `npm run studio:build` and `npm run backup` succeeded. `git diff --check` succeeded. The new tests distinguish HTML/plain-text metadata, assert no content is retained and that the observer returns synchronous `undefined`, and validate the default schema-aware conversion for the two synthetic rich inputs. The suite also reran actual static builds, draft exclusion and obsolete revision rejection; the separate backup command verified fixture NDJSON export/restore. No actual Word clipboard, cloud mutation, live webhook or portfolio deployment is implied.
+
+Schema extraction also passed with `npx sanity schema extract --path artifacts/schema.json --force`. The first attempt without `--force` refused to overwrite the existing ignored generated schema; the retry replaced that local artifact only.
+
+All independent investigation, implementation and available checks are finished for this iteration. At the owner's request, further interactive checks are deferred until the owner is at a PC. Do not keep requesting individual screenshots or repeated login attempts. Resume with one coordinated session using this checklist:
+
+| Deferred check | Exact dependency / remaining evidence |
+| --- | --- |
+| Diagnose and close Word paste | Owner's authenticated Sanity CLI/browser. Deploy the committed diagnostic to the existing test Studio, paste the synthetic DOCX from Word, and inspect its HTML/plain-text message. Plain-text-only receipt requires source/browser diagnosis; HTML receipt with lost marks requires inspecting a synthetic captured payload and the native conversion. Do not claim either cause in advance. Then preserve all required formatting or explicitly agree a documented manual compromise. |
+| Refresh and independent-session body resume | Owner's authenticated sessions; verify the complete body/table/code as well as metadata after save/refresh. This remains a two-session surrogate until tested on two physical PCs. |
+| Stale-session edits | Two owner sessions. Edit the same and different fields from an older state, include disconnect/reconnect, and record merge/conflict/lost-update behavior and UI feedback. |
+| Authenticated non-member denial | A genuine signed-in account without project membership. Query/direct-read/export/mutation validation must exclude the draft and deny writes; do not invite the account as Viewer. |
+| Published revision separation | Owner session and disposable dataset only. Deliberately publish a synthetic revision, create an unpublished changed draft, compare exact anonymous published/draft results and ensure the build reads only the published revision. Studio Publish is not evidence that GitHub Pages deployed. |
+| Real secure build/status | An explicitly designated isolated repository/destination, default-branch build-only workflow and owner-entered restricted expiring GitHub credential in the provider's secret header configuration. No browser token. Verify publish/retry/failure/rapid revisions/unpublish and matching deployment manifest/status. Current adapter remains a mock. No safe destination or usable credential is available to the agent. |
+| Authenticated backup/restore | Owner Sanity CLI authentication. Export outside the public repository, import into a disposable dataset within Free limits, compare IDs/body/rendering and then decide retention. Never overwrite production. |
+
+When the owner is ready, the existing detached Windows test worktree can receive the diagnostic with the following **CMD** commands (not PowerShell). If Git reports local source changes or a conflict, stop before switching; preserve those changes rather than reset/clean them. No dependency changed, so a fresh install is unnecessary for this update.
+
+```bat
+cd /d "C:\Users\mitko\OneDrive\Desktop\web_portfolio\web01-sanity-deploy\spikes\web-01"
+git status --short
+git fetch origin web-01/architecture-spike
+git switch --detach origin/web-01/architecture-spike
+npx sanity deploy
+```
+
+This targets the already configured test Studio app ID, not the portfolio. Hosting deployment needs the owner's local login; it has not been performed by the agent. Continue to leave WEB-01 open and the implementation available for review.
+
+Additional official sources checked 2026-11-15: [Sanity Portable Text configuration](https://www.sanity.io/docs/studio/portable-text-editor-configuration), [custom paste handler contract](https://www.sanity.io/docs/studio/customizing-block-content), [Studio HTML-paste ownership](https://www.sanity.io/docs/changelog/studio-Ni4xMC4x), and the installed MIT-licensed `@portabletext/html` package's [upstream source](https://github.com/portabletext/editor/tree/main/packages/html). Existing quota/pricing claims retain their original 2026-11-04 check date.
 
 ## Official references (checked 2026-11-04)
 
