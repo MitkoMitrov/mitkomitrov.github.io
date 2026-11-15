@@ -130,6 +130,27 @@ The earlier remote-localhost sign-in route failed with an OAuth-state error and 
 
 Next evidence: create one synthetic unpublished article, wait for the editor's saved indicator, refresh and verify restoration. Then check the exact draft ID via anonymous APIs, test a non-member account and a separate owner session, and exercise published/draft separation. WEB-01 remains partially validated and open.
 
+## Draft privacy API evidence — 2026-11-15
+
+Owner-reported evidence: the synthetic article was saved and survived refresh. Document ID supplied by the owner: `925a90b1-5681-4ca0-be1a-409c010fe4c8`. This is an owner report, not an agent-observed authenticated session. The independent/private-browser resume check has not yet been confirmed.
+
+Live checks used `https://o3i9jgij.api.sanity.io/v2025-02-19`, dataset `web01`, with **no Authorization header or cookies**:
+
+| Check | Result |
+| --- | --- |
+| Query test slug with published perspective | HTTP 200, count 0 |
+| Query test slug with raw perspective | HTTP 200, count 0 |
+| Query draft namespace with raw perspective | HTTP 200, count 0 |
+| Query article-body canary with raw perspective | HTTP 200, count 0 |
+| GET `/data/doc/web01/drafts.925a90b1-5681-4ca0-be1a-409c010fe4c8` | HTTP 200, zero documents; exact draft ID omitted with reason **permission** |
+| GET corresponding published ID | HTTP 200, zero documents; reason **existence** (not published) |
+| GET `/data/export/web01` | HTTP 200, zero exported documents; no target ID, canary or stream error |
+| POST `/data/mutate/web01?dryRun=true`, patch exact draft title | HTTP **403**, insufficient permissions; permission **update** required |
+
+The mutation request was validation-only, using Sanity's documented `dryRun=true`; no content was changed. The exact draft read was denied by API permissions, not merely hidden by the UI. These checks verify anonymous read/export exclusion and denial of the tested dry-run update. They do not establish non-member authenticated access, second-session restoration, stale-editor conflicts, editing of published content, Word fidelity or publishing/deployment.
+
+Reproduction: anonymous GET the exact Doc and Export paths above; the query endpoint is `/data/query/web01` with `query=count(*[_type == "article" && slug.current == "web01-draft-test"])` and `perspective=raw` (also test `published`). The dry-run JSON was `{"mutations":[{"patch":{"id":"drafts.925a90b1-5681-4ca0-be1a-409c010fe4c8","set":{"title":"WEB-01 draft test"}}}]}`. Keep the article unpublished until published/draft separation is tested deliberately. WEB-01 remains open.
+
 ## Official references (checked 2026-11-04)
 
 - **S1** [Sanity pricing](https://www.sanity.io/pricing)
