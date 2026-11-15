@@ -120,6 +120,16 @@ The owner supplied project ID `o3i9jgij`, named **mitko.mk**, and created the di
 
 Studio and CLI configuration now default to these public identifiers. The Astro site still defaults to synthetic offline fixtures; live published reads require explicit opt-in. The configured Studio build succeeded; its browser startup displays “Connect this Studio to your project” and requests the exact CORS origin `http://127.0.0.1:4173`. The real SDK published-article read also returned zero articles without credentials. No token, CORS setting, membership, hosted Studio deployment or cloud content was changed by the agent. Owner login and the remaining acceptance gates above are still unverified.
 
+## Hosted Studio follow-up — 2026-11-15
+
+The owner completed local CLI Google login and ran `npx sanity deploy` from the isolated Windows worktree `C:\Users\mitko\OneDrive\Desktop\web_portfolio\web01-sanity-deploy\spikes\web-01`. The supplied CLI output reports a successful Studio build, schema deployment (1/1) and hosting deployment to **https://mitko-mk-web01.sanity.studio/**. Application ID: `lmcoe9fx7g4l5s3sfbwfn0kl`; recorded in `sanity.cli.ts` so later deploys target this same test Studio.
+
+An independent signed-out browser visit to that hostname reached Sanity's HTTPS login screen with a redirect targeting the same application ID. This verifies a reachable hosted login gate, not owner editor access, draft API denial, persistence, Word paste or site publishing. No cloud content was created by the agent. The owner performed the Studio deployment; no portfolio deployment or merge was performed.
+
+The earlier remote-localhost sign-in route failed with an OAuth-state error and later a browser URL-policy block; it is abandoned. Continue owner testing in the owner's regular browser at the hosted Studio. Remove the temporary `http://127.0.0.1:4173` credentialed CORS origin when it is no longer needed. Do not remove the hosted Studio origin.
+
+Next evidence: create one synthetic unpublished article, wait for the editor's saved indicator, refresh and verify restoration. Then check the exact draft ID via anonymous APIs, test a non-member account and a separate owner session, and exercise published/draft separation. WEB-01 remains partially validated and open.
+
 ## Official references (checked 2026-11-04)
 
 - **S1** [Sanity pricing](https://www.sanity.io/pricing)
