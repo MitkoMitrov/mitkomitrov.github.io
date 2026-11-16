@@ -1,12 +1,92 @@
 ---
 import Document from '../layouts/Document.astro';
-import {splitLegacyDocument} from '../lib/legacy-document.mjs';
-import legacyHome from '../../index.html?raw';
-
-// Render at build time; keep the existing reviewed HTML as one source of truth.
-const {head, body} = splitLegacyDocument(legacyHome);
+import {articles, profile, selectedWork} from '../data/portfolio.mjs';
+import Arrow from '../components/Arrow.astro';
 ---
 <Document>
-  <Fragment slot="head" set:html={head} />
-  <Fragment set:html={body} />
+  <section class="hero container" id="home" aria-labelledby="intro-title">
+    <p class="eyebrow">Mitko Mitrov <span aria-hidden="true">/</span> Software engineer</p>
+    <h1 id="intro-title">Building useful software.<br /><span>Sharing what I learn.</span></h1>
+    <p class="hero-intro">I build and operate web products with .NET and React, from multi-tenant platforms to connected kiosks. Here I share the engineering decisions and practical lessons behind the work.</p>
+    <div class="hero-actions">
+      <a class="button" href="#work">Explore my work <Arrow down /></a>
+      <a class="text-link" href="/CV/CV.html">View my CV <Arrow /></a>
+    </div>
+    <p class="hero-footnote">C# & .NET <span aria-hidden="true">/</span> React <span aria-hidden="true">/</span> Web products & operations</p>
+  </section>
+
+  <section class="section container" id="work" aria-labelledby="work-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Selected work</p><h2 id="work-title">From code to production.</h2></div>
+      <p>Software I've built, operated and learned from.</p>
+    </div>
+    <ul class="work-list">
+      {selectedWork.map((project, index) => (
+        <li class="work-item" id={`work-${project.id}`}>
+          <span class="work-number" aria-hidden="true">0{index + 1}</span>
+          <article class="work-content" aria-labelledby={`title-${project.id}`}>
+            <p class="work-category">{project.category}</p>
+            <h3 id={`title-${project.id}`}>{project.title}</h3>
+            <p class="work-summary">{project.summary}</p>
+            <ul class="tags" aria-label={`${project.title} technologies and focus`}>
+              {project.stack.map(technology => <li>{technology}</li>)}
+            </ul>
+          </article>
+          <p class="work-outcome">{project.outcome}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section container" id="articles" aria-labelledby="articles-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Latest articles</p><h2 id="articles-title">Engineering, in practice.</h2></div>
+      <p>My Redis series, currently published on LinkedIn.</p>
+    </div>
+    <ul class="article-list">
+      {articles.slice(0, 3).map(article => (
+        <li>
+          <article class="article-item">
+            <p class="article-meta">Redis · Part {article.part} <span aria-hidden="true">/</span> <time datetime={article.date}>{article.dateLabel}</time></p>
+            <h3><a class="article-title" href={article.href}>{article.title}<span class="article-arrow"><Arrow /></span></a></h3>
+            <p>{article.summary}</p>
+            <span class="article-source">Read on LinkedIn</span>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section container contact-section" id="contact" aria-labelledby="contact-title">
+    <p class="eyebrow">Get in touch</p>
+    <h2 id="contact-title">Have something in mind?</h2>
+    <p>Let's talk about a software engineering role, a collaboration, or a product worth building.</p>
+    <a class="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Arrow /></a>
+    <p class="contact-alternative">Or connect on <a href={profile.linkedin}>LinkedIn</a>.</p>
+  </section>
+
+  <section class="section container about-section" id="about" aria-labelledby="about-title">
+    <div class="about-intro">
+      <img src="/assets/img/perfil2.jpg" width="1079" height="1079" alt="" loading="lazy" decoding="async" />
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">A little more about me.</h2>
+        <p>I work across backend systems, interfaces and operations. My focus is practical: make the product useful, understand its failure modes, and leave the code easier to maintain.</p>
+        <a class="text-link" href="/CV/CV.html">Full experience & CV <Arrow /></a>
+      </div>
+    </div>
+    <div class="about-details">
+      <div id="experience">
+        <h3>Experience</h3>
+        <p>Meta5Team <span>Software Engineer · 2022–present</span></p>
+        <p>Freelance <span>Full-Stack Developer · 2021–present</span></p>
+        <p>SPD Computing <span>Part-time Developer · 2019–2021</span></p>
+      </div>
+      <div id="skills">
+        <h3>How I work</h3>
+        <p>ASP.NET Core, EF Core and React for production systems. PostgreSQL, Docker and Linux for the infrastructure around them.</p>
+        <p>I've migrated legacy APIs, built regression tests and mentored junior developers. Clear boundaries and reliable behavior matter to me.</p>
+      </div>
+    </div>
+  </section>
 </Document>

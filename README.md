@@ -1,6 +1,6 @@
 # mitko.mk — Web Portfolio
 
-Astro static build for Mitko Mitrov's existing portfolio. **WEB-03 introduces the build foundation without redesigning the site or connecting a CMS.**
+Astro static portfolio for Mitko Mitrov. WEB-03 provides the build foundation; WEB-02 adds the simplified dark homepage and shared navigation. CMS integration is separate.
 
 ## Run locally
 
@@ -24,9 +24,10 @@ The preview command serves **built `dist/`**; rebuild before checking source cha
 
 | Path | Role |
 | --- | --- |
-| `index.html` | Transitional, single source of truth for the existing homepage; remains usable by the current branch-based deployment until cutover. |
-| `src/pages/index.astro` | Generates `/` at build time from that repository-owned HTML. No browser content fetching. |
-| `src/layouts/Document.astro` | Shared document shell; WEB-02 can replace the transitional raw-HTML bridge with components. |
+| `index.html` | Historical homepage retained unchanged for the current branch-based deployment until the separately reviewed Pages cutover. It is not used by Astro. |
+| `src/pages/index.astro` | Homepage: introduction → selected work → LinkedIn articles → contact; compact About follows. All content is rendered at build time. |
+| `src/layouts/Document.astro`, `src/components/` | Shared metadata, accessible header, footer and icons for future pages. |
+| `src/data/portfolio.mjs`, `src/styles/global.css` | CV-backed public work summaries, verified LinkedIn article links and responsive dark styles. |
 | `assets/`, `CV/`, `CNAME` | Existing public files, copied unchanged into the build. `/CV/CV.html`, home anchors and custom domain remain valid. |
 | `scripts/prepare-public.mjs` | Stages only those public sources into ignored `.generated/public/`; removes stale staged files. |
 | `scripts/verify-build.mjs` | Checks the exact public output allowlist and byte equality of preserved assets/CV/CNAME. |
@@ -45,4 +46,4 @@ After review and explicit release approval, the owner must confirm Pages setting
 
 A failed build/check prevents artifact upload and the dependent deploy job. This path is configured and locally checked; actual GitHub Pages cutover, failed-run behavior against a live destination and deployed route verification remain unverified until release. Do not mark WEB-03 complete solely from a local build.
 
-See [WEB-03 evidence and release runbook](docs/architecture/WEB-03-astro-ssg.md) and [the Trello requirements](https://trello.com/c/m9MenNfi). Existing domain setup documents are historical references, not proof of current DNS/Pages settings.
+See [WEB-02 implementation evidence](docs/architecture/WEB-02-homepage-navigation.md), [WEB-03 evidence and release runbook](docs/architecture/WEB-03-astro-ssg.md) and [the Trello requirements](https://trello.com/c/m9MenNfi). Existing domain setup documents are historical references, not proof of current DNS/Pages settings.

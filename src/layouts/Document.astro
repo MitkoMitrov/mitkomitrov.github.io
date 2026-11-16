@@ -1,8 +1,46 @@
 ---
-// Document shell for generated pages. Visual/navigation changes belong to WEB-02.
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+import {profile} from '../data/portfolio.mjs';
+
+interface Props {title?: string; description?: string; canonicalPath?: string;}
+const {
+  title = 'Mitko Mitrov — Software Engineer | .NET & React',
+  description = 'Mitko Mitrov builds and operates useful web products with .NET and React, and shares practical engineering lessons.',
+  canonicalPath = '/',
+} = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+const person = {
+  '@context': 'https://schema.org', '@type': 'Person', name: profile.name,
+  jobTitle: 'Software Engineer', url: 'https://mitko.mk/',
+  sameAs: [profile.github, profile.linkedin],
+  knowsAbout: ['C#', '.NET', 'ASP.NET Core', 'React', 'PostgreSQL'],
+};
 ---
 <!doctype html>
 <html lang="en">
-  <head><slot name="head" /></head>
-  <body><slot /></body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(person).replace(/</g, '\\u003c')} />
+    <slot name="head" />
+  </head>
+  <body>
+    <SiteHeader />
+    <main id="main" tabindex="-1"><slot /></main>
+    <SiteFooter />
+  </body>
 </html>

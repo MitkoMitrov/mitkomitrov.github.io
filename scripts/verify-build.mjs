@@ -9,7 +9,7 @@ export async function verifyBuild(root = fileURLToPath(new URL('../', import.met
   const html = await readFile(join(output, 'index.html'), 'utf8');
   assert.match(html, /<html lang="en">/);
   assert.match(html, /rel="canonical" href="https:\/\/mitko\.mk\/"/);
-  for (const id of ['about', 'experience', 'skills', 'work', 'contact']) {
+  for (const id of ['home', 'articles', 'about', 'experience', 'skills', 'work', 'contact']) {
     assert.ok(html.includes(`id="${id}"`), `Missing important anchor: ${id}`);
   }
   // The build artifact contains the explicit public allowlist, not the repository.
@@ -20,7 +20,13 @@ export async function verifyBuild(root = fileURLToPath(new URL('../', import.met
       assert.deepEqual(await readFile(join(output, path)), await readFile(join(root, path)), `Changed public asset: ${path}`);
     }
   }
-  assert.deepEqual((await filesUnder(output)).sort(), expected.sort(), 'Unexpected/missing published files; review the public allowlist before adding routes.');
+  // WEB-02 adds a build-generated stylesheet; executable chunks and new routes
+  // require their own reviewed contract rather than allowing arbitrary output.
+  const actual = await filesUnder(output);
+  const styles = actual.filter(path => /^_astro\/[A-Za-z0-9_.-]+\.css$/.test(path));
+  assert.ok(styles.length > 0, 'Missing generated homepage styles');
+  expected.push(...styles);
+  assert.deepEqual(actual.sort(), expected.sort(), 'Unexpected/missing published files; review the public allowlist before adding routes.');
   return expected.length;
 }
 
