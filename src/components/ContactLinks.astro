@@ -1,0 +1,8 @@
+---
+import {profile} from '../data/portfolio.mjs';
+import ContactIcon from './ContactIcon.astro';
+---
+<ul class="contact-links" aria-label="LinkedIn and email">
+  <li><a class="icon-link" href={profile.linkedin} aria-label="Mitko Mitrov on LinkedIn" title="LinkedIn"><ContactIcon kind="linkedin" /></a></li>
+  <li><a class="icon-link" href={`mailto:${profile.email}`} aria-label="Email Mitko Mitrov" title={profile.email}><ContactIcon kind="email" /></a></li>
+</ul>

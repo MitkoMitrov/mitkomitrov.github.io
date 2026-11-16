@@ -12,12 +12,16 @@ test('homepage renders the agreed hierarchy and shared navigation without JavaSc
   assert.deepEqual([...document.querySelectorAll('main > section')].map(section => section.id), ['home', 'articles', 'experience', 'work', 'contact']);
   assert.deepEqual([...document.querySelectorAll('nav[aria-label="Primary navigation"] a')].map(link => link.textContent), ['Articles', 'Experience', 'Projects']);
   assert.equal(document.querySelector('h1').textContent, 'Mitko Mitrov');
-  assert.ok(document.querySelector('#home').textContent.trim().split(/\s+/).length <= 40, 'Keep the introduction scannable');
+  const bioWords = document.querySelector('.intro-summary').textContent.trim().split(/\s+/).length;
+  assert.ok(bioWords >= 50 && bioWords <= 85, 'Keep the expanded CV-based bio scannable');
   assert.equal(document.querySelectorAll('a[href="/CV/CV.html"]').length, 0, 'No CV action in the minimal homepage');
   assert.equal(document.querySelectorAll('.timeline > li').length, 3);
   assert.deepEqual([...document.querySelectorAll('.timeline h3')].map(item => item.textContent), ['Meta5Team', 'Freelance', 'SPD Computing']);
   assert.deepEqual([...document.querySelectorAll('.timeline-period time')].map(time => time.dateTime), ['2022-03', '2021-09', '2019-10', '2021-05']);
-  assert.match(document.querySelector('.timeline').textContent, /50\+ kiosks/);
+  const highlights = document.querySelector('.timeline').textContent;
+  for (const topic of ['Clean Architecture', 'NUnit', 'cashier', 'thermal printer', 'Redux Toolkit', 'SignalR', 'Mentored', 'Vue.js', 'PL/SQL']) assert.ok(highlights.includes(topic), `Missing CV highlight: ${topic}`);
+  for (const entry of document.querySelectorAll('.timeline-content')) assert.ok(entry.querySelector('ul > li'), 'Use scannable experience bullets');
+  assert.doesNotMatch([...document.querySelectorAll('.timeline-highlights, .project-summary')].map(node => node.textContent).join(' '), /\d|\b(?:daily active users|bookings per month)\b/i, 'Omit operational counts and percentages');
   assert.equal(document.querySelector('meta[name="color-scheme"]').content, 'light');
   assert.equal(document.querySelectorAll('main').length, 1);
   assert.equal(document.querySelectorAll('h1').length, 1);
@@ -34,8 +38,8 @@ test('selected work uses CV-backed facts and distinguishes production, past and 
   const work = [...document.querySelectorAll('.project-list > li')];
   assert.equal(work.length, 3);
   assert.match(work[0].textContent, /Imenologija.*In development/s);
-  assert.match(work[1].textContent, /Past project.*about 1,000 daily users during operation/s);
-  assert.match(work[2].textContent, /AI Daily Stock Reports.*Past project.*about 30%/s);
+  assert.match(work[1].textContent, /Past project.*article categorization.*Nginx caching/s);
+  assert.match(work[2].textContent, /AI Daily Stock Reports.*Past project.*OpenAI API/s);
   for (const item of work) {
     assert.ok(item.querySelector('h3'));
     assert.ok(item.querySelector('.project-summary').textContent.length > 50);
@@ -81,6 +85,16 @@ test('keyboard and semantic access have a skip target, section labels and workin
   for (const image of document.querySelectorAll('img')) assert.ok(image.hasAttribute('alt'));
   assert.equal(document.querySelector('.header-contact').href, 'mailto:mitkomitrov09@gmail.com');
   assert.equal(document.querySelector('.contact-email').href, 'mailto:mitkomitrov09@gmail.com');
+  for (const scope of [document.querySelector('#home'), document.querySelector('footer')]) {
+    const icons = [...scope.querySelectorAll('.contact-links a')];
+    assert.equal(icons.length, 2);
+    assert.equal(icons[0].href, 'https://www.linkedin.com/in/mitko-mitrov-14aa3b191/');
+    assert.equal(icons[1].href, 'mailto:mitkomitrov09@gmail.com');
+    for (const link of icons) {
+      assert.ok(link.getAttribute('aria-label'));
+      assert.equal(link.querySelector('svg').getAttribute('aria-hidden'), 'true');
+    }
+  }
   assert.equal(document.querySelectorAll('a[target="_blank"]').length, 0);
   const css = await readFile('src/styles/global.css', 'utf8');
   assert.match(css, /a:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--accent\)/);
