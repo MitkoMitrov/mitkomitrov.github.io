@@ -13,15 +13,17 @@ export async function verifyBuild(root = fileURLToPath(new URL('../', import.met
     assert.ok(html.includes(`id="${id}"`), `Missing important anchor: ${id}`);
   }
   // The build artifact contains the explicit public allowlist, not the repository.
-  const expected = ['index.html'];
+  // The portfolio and article catalogue are the only generated HTML routes.
+  const catalogue = await readFile(join(output, 'articles/index.html'), 'utf8');
+  assert.match(catalogue, /rel="canonical" href="https:\/\/mitko\.mk\/articles\/"/);
+  const expected = ['index.html', 'articles/index.html'];
   for (const source of publicSources) {
     for (const path of await filesUnder(join(root, source), source)) {
       expected.push(path);
       assert.deepEqual(await readFile(join(output, path)), await readFile(join(root, path)), `Changed public asset: ${path}`);
     }
   }
-  // WEB-02 adds a build-generated stylesheet; executable chunks and new routes
-  // require their own reviewed contract rather than allowing arbitrary output.
+  // Generated styles are allowed; executable chunks and additional routes are not.
   const actual = await filesUnder(output);
   const styles = actual.filter(path => /^_astro\/[A-Za-z0-9_.-]+\.css$/.test(path));
   assert.ok(styles.length > 0, 'Missing generated homepage styles');

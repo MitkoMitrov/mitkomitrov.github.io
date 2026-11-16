@@ -9,7 +9,7 @@ import ContactIcon from '../components/ContactIcon.astro';
 <Document>
   <section class="intro container" id="home" aria-labelledby="intro-title">
     <div id="about">
-      <Hero title="Mitko Mitrov" titleId="intro-title" tagline="Software engineer · .NET & React" align="start">
+      <Hero title="Mitko Mitrov" titleId="intro-title" tagline="Full-stack software engineer · .NET & React" align="start">
         <div class="intro-summary" id="skills">{profile.bio.map(paragraph => <p>{paragraph}</p>)}</div>
       </Hero>
       <div class="stack-tags" aria-label="Core stack"><span>.NET</span><span>React</span></div>
@@ -39,6 +39,7 @@ import ContactIcon from '../components/ContactIcon.astro';
         </li>
       ))}
     </ul>
+    <a class="button-link all-articles-link" href="/articles/">See all articles <Arrow /></a>
   </section>
 
   <section class="section container" id="experience" aria-labelledby="experience-title">
@@ -49,6 +50,7 @@ import ContactIcon from '../components/ContactIcon.astro';
           <p class="timeline-period">
             <time datetime={job.start}>{job.startLabel}</time><span aria-hidden="true"> – </span>
             {job.end ? <time datetime={job.end}>{job.endLabel}</time> : <span>{job.endLabel}</span>}
+            {job.durationLabel && <small class="timeline-duration">{job.durationLabel}</small>}
           </p>
           <div class="timeline-content">
             <h3>{job.company}</h3>

@@ -1,0 +1,18 @@
+---
+import Document from '../../layouts/Document.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import {articles} from '../../data/articles.mjs';
+const orderedArticles = [...articles].sort((a, b) => b.date.localeCompare(a.date));
+---
+<Document title="Articles — Mitko Mitrov" description="Practical notes on software engineering, web development and the decisions behind building reliable products." canonicalPath="/articles/">
+  <section class="section container articles-index" aria-labelledby="articles-index-title">
+    <a class="back-link" href="/">← Back to portfolio</a>
+    <div class="articles-index-heading">
+      <h1 id="articles-index-title">Articles</h1>
+      <p>Practical engineering, explained through real problems and trade-offs.</p>
+    </div>
+    <ul class="article-grid" aria-label="All articles">
+      {orderedArticles.map(article => <li><ArticleCard article={article} /></li>)}
+    </ul>
+  </section>
+</Document>
