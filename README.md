@@ -38,12 +38,12 @@ The production artifact is **`dist/`**, never the repository root. Documentation
 
 Add future pages under `src/pages/`. When adding a public route, update the artifact allowlist deliberately in `scripts/verify-build.mjs` and extend the route checks. Article models/templates belong to WEB-04; the CMS/editor remains independent.
 
-## GitHub Pages release boundary
+## GitHub Pages deployment
 
-This branch is for review; it does not switch production hosting or change DNS. Existing `master` HTML remains the live source while the PR is unmerged.
+The live site is **https://mitko.mk/**. GitHub Pages uses **GitHub Actions**, with **Enforce HTTPS** enabled. HTTP redirects to HTTPS. DNS/custom domain and existing public URLs are preserved.
 
-After review and explicit release approval, the owner must confirm Pages settings, retain **`mitko.mk`**, select **GitHub Actions** as the publishing source and restrict the `github-pages` environment to `master`. Then a reviewed merge/push to `master` builds, tests, uploads `dist/` and deploys that checked artifact. PR and feature-branch runs cannot enter the deploy job. No PAT, CMS token or browser credential is required; deployment uses GitHub's short-lived job token/OIDC.
+Merge reviewed changes to `master` to run the checked build, artifact upload and Pages deployment. Feature-branch pushes cannot deploy; PRs targeting `master` run read-only build checks. Deploy uses the short-lived GitHub job token/OIDC, with Pages permissions confined to the deploy job. Build/check failures prevent upload and deployment.
 
-A failed build/check prevents artifact upload and the dependent deploy job. This path is configured and locally checked; actual GitHub Pages cutover, failed-run behavior against a live destination and deployed route verification remain unverified until release. Do not mark WEB-03 complete solely from a local build.
+Publish **`dist/`**, never the repository root. The root `index.html` is historical and is not the Astro page source. No Sanity setup is required for the current static portfolio.
 
-See [WEB-02 implementation evidence](docs/architecture/WEB-02-homepage-navigation.md), [WEB-03 evidence and release runbook](docs/architecture/WEB-03-astro-ssg.md) and [the Trello requirements](https://trello.com/c/m9MenNfi). Existing domain setup documents are historical references, not proof of current DNS/Pages settings.
+See [verified release evidence](docs/architecture/WEB-02-release.md), [WEB-02 implementation](docs/architecture/WEB-02-homepage-navigation.md) and [WEB-03 investigation](docs/architecture/WEB-03-astro-ssg.md). Historical domain setup guides do not describe the current Pages publishing source.

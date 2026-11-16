@@ -1,6 +1,6 @@
 # WEB-02 — Minimal light portfolio
 
-**Ready for review; not released.** Checked 16 November 2026.
+**Released and verified over HTTPS.** See [release evidence](WEB-02-release.md). The implementation notes below describe the reviewed pre-release snapshot.
 
 [WEB-02](https://trello.com/c/ZsBFpdax) · [Draft PR #3](https://github.com/MitkoMitrov/mitkomitrov.github.io/pull/3) · [Astro foundation / draft PR #2](https://github.com/MitkoMitrov/mitkomitrov.github.io/pull/2)
 

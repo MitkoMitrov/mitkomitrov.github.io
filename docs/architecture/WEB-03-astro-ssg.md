@@ -1,6 +1,6 @@
 # WEB-03 — Astro static build foundation
 
-Checked **2026-11-16**. [Ticket](https://trello.com/c/m9MenNfi). **Implementation ready for review; deployment acceptance remains open.**
+Checked **2026-11-16**. [Ticket](https://trello.com/c/m9MenNfi). **Released with WEB-02; live HTTPS routes verified.** See [release evidence](WEB-02-release.md). The notes below retain the original pre-release investigation and its test limits.
 
 ## Starting point and scope
 
