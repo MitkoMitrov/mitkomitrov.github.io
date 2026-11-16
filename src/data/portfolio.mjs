@@ -1,9 +1,13 @@
-// Public copy approved for WEB-02. Provenance and link checks are in the WEB-02 report.
+// Homepage copy based on the supplied CV; operational counts are intentionally omitted.
 export const profile = {
   name: 'Mitko Mitrov',
   email: 'mitkomitrov09@gmail.com',
   github: 'https://github.com/MitkoMitrov',
   linkedin: 'https://www.linkedin.com/in/mitko-mitrov-14aa3b191/',
+  bio: [
+    'I’m a .NET software engineer working across C#, ASP.NET Core and React. I turn legacy applications into maintainable APIs, build multi-tenant web platforms, and connect desktop software with real-world hardware.',
+    'I enjoy owning the path from requirements to production, with a focus on clean architecture, regression testing and useful observability. Alongside product development, I mentor developers and write about practical engineering.',
+  ],
 };
 
 // Section URLs remain useful until WEB-13, WEB-04 and WEB-10 introduce their pages.
@@ -17,17 +21,33 @@ export const experience = [
   {
     company: 'Meta5Team', role: 'Software Engineer',
     start: '2022-03', startLabel: 'Mar 2022', end: null, endLabel: 'Present',
-    summary: 'Migrated 50–100 legacy endpoints to ASP.NET Core. Own cashier software serving 5,000–10,000 daily users and a MAUI app deployed on 50+ kiosks.',
+    highlights: [
+      'Led the migration of legacy functionality to modular ASP.NET Core REST APIs using Clean Architecture, improving testability, maintainability and deployment safety.',
+      'Built NUnit regression tests to compare legacy and replacement API responses and catch breaking changes before release.',
+      'Own the cashier module for deposits and withdrawals, built with C# and .NET.',
+      'Built and deployed a .NET MAUI kiosk application with thermal printer and bill acceptor integrations.',
+      'Redesigned the React frontend with Redux Toolkit to isolate tenants within a shared codebase.',
+      'Designed structured logging across local files, SQLite and real-time SignalR streams to trace production issues.',
+      'Mentored junior developers and a UI/UX developer on C#, SOLID principles and .NET architecture.',
+    ],
   },
   {
     company: 'Freelance', role: 'Full-Stack Developer',
     start: '2021-09', startLabel: 'Sep 2021', end: null, endLabel: 'Present',
-    summary: 'Delivered a Canadian sports booking platform from requirements to production, handling around 1,000 bookings per month.',
+    highlights: [
+      'Owned delivery of a sports booking platform for the Canadian market, from requirements to production, with a Vue.js frontend.',
+      'Designed booking flows, the relational database schema and a library of reusable frontend components.',
+      'Delivered business-logic changes in the platform’s .NET services while adapting to changing client requirements.',
+    ],
   },
   {
     company: 'SPD Computing', role: 'Full-Stack Developer · Part-time',
     start: '2019-10', startLabel: 'Oct 2019', end: '2021-05', endLabel: 'May 2021',
-    summary: 'Modernized banking software and automated 100+ financial reports and branch printing.',
+    highlights: [
+      'Contributed to banking software modernization, including a migration from VB.NET to PHP and PL/SQL.',
+      'Automated financial report generation in CSV, PDF and Excel, replacing manual processing.',
+      'Implemented automated printing for payment and foreign-exchange forms across bank branches.',
+    ],
   },
 ];
 
@@ -42,13 +62,13 @@ export const selectedWork = [
     id: 'whowinselections',
     title: 'WhoWinSelections.com',
     category: 'Past project · Feb–Nov 2024',
-    summary: 'Built and operated an election news aggregator covering 100+ sources and about 1,000 daily users during operation.',
+    summary: 'Built and operated an election news aggregator with article categorization and Nginx caching. Owned the infrastructure, monetization and traffic acquisition.',
   },
   {
     id: 'stock-reports',
     title: 'AI Daily Stock Reports',
     category: 'Past project · Sep 2024–Feb 2025',
-    summary: 'An automated market-data and reporting pipeline using the OpenAI API. Reduced AI operating costs by about 30%.',
+    summary: 'Built a pipeline that aggregates market data, filters key events and generates daily reports through the OpenAI API. Optimized prompts and data processing to reduce operating costs.',
   },
 ];
 

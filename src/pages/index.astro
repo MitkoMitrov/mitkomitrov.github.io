@@ -3,14 +3,17 @@ import Document from '../layouts/Document.astro';
 import {articles, experience, profile, selectedWork} from '../data/portfolio.mjs';
 import Arrow from '../components/Arrow.astro';
 import Hero from '../components/Hero.astro';
+import ContactLinks from '../components/ContactLinks.astro';
+import ContactIcon from '../components/ContactIcon.astro';
 ---
 <Document>
   <section class="intro container" id="home" aria-labelledby="intro-title">
     <div id="about">
       <Hero title="Mitko Mitrov" titleId="intro-title" tagline="Software engineer · .NET & React" align="start">
-        <p class="intro-summary" id="skills">I build web products, modernize legacy systems, and write about practical engineering.</p>
+        <div class="intro-summary" id="skills">{profile.bio.map(paragraph => <p>{paragraph}</p>)}</div>
       </Hero>
       <div class="stack-tags" aria-label="Core stack"><span>.NET</span><span>React</span></div>
+      <ContactLinks />
     </div>
     <img class="portrait" src="/assets/img/perfil2.jpg" width="1079" height="1079" alt="Portrait of Mitko Mitrov" decoding="async" />
   </section>
@@ -50,7 +53,7 @@ import Hero from '../components/Hero.astro';
           <div class="timeline-content">
             <h3>{job.company}</h3>
             <p class="timeline-role">{job.role}</p>
-            <p class="timeline-summary">{job.summary}</p>
+            <ul class="timeline-highlights">{job.highlights.map(highlight => <li>{highlight}</li>)}</ul>
           </div>
         </li>
       ))}
@@ -77,6 +80,6 @@ import Hero from '../components/Hero.astro';
   <section class="section container contact-section" id="contact" aria-labelledby="contact-title">
     <h2 id="contact-title">Get in touch</h2>
     <p>For roles, projects, or a good engineering conversation.</p>
-    <a class="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Arrow /></a>
+    <a class="contact-email" href={`mailto:${profile.email}`}><ContactIcon kind="email" />{profile.email}</a>
   </section>
 </Document>
