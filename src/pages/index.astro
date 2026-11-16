@@ -1,0 +1,12 @@
+---
+import Document from '../layouts/Document.astro';
+import {splitLegacyDocument} from '../lib/legacy-document.mjs';
+import legacyHome from '../../index.html?raw';
+
+// Render at build time; keep the existing reviewed HTML as one source of truth.
+const {head, body} = splitLegacyDocument(legacyHome);
+---
+<Document>
+  <Fragment slot="head" set:html={head} />
+  <Fragment set:html={body} />
+</Document>
