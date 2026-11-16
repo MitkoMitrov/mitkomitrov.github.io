@@ -3,35 +3,12 @@ import assert from 'node:assert/strict';
 import {mkdtemp, mkdir, readFile, rm, writeFile, symlink} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
-import {JSDOM} from 'jsdom';
 import {parse} from 'yaml';
-import {splitLegacyDocument} from '../src/lib/legacy-document.mjs';
 import {preparePublic} from '../scripts/prepare-public.mjs';
 import {verifyBuild} from '../scripts/verify-build.mjs';
 
-test('Astro generates the complete existing homepage with identical body, CSS, metadata and scripts', async () => {
-  const source = new JSDOM(await readFile('index.html', 'utf8')).window.document;
-  const built = new JSDOM(await readFile('dist/index.html', 'utf8')).window.document;
-  assert.equal(built.body.innerHTML.trim(), source.body.innerHTML.trim());
-  assert.equal(built.head.innerHTML.trim(), source.head.innerHTML.trim());
-  assert.equal(built.querySelectorAll('html').length, 1);
-  assert.equal(built.querySelectorAll('body').length, 1);
-  for (const link of built.querySelectorAll('a[href^="#"]')) {
-    if (link.hash) assert.ok(built.getElementById(decodeURIComponent(link.hash.slice(1))), `Missing target ${link.hash}`);
-  }
-  // The raw-HTML bridge is entirely build-time; there is no content loader in-browser.
-  assert.equal(built.querySelectorAll('script').length, source.querySelectorAll('script').length);
-  assert.ok(built.body.textContent.includes('Mitko'));
-});
-
 test('artifact preserves all public files byte-for-byte and excludes repository-only files', async () => {
   assert.ok(await verifyBuild() > 10);
-});
-
-test('legacy bridge rejects an unsupported document shell rather than silently losing attributes', () => {
-  assert.deepEqual(splitLegacyDocument('<!doctype html><html lang="en"><head><title>x</title></head><body>visible</body></html>'), {head:'<title>x</title>',body:'visible'});
-  assert.throws(() => splitLegacyDocument('<html><head></head><body>missing contract</body></html>'), /Unsupported/);
-  assert.throws(() => splitLegacyDocument('<!doctype html><html lang="en"><head></head><body class="new">x</body></html>'), /Unsupported/);
 });
 
 test('public staging removes stale files and fails closed on domain changes, missing input or symlinks', async () => {

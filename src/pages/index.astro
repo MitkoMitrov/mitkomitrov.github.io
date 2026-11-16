@@ -1,12 +1,81 @@
 ---
 import Document from '../layouts/Document.astro';
-import {splitLegacyDocument} from '../lib/legacy-document.mjs';
-import legacyHome from '../../index.html?raw';
-
-// Render at build time; keep the existing reviewed HTML as one source of truth.
-const {head, body} = splitLegacyDocument(legacyHome);
+import {articles, experience, profile, selectedWork} from '../data/portfolio.mjs';
+import Arrow from '../components/Arrow.astro';
+import Hero from '../components/Hero.astro';
 ---
 <Document>
-  <Fragment slot="head" set:html={head} />
-  <Fragment set:html={body} />
+  <section class="intro container" id="home" aria-labelledby="intro-title">
+    <div id="about">
+      <Hero title="Mitko Mitrov" titleId="intro-title" tagline="Software engineer · .NET & React" align="start">
+        <p class="intro-summary" id="skills">I build web products, modernize legacy systems, and write about practical engineering.</p>
+      </Hero>
+    </div>
+    <img class="portrait" src="/assets/img/perfil2.jpg" width="1079" height="1079" alt="Portrait of Mitko Mitrov" decoding="async" />
+  </section>
+
+  <section class="section container articles-section" id="articles" aria-labelledby="articles-title">
+    <div class="section-heading">
+      <h2 id="articles-title">Articles</h2>
+      <p>My Redis series · Published on LinkedIn</p>
+    </div>
+    <ul class="article-list">
+      {articles.slice(0, 3).map(article => (
+        <li>
+          <article>
+            <a class="article-link" href={article.href}>
+              <div>
+                <h3>{article.title}</h3>
+                <p>{article.summary}</p>
+              </div>
+              <time datetime={article.date}>{article.dateLabel}</time>
+              <Arrow />
+            </a>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section container" id="experience" aria-labelledby="experience-title">
+    <div class="section-heading"><h2 id="experience-title">Experience</h2></div>
+    <ol class="timeline">
+      {experience.map(job => (
+        <li>
+          <p class="timeline-period">
+            <time datetime={job.start}>{job.startLabel}</time><span aria-hidden="true"> – </span>
+            {job.end ? <time datetime={job.end}>{job.endLabel}</time> : <span>{job.endLabel}</span>}
+          </p>
+          <div class="timeline-content">
+            <h3>{job.company}</h3>
+            <p class="timeline-role">{job.role}</p>
+            <p class="timeline-summary">{job.summary}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section container" id="work" aria-labelledby="work-title">
+    <div class="section-heading"><h2 id="work-title">Selected projects</h2></div>
+    <ul class="project-list">
+      {selectedWork.map(project => (
+        <li id={`work-${project.id}`}>
+          <article aria-labelledby={`title-${project.id}`}>
+            <div class="project-heading">
+              <h3 id={`title-${project.id}`}>{project.title}</h3>
+              <p class="project-category">{project.category}</p>
+            </div>
+            <p class="project-summary">{project.summary}</p>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section container contact-section" id="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">Get in touch</h2>
+    <p>For roles, projects, or a good engineering conversation.</p>
+    <a class="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Arrow /></a>
+  </section>
 </Document>

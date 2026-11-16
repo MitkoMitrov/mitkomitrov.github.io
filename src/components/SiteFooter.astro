@@ -1,0 +1,14 @@
+---
+import {profile} from '../data/portfolio.mjs';
+import Arrow from './Arrow.astro';
+---
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {new Date().getUTCFullYear()} {profile.name}</p>
+    <ul class="footer-links" aria-label="Professional links">
+      <li><a href={profile.github}>GitHub <Arrow /></a></li>
+      <li><a href={profile.linkedin}>LinkedIn <Arrow /></a></li>
+      <li><a href={`mailto:${profile.email}`}>Email <Arrow /></a></li>
+    </ul>
+  </div>
+</footer>
