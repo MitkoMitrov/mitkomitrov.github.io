@@ -35,10 +35,10 @@ There were no source workflows on the verified base. Before publishing this bran
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
-| Reproducible clean source build | Root locked install; static build and test commands below; fresh source-export run recorded in final validation | Pending fresh export at time of this note |
+| Reproducible clean checkout build | Fresh clone of the published feature branch, `npm ci`, `npm run check`; 19 verified files and five passing tests | Pass on Linux |
 | Generated HTML | Astro generated `/index.html`; DOM checks compare the entire head/body, including CSS, metadata and scripts, with the source | Pass locally |
 | Domain, assets and important URLs | Artifact verifier checks 19 exact public paths and byte equality for CNAME/CV/assets; all fragment targets present | Pass locally |
-| Failed builds preserve last live deployment | Upload follows successful checks; deploy depends on build and is restricted to master; YAML policy checks pass | Configured/tested structurally; live failure behavior unverified |
+| Failed builds preserve last live deployment | Upload follows successful checks; deploy depends on build and is restricted to master; YAML policy checks pass. Actual PR run builds/uploads successfully and skips deploy | Configured/tested structurally; live failure behavior unverified |
 | Document local commands | Root README and this runbook | Pass |
 | Direct deployed-route verification | Browser inspected built homepage, Work hash navigation and direct `/CV/CV.html` in an internal static preview | Pass for local preview; new GitHub Pages deployment unverified |
 | No production changes | Default branch/domain/source HTML/assets untouched; review branch only | Pass for this change |
@@ -54,7 +54,11 @@ git diff --check
 
 `npm run check` runs public staging, Astro static build, the output verifier and `node --test test/*.test.mjs`. **Five tests pass**: complete HTML preservation/fragment targets, exact public artifact, strict bridge rejection, stale-file cleanup/domain/missing-input/symlink rejection, and workflow privilege/dependency policy. All failures injected by tests are local synthetic temp-directory cases, not cloud data or live deployment tests.
 
-The built homepage and CV were opened in the supported browser against an internal static `dist/` preview. The page rendered, existing Work navigation reached `/#work`, and a direct CV URL displayed the existing CV. Desktop screenshot inspected. This does not verify a public deployment or add a branch-preview hosting service. Mobile viewport, remote third-party services and full visual/accessibility auditing are outside this build-only change; existing HTML/CSS is preserved.
+Fresh remote-clone verification used the published branch at implementation commit `0587c9c0673ffec6d9eeb535ff6402a2316d0b20`, in a new empty directory with no dependency/generated files: `git clone --branch web-03/astro-ssg --single-branch https://github.com/MitkoMitrov/mitkomitrov.github.io.git <EMPTY_DIRECTORY>`, then `npm ci --no-audit --no-fund` and `npm run check`. All passed. A later test-only portability adjustment uses a directory junction on Windows instead of a privileged file symlink; its five tests pass again on Linux. Windows execution itself is not claimed. The production dependency audit on patched Astro reports **zero vulnerabilities** as of the check date.
+
+The published workflow was also exercised by [draft PR #2](https://github.com/MitkoMitrov/mitkomitrov.github.io/pull/2). [GitHub run 43818405829](https://github.com/MitkoMitrov/mitkomitrov.github.io/actions/runs/43818405829) succeeded: checkout, pinned Node, locked install, build/check and checked artifact upload all passed; the **deploy job was skipped**. This verifies the PR build/permission boundary in the real service, not an actual Pages deployment. The connector successfully created the branch, workflow-containing commit and draft PR; no assumption of write capability was required.
+
+The built homepage and CV were opened in the supported browser against an internal static `dist/` preview. The page rendered, existing Work navigation reached `/#work`, and a direct CV URL displayed the existing CV. Desktop screenshot inspected. The homepage SHA-256 remained `ad31d3accc81d784b5e02634db3ad22a4d3231ea491b735f1c558acb4d1409f8` after the Astro patch update, matching the inspected preview bytes. This does not verify a public deployment or add a branch-preview hosting service. Mobile viewport, remote third-party services and full visual/accessibility auditing are outside this build-only change; existing HTML/CSS is preserved.
 
 ## Owner steps after review, deferred until release
 

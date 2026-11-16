@@ -52,7 +52,8 @@ test('public staging removes stale files and fails closed on domain changes, mis
     await rm(join(root, 'CNAME'));
     await assert.rejects(preparePublic(root), {code:'ENOENT'});
     await writeFile(join(root, 'CNAME'), 'mitko.mk');
-    await symlink(join(root, 'CNAME'), join(root, 'assets/link'));
+    // Directory junctions avoid requiring Windows Developer Mode/admin rights.
+    await symlink(join(root, 'CV'), join(root, 'assets/link'), process.platform === 'win32' ? 'junction' : 'dir');
     await assert.rejects(preparePublic(root), /symbolic links/);
   } finally {await rm(root, {recursive:true,force:true});}
 });
