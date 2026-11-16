@@ -27,21 +27,24 @@ function visit({html = home, url = 'https://mitko.mk/', saved, unavailable = fal
   };
 }
 
-test('both public pages block Google until a visitor explicitly accepts', () => {
+test('both public pages start GA once by default and show an honest inline opt-out', () => {
   for (const html of [home, catalogue]) {
     const page = visit({html});
-    assert.equal(page.scripts().length, 0);
-    assert.equal(page.commands().length, 0);
+    assert.equal(page.scripts().length, 1);
+    assert.equal(page.window.localStorage.getItem(storageKey), null, 'Do not manufacture a saved consent choice');
     assert.equal(page.panel().hidden, false);
+    assert.match(page.panel().textContent, /uses Google Analytics cookies automatically/);
+    assert.match(page.document.querySelector('[data-analytics-status]').textContent, /currently on/);
     page.click('accept');
     assert.equal(page.window.localStorage.getItem(storageKey), 'granted');
     assert.equal(page.panel().hidden, true);
     assert.deepEqual(page.scripts().map(script => script.src), [`https://www.googletagmanager.com/gtag/js?id=${measurementId}`]);
     assert.equal(page.scripts()[0].async, true);
     const commands = page.commands();
-    assert.equal(commands[0][2].analytics_storage, 'denied');
+    assert.equal(commands[0][2].analytics_storage, 'granted');
     assert.equal(commands[0][2].ad_storage, 'denied');
-    assert.deepEqual(commands[1], ['consent', 'update', {analytics_storage: 'granted'}]);
+    assert.equal(commands[0][2].ad_user_data, 'denied');
+    assert.equal(commands[0][2].ad_personalization, 'denied');
     assert.equal(commands.filter(command => command[0] === 'config').length, 1);
     assert.equal(commands.at(-1)[1], measurementId);
     assert.equal(commands.at(-1)[2].allow_google_signals, false);
@@ -54,22 +57,28 @@ test('both public pages block Google until a visitor explicitly accepts', () => 
   }
 });
 
-test('decline is remembered, loads nothing, and can be changed from the footer', () => {
+test('decline is remembered and earlier opt-outs remain blocked on both public routes', () => {
   const page = visit();
   page.click('decline');
   assert.equal(page.window.localStorage.getItem(storageKey), 'denied');
-  assert.equal(page.scripts().length, 0);
-  const next = visit({html: catalogue, saved: 'denied'});
-  assert.equal(next.panel().hidden, true);
-  assert.equal(next.scripts().length, 0);
-  next.click('preferences');
-  assert.equal(next.panel().hidden, false);
-  assert.ok(next.document.activeElement.hasAttribute('data-analytics-accept'));
-  next.click('accept');
-  assert.equal(next.scripts().length, 1);
+  assert.equal(page.window['ga-disable-' + measurementId], true);
+  assert.equal(page.reloads(), 1);
+  for (const html of [home, catalogue]) {
+    const next = visit({html, saved: 'denied'});
+    assert.equal(next.panel().hidden, true);
+    assert.equal(next.scripts().length, 0);
+    assert.equal(next.commands().length, 0);
+    next.click('preferences');
+    assert.equal(next.panel().hidden, false);
+    assert.match(next.document.querySelector('[data-analytics-status]').textContent, /currently off/);
+    assert.ok(next.document.activeElement.hasAttribute('data-analytics-accept'));
+    next.click('accept');
+    assert.equal(next.scripts().length, 1);
+    assert.equal(next.window['ga-disable-' + measurementId], false);
+  }
 });
 
-test('withdrawal disables collection, clears GA cookies and reloads to remove Google listeners', () => {
+test('opt-out disables collection, clears GA cookies and reloads to remove Google listeners', () => {
   const page = visit({saved: 'granted'});
   assert.equal(page.scripts().length, 1);
   page.document.cookie = '_ga=synthetic; Path=/; Secure';
@@ -92,12 +101,33 @@ test('localhost and preview domains never initialize GA even with saved consent'
   }
 });
 
-test('blocked browser storage and invalid saved choices fail closed until opt-in', () => {
-  for (const options of [{unavailable: true}, {saved: 'invalid'}]) {
-    const page = visit(options);
-    assert.equal(page.scripts().length, 0);
-    assert.equal(page.panel().hidden, false);
-    page.click('accept');
-    assert.equal(page.scripts().length, 1);
-  }
+test('an unsavable decline stays disabled in memory instead of reloading and re-enabling GA', () => {
+  const page = visit({unavailable: true});
+  assert.equal(page.scripts().length, 1);
+  page.click('decline');
+  assert.equal(page.window['ga-disable-' + measurementId], true);
+  assert.equal(page.reloads(), 0);
+  assert.equal(page.panel().hidden, false);
+  assert.match(page.document.querySelector('[data-analytics-status]').textContent, /currently off.*could not save/);
+  assert.equal(page.commands().filter(command => command[0] === 'config').length, 1);
+  page.click('accept');
+  assert.equal(page.window['ga-disable-' + measurementId], false);
+  assert.equal(page.scripts().length, 1);
+});
+
+test('a decline in another tab immediately disables this tab and reloads without GA', () => {
+  const page = visit();
+  page.window.localStorage.setItem(storageKey, 'denied');
+  page.window.dispatchEvent(new page.window.StorageEvent('storage', {key: storageKey, newValue: 'denied'}));
+  assert.equal(page.window['ga-disable-' + measurementId], true);
+  assert.equal(page.reloads(), 1);
+  const next = visit({saved: page.window.localStorage.getItem(storageKey)});
+  assert.equal(next.scripts().length, 0);
+});
+
+test('invalid saved choices use the default policy without recording consent', () => {
+  const page = visit({saved: 'invalid'});
+  assert.equal(page.scripts().length, 1);
+  assert.equal(page.panel().hidden, false);
+  assert.equal(page.window.localStorage.getItem(storageKey), 'invalid');
 });

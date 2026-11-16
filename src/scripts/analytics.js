@@ -17,12 +17,12 @@
     loaded = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
-    // Basic consent mode: no Google script or request exists before opt-in.
+    window['ga-disable-' + measurementId] = false;
+    // Owner-requested opt-out policy. Enabled storage is not evidence of consent.
     window.gtag('consent', 'default', {
-      analytics_storage: 'denied', ad_storage: 'denied',
+      analytics_storage: 'granted', ad_storage: 'denied',
       ad_user_data: 'denied', ad_personalization: 'denied',
     });
-    window.gtag('consent', 'update', {analytics_storage: 'granted'});
     window.gtag('js', new Date());
     window.gtag('config', measurementId, {
       allow_google_signals: false,
@@ -36,38 +36,60 @@
   }
 
   function showPreferences(moveFocus = false) {
-    status.textContent = choice === 'granted' ? 'Analytics is currently on.' : 'Analytics is currently off.';
+    status.textContent = choice === 'denied' ? 'Analytics is currently off.' : 'Analytics is currently on.';
     panel.hidden = false;
     if (moveFocus) accept.focus();
   }
 
   function saveChoice(next) {
     choice = next;
-    try { localStorage.setItem(storageKey, choice); } catch { /* Keep the choice for this page visit. */ }
+    let saved = false;
+    try {
+      localStorage.setItem(storageKey, choice);
+      saved = localStorage.getItem(storageKey) === choice;
+    } catch { /* Keep the choice for this page visit. */ }
     panel.hidden = true;
     preferences.focus();
     if (choice === 'granted') {
       window['ga-disable-' + measurementId] = false;
       loadAnalytics();
     } else {
-      window['ga-disable-' + measurementId] = true;
-      // Remove this site's GA cookies after withdrawing consent.
-      for (const cookie of document.cookie.split(';')) {
-        const name = cookie.split('=')[0].trim();
-        if (!/^_ga(?:_|$)/.test(name)) continue;
-        for (const domain of ['', '; Domain=mitko.mk', '; Domain=.mitko.mk']) {
-          document.cookie = name + '=; Max-Age=0; Path=/' + domain + '; SameSite=Lax; Secure';
-        }
-      }
-      // Unload enhanced measurement listeners as well as disabling collection.
-      if (loaded) location.reload();
+      stopAnalytics(saved);
     }
+    if (!saved) {
+      showPreferences();
+      status.textContent += ' Your browser could not save this choice; it applies only to this page.';
+    }
+  }
+
+  function stopAnalytics(reload) {
+    window['ga-disable-' + measurementId] = true;
+    // Do not send a consent-update ping after the visitor declines.
+    for (const cookie of document.cookie.split(';')) {
+      const name = cookie.split('=')[0].trim();
+      if (!/^_ga(?:_|$)/.test(name)) continue;
+      for (const domain of ['', '; Domain=mitko.mk', '; Domain=.mitko.mk']) {
+        document.cookie = name + '=; Max-Age=0; Path=/' + domain + '; SameSite=Lax; Secure';
+      }
+    }
+    // Reload only with a persisted opt-out: otherwise the new page would re-enable GA.
+    if (loaded && reload) location.reload();
   }
 
   preferences.hidden = false;
   preferences.addEventListener('click', () => showPreferences(true));
   accept.addEventListener('click', () => saveChoice('granted'));
   panel.querySelector('[data-analytics-decline]').addEventListener('click', () => saveChoice('denied'));
-  if (choice === 'granted') loadAnalytics();
-  else if (choice !== 'denied') showPreferences();
+  window.addEventListener('storage', event => {
+    if (event.key !== storageKey || event.newValue !== 'denied') return;
+    choice = 'denied';
+    panel.hidden = true;
+    stopAnalytics(true);
+  });
+  // Preserve all earlier opt-outs, including those saved under the old opt-in UI.
+  if (choice === 'denied') stopAnalytics(false);
+  else {
+    loadAnalytics();
+    if (choice !== 'granted') showPreferences();
+  }
 })();
