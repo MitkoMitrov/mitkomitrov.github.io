@@ -22,7 +22,7 @@ test('article catalogue renders every published entry as a thumbnail card, newes
     assert.equal(card.querySelector('img').getAttribute('alt'), '', 'The adjacent title labels the decorative cover');
     assert.match(card.textContent, /Read on LinkedIn/);
   }
-  assert.equal(document.querySelectorAll('script:not([type="application/ld+json"]), astro-island, iframe').length, 0);
+  assert.equal(document.querySelectorAll('script:not([type="application/ld+json"]):not([data-analytics-bootstrap]), astro-island, iframe').length, 0);
 });
 
 test('catalogue images, navigation and cross-page anchors resolve in the static build', async () => {

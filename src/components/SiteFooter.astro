@@ -1,10 +1,12 @@
 ---
 import {profile} from '../data/portfolio.mjs';
 import ContactLinks from './ContactLinks.astro';
+import Analytics from './Analytics.astro';
 ---
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>© {new Date().getUTCFullYear()} {profile.name}</p>
     <ContactLinks />
+    <Analytics />
   </div>
 </footer>
