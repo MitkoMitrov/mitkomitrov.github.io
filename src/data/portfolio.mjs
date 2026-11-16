@@ -8,36 +8,47 @@ export const profile = {
 
 // Section URLs remain useful until WEB-13, WEB-04 and WEB-10 introduce their pages.
 export const navigation = [
-  {label: 'Home', href: '/'},
-  {label: 'Work', href: '/#work'},
   {label: 'Articles', href: '/#articles'},
-  {label: 'About', href: '/#about'},
+  {label: 'Experience', href: '/#experience'},
+  {label: 'Projects', href: '/#work'},
+];
+
+export const experience = [
+  {
+    company: 'Meta5Team', role: 'Software Engineer',
+    start: '2022-03', startLabel: 'Mar 2022', end: null, endLabel: 'Present',
+    summary: 'Migrated 50–100 legacy endpoints to ASP.NET Core. Own cashier software serving 5,000–10,000 daily users and a MAUI app deployed on 50+ kiosks.',
+  },
+  {
+    company: 'Freelance', role: 'Full-Stack Developer',
+    start: '2021-09', startLabel: 'Sep 2021', end: null, endLabel: 'Present',
+    summary: 'Delivered a Canadian sports booking platform from requirements to production, handling around 1,000 bookings per month.',
+  },
+  {
+    company: 'SPD Computing', role: 'Full-Stack Developer · Part-time',
+    start: '2019-10', startLabel: 'Oct 2019', end: '2021-05', endLabel: 'May 2021',
+    summary: 'Modernized banking software and automated 100+ financial reports and branch printing.',
+  },
 ];
 
 export const selectedWork = [
   {
-    id: 'kiosk',
-    title: 'Connected retail kiosks',
-    category: 'Production work · Meta5Team',
-    summary: 'Built a .NET MAUI application connecting kiosk software to thermal printers and bill acceptors. Added local files, SQLite and live SignalR logging to make production issues traceable.',
-    outcome: '50+ kiosks across 25+ locations',
-    stack: ['C#', '.NET MAUI', 'SQLite', 'SignalR'],
+    id: 'imenologija',
+    title: 'Imenologija.mk',
+    category: 'In development · 2026–present',
+    summary: 'A Macedonian names encyclopedia with linked sources and an editorial workflow. Built with Next.js, Payload CMS and PostgreSQL.',
   },
   {
     id: 'whowinselections',
     title: 'WhoWinSelections.com',
     category: 'Past project · Feb–Nov 2024',
-    summary: 'Built and operated an election news aggregator, from categorizing articles across 100+ sources to infrastructure, monetization and traffic acquisition. Used Nginx caching to improve backend performance.',
-    outcome: 'About 1,000 daily users during operation',
-    stack: ['News aggregation', 'Nginx', 'Operations'],
+    summary: 'Built and operated an election news aggregator covering 100+ sources and about 1,000 daily users during operation.',
   },
   {
-    id: 'imenologija',
-    title: 'Imenologija.mk',
-    category: 'In development · Personal product',
-    summary: 'Building a Macedonian names encyclopedia with linked origins, sources and name variants. Each entry follows a draft, verified and published editorial workflow, backed by PostgreSQL on a Linux VPS.',
-    outcome: 'Content model spanning 42 categories',
-    stack: ['Next.js', 'Payload CMS', 'PostgreSQL', 'Docker'],
+    id: 'stock-reports',
+    title: 'AI Daily Stock Reports',
+    category: 'Past project · Sep 2024–Feb 2025',
+    summary: 'An automated market-data and reporting pipeline using the OpenAI API. Reduced AI operating costs by about 30%.',
   },
 ];
 

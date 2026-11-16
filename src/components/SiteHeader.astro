@@ -5,7 +5,7 @@ import Arrow from './Arrow.astro';
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="Mitko Mitrov home">mitko<span>.mk</span></a>
+    <a class="brand" href="/" aria-label="Mitko Mitrov home"><svg class="brand-icon" aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="18" rx="2" /><path d="m6 8 4 4-4 4m7 0h5" /></svg>Mitko Mitrov</a>
     <nav aria-label="Primary navigation">
       <ul class="nav-links">
         {navigation.map(({label, href}) => <li><a href={href}>{label}</a></li>)}

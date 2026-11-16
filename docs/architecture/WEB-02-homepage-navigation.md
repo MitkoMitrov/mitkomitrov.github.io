@@ -1,88 +1,84 @@
-# WEB-02 — Homepage and professional navigation
+# WEB-02 — Minimal light portfolio
 
-**Implementation ready for review; not released.** Checked 16 November 2026.
+**Ready for review; not released.** Checked 16 November 2026.
 
-[Trello requirements](https://trello.com/c/ZsBFpdax) · [Astro foundation / draft PR #2](https://github.com/MitkoMitrov/mitkomitrov.github.io/pull/2)
+[WEB-02](https://trello.com/c/ZsBFpdax) · [Draft PR #3](https://github.com/MitkoMitrov/mitkomitrov.github.io/pull/3) · [Astro foundation / draft PR #2](https://github.com/MitkoMitrov/mitkomitrov.github.io/pull/2)
 
-## Decisions and scope
+## Result
 
-The owner requested a simplified dark appearance, featured work sourced from the supplied CV, and existing LinkedIn Redis articles. The homepage now follows introduction → selected work → latest articles → contact. A compact About section follows that primary flow; its experience and working-approach summaries retain useful existing content without the previous long timeline, stack catalog, ticker or decorative animation.
+A short identity block leads with Mitko's name, .NET / React role and one sentence about his work. Articles appears immediately below it, followed by a dated experience timeline, three concise project summaries and contact. The primary navigation is **Articles / Experience / Projects**; the name/logo returns home. Contact remains in the sticky header and footer. The brand, light palette, rounded navigation and portrait composition follow the owner's [visual reference](https://aitortita.com/), adapted to the requested focus on writing and work history.
 
-Shared Astro components provide the header, footer, metadata and icons. Home, Work, Articles and About are available without JavaScript, with a direct email action in the sticky header and professional links in the footer. Work, Articles and About currently link to real homepage sections. Dedicated listings, case studies, article bodies and the full About page remain WEB-13, WEB-04 and WEB-10. No empty destination pages or fictitious article fixtures were added.
+There are no CV buttons, oversized marketing slogans, animated elements, technology walls or empty destination pages. The full intro contains fewer than 40 words. Recognizing the owner within 10–20 seconds is a design goal, not a measured usability result. At desktop width all three article links are visible before scrolling; the timeline is the next main section. On narrow screens the timeline stacks and article dates move above the titles.
 
-The checked-in historical `index.html` has a light palette. The implementation follows the owner's explicit dark-theme choice and retains the existing Space Grotesk / JetBrains Mono typography and warm accent direction. The historical HTML remains untouched for the existing branch-based Pages source. Astro now renders `src/pages/index.astro` directly; the transitional raw-HTML bridge is removed. Future copy changes belong in Astro/data files, not the historical root HTML.
+The current owner direction supersedes the ticket's original homepage ordering, dark visual iteration and Home / Work / Articles / About menu. No unrelated tickets were changed. `#about` resolves to the brief introduction, `#skills` to its summary, and the existing `#experience`, `#work`, `#contact` and `/CV/CV.html` destinations remain valid. The CV route is retained as an existing URL without advertising a stale CV in the new homepage.
 
-## Repository and release boundary
+## Template reuse
 
-- Repository: `MitkoMitrov/mitkomitrov.github.io`; no repository `AGENTS.md` found. Conversation-provided instructions apply.
-- Default branch reverified as `master` at `2fce845161e70b4f67472767b96c2be8bd0bc94e`.
-- Starting branch: `web-03/astro-ssg` at `d5f0d6cfa8d6c3dab676787f1067c3b842959c63`; PR #2 is open and draft.
-- Implementation branch: `web-02/homepage-navigation`, stacked on that foundation. Review this change against `web-03/astro-ssg`; merge WEB-03 first, then retarget WEB-02 to `master` and rerun CI before release.
-- Existing PRs, production HTML, CV, public assets, CNAME, dependency versions and workflow are unchanged. No merge, production deployment, DNS, billing, CMS or Pages-settings change.
-- The workflow only triggers pull-request checks for base `master`. The stacked PR targets `web-03/astro-ssg`, so automated GitHub CI is **not expected yet**. Local checks are evidence; they are not a claim of GitHub CI success. No feature-branch push can enter the existing production deploy job.
+The [official Astro Portfolio Starter](https://github.com/withastro/astro/tree/main/examples/portfolio) supplies an adapted `Hero.astro`, light palette and navigation styles. Its MIT notice is preserved in `third_party/astro-portfolio.LICENSE`; source blob IDs and adaptation details are in `third_party/README.md`.
 
-## Public content provenance
+Only reusable layout pieces were imported. Mitko's text comes from his supplied CV and approved project context. The portrait already existed at `/assets/img/perfil2.jpg`. The reference site's personal copy, photographs and project images were not imported. The background is CSS; no new image generation, external fonts, runtime framework or dependency changes are needed. The original navigation's JavaScript menu/theme system was not imported; all three section links stay visible without JavaScript.
 
-Source: the owner's supplied **CV — Mitko Mitrov.pdf**, pages 2–4. The PDF itself is not committed or published. Figures are owner-reported CV facts, not independently audited product analytics.
+## Content provenance
 
-| Featured work | CV basis | Public presentation |
-| --- | --- | --- |
-| Connected retail kiosks | Page 2: .NET MAUI, thermal printers / bill acceptors, 50+ kiosks at 25+ locations, three logging channels | Production work at Meta5Team; no private source or internal URLs |
-| WhoWinSelections.com | Page 4: Feb–Nov 2024, 100+ sources, about 1,000 daily users, Nginx caching, end-to-end ownership | Explicitly a past project; usage described during operation |
-| Imenologija.mk | Page 3: in development, Next.js / Payload / PostgreSQL / Docker, editorial states, 42 categories, Linux VPS | Explicitly in development; no invented launch or usage claims |
+Source: the owner's **CV — Mitko Mitrov.pdf**, pages 2–4, supplied in this conversation. The file is not committed or published. Figures below are CV-reported facts, not independently audited analytics.
 
-No unverified product domain is linked as a live service. WEB-13 can add verified product links and full case studies. ConvertAmountApp and the stock-report bot were omitted to keep the homepage to three examples. The existing `/CV/CV.html` is byte-preserved, but it predates the newly supplied PDF and still has older metrics; synchronizing the full CV is a separate content update.
+| Content | Source and treatment |
+| --- | --- |
+| Meta5Team timeline | Mar 2022–present; 50–100 legacy endpoints, cashier software with 5,000–10,000 daily users, MAUI on 50+ kiosks (page 2) |
+| Freelance timeline | Sep 2021–present; Canadian sports booking platform, around 1,000 bookings/month (page 3) |
+| SPD Computing timeline | Oct 2019–May 2021; banking migration, reporting and branch printing (page 3) |
+| Imenologija.mk | In development, 2026–present; names encyclopedia with Next.js / Payload / PostgreSQL (page 3) |
+| WhoWinSelections.com | Past project, Feb–Nov 2024; 100+ sources, about 1,000 daily users during operation (page 4) |
+| AI Daily Stock Reports | Past project, Sep 2024–Feb 2025; reporting pipeline, about 30% lower AI operating cost (page 4) |
 
-Article author, title, publication date and direct URL were verified on the public LinkedIn pages on 16 November 2026:
+Professional kiosk work is described in the timeline rather than duplicated as a project card. No unverified product URL is advertised as live. Full case studies and verified live-product links remain WEB-13. The existing HTML CV is byte-preserved and predates the supplied PDF; a full CV content sync is a separate update.
 
-| Date | Article |
+Three real LinkedIn pages were verified earlier on 16 November 2026 and retain their direct URLs:
+
+| Published | Article |
 | --- | --- |
 | 1 Oct 2026 | [When to Use Redis—and When Not To](https://www.linkedin.com/pulse/when-use-redisand-mitko-mitrov-09cxf) |
 | 10 Sep 2026 | [Redis in Practice: Cache-Aside, TTL, and Eviction](https://www.linkedin.com/pulse/redis-practice-cache-aside-ttl-eviction-mitko-mitrov-ilqlf) |
 | 1 Sep 2026 | [Why Redis? What problem does it actually solve?](https://www.linkedin.com/pulse/why-redis-what-problem-does-actually-solve-mitko-mitrov-zaepf) |
 
-The cards contain short original summaries and clearly identify LinkedIn as the reading destination. No full article was copied or embedded. These are the three verified articles; this does not assert that an unpublished or unindexed later installment exists.
+These entries use short original summaries, newest first, and identify LinkedIn as the reading destination. No full articles, fixture posts or Sanity drafts are included. Local article listing/body pages remain WEB-04.
 
 ## Verification
 
-From the repository root, Node 24.22.1 / npm 11.9.0:
+Node 24.22.1 / npm 11.9.0; existing locked dependencies:
 
 ```sh
-npm ci --ignore-scripts
 npm run check
 git diff --check
 ```
 
-Locked installation succeeded. Astro built one fully static homepage and the output verifier accepted **20 files**: homepage, generated CSS and the unchanged public allowlist. All **8 focused tests passed**, covering layout/navigation, CV-derived states and figures, chronological LinkedIn links, first-party URLs / assets / preserved bookmarks, keyboard semantics / contrast, public-file staging and the deployment guard. The old exact-legacy-HTML tests were replaced because a deliberate homepage change invalidates that contract.
+**All 8 checks pass.** Astro builds one complete static homepage; the verifier accepts **20 files** including generated CSS and byte-preserved assets/CV/CNAME. Checks cover the new hierarchy, brief intro, no CV actions, exact timeline dates, CV-backed project states, real article URLs and date order, first-party destinations, semantics, contrast, public staging and the guarded Pages workflow.
 
-The output allowlist permits generated `_astro/*.css` files but still rejects unexpected routes, executable chunks and source files. No browser-side content fetch, CMS call, account, form backend, analytics or hydration is introduced. Google Fonts remains an external stylesheet request with system-font fallbacks.
+The implementation adds no browser scripts, hydration, content fetching, Google Fonts request, form backend or CMS connection. The public allowlist still rejects unexpected routes, JavaScript chunks and source files.
 
-Manual inspection used the **built output**, served through the managed static preview. The managed launcher could not run Astro's development command, so a temporary preview directory containing `dist/` and a static manifest was used instead. Application code was not changed to accommodate that preview issue.
-
-| Acceptance requirement | Evidence | Result |
+| Requirement | Evidence | Result |
 | --- | --- | --- |
-| Home / Work / Articles / About; easy contact | DOM checks, visible header, working section navigation, header/footer `mailto:` targets | Pass locally |
-| Introduction, 2–3 work examples, up to 3 articles, contact | Static HTML checks, three CV-based work items and three LinkedIn links | Pass |
-| Clear hierarchy, consistent typography, minimal decoration | Desktop visual inspection; no ticker, canvas, animation or client runtime | Pass locally; owner review pending |
-| Narrow / desktop layout | 1363px CSS desktop and 340px CSS browser-zoom reflow; narrow navigation remains visible, article column becomes 297px, no horizontal overflow | Pass for checked widths; physical phone not tested |
-| Keyboard navigation and visible focus | Tab reveals the skip link with an outline; Enter focuses `main`; nav links have 44px height; semantic landmarks / labels checked | Pass locally; screen-reader session not tested |
-| Readable text contrast | Calculated foreground, muted and accent contrast against actual dark background each exceeds 4.5:1 | Pass |
-| Products under Work; no empty panels | Explicit production / past / development labels; no top-level Products or Personal area | Pass |
-| Existing content / URLs retained where useful | CV/assets/CNAME byte checks, browser navigation to `/CV/CV.html`, preserved `#about`, `#experience`, `#skills`, `#work`, `#contact` | Pass locally |
-| Publish / deployed behavior | No production release authorized; stacked PR does not match the master-only PR check trigger | Unverified / deferred to release |
+| Brief identity, Articles as primary focus | Name / role / short bio; Articles first after intro; all three links visible on checked desktop viewport | Pass locally; reading time not user-tested |
+| Experience timeline | Three CV-derived entries with month/year dates, role and one concise contribution summary | Pass |
+| Projects | Three compact, CV-derived entries with development/past status labels | Pass |
+| No CV buttons | Static test and browser DOM report zero homepage links to `/CV/CV.html` | Pass |
+| Light reference-based appearance | White / purple template palette, rounded menu, own portrait, compact spacing | Pass locally; owner review pending |
+| Desktop and narrow reflow | 1363px CSS desktop and 340px CSS at 400% browser zoom; no horizontal overflow; timeline becomes one 297px column | Pass for tested widths; physical phone not tested |
+| Keyboard and contact | Tab reveals skip link; Enter focuses main; visible focus outlines; section links and email targets work | Pass locally; no screen-reader session or email send claimed |
+| Contrast | Foreground, muted and purple accent text each exceed 4.5:1 against white; dark outline for keyboard focus | Pass |
+| URL / deployment boundary | Historical root HTML, CV/assets/CNAME, package versions and workflow unchanged | Pass locally; live release unverified |
 
-Contact testing verifies the email URL; no email was sent. LinkedIn destinations were verified through public retrieval, not a signed-in reading session. Viewport reflow is a browser surrogate, not a claim of physical-device testing. SVG arrows replaced font-dependent glyphs after browser inspection exposed missing glyphs.
+Manual browser QA used the built `dist/` through the managed static preview, rather than the previously incompatible managed Astro dev launcher. The copied preview directory is temporary and is not part of the repository. Narrow screenshots are browser-zoom reflow evidence, not physical-device tests.
 
-[Desktop viewport evidence](images/WEB-02-preview.jpg) · [Narrow header evidence at 400% browser zoom](images/WEB-02-narrow.jpg)
+[Full page](images/WEB-02-full.jpg) · [Desktop viewport](images/WEB-02-preview.jpg) · [Narrow header](images/WEB-02-narrow.jpg)
 
-![WEB-02 dark homepage](images/WEB-02-preview.jpg)
+![Minimal light homepage](images/WEB-02-preview.jpg)
 
-## Review and follow-up
+## Branch and release
 
-Leave WEB-02 open for visual/content review and the later release checks. No PC session is needed for the submitted implementation.
-
-- WEB-13: expand the selected work into case studies; verify product destination/status before adding links.
-- WEB-04: add real static article pages and transition appropriate cards from LinkedIn to canonical local URLs; no empty `/articles` route in this ticket.
-- WEB-10: expand the concise About content and add personal interests only when actual content is supplied.
-- WEB-03 release: merge/review the foundation first; retarget this stacked PR, require its CI, and use the existing guarded Pages cutover checklist. Do not publish the repository root as the Astro artifact.
-- WEB-01: its editor/paste/publishing checks remain independent and deferred; this homepage has no Sanity dependency.
+- Repository default: `master`, last verified at `2fce845161e70b4f67472767b96c2be8bd0bc94e`; no repository `AGENTS.md` found.
+- Foundation: `web-03/astro-ssg` at `d5f0d6cfa8d6c3dab676787f1067c3b842959c63` (draft PR #2).
+- This work updates `web-02/homepage-navigation` and the existing draft PR #3. PRs #1/#2 remain untouched.
+- Review/merge WEB-03 first; then retarget WEB-02 to `master` and require CI before release. The existing workflow's master-only PR filter means this stacked PR has no GitHub Actions run yet; local checks are not represented as CI success.
+- Nothing is merged or deployed. No DNS, authentication, Pages configuration, billing or production data changes.
+- WEB-02 remains open for visual/content review and eventual deployed checks. No owner PC session is needed for this implementation. WEB-01's outstanding editor checks remain independent.

@@ -9,8 +9,16 @@ const html = await readFile('dist/index.html', 'utf8');
 const document = new JSDOM(html, {url: 'https://mitko.mk/'}).window.document;
 
 test('homepage renders the agreed hierarchy and shared navigation without JavaScript', () => {
-  assert.deepEqual([...document.querySelectorAll('main > section')].slice(0, 4).map(section => section.id), ['home', 'work', 'articles', 'contact']);
-  assert.deepEqual([...document.querySelectorAll('nav[aria-label="Primary navigation"] a')].map(link => link.textContent), ['Home', 'Work', 'Articles', 'About']);
+  assert.deepEqual([...document.querySelectorAll('main > section')].map(section => section.id), ['home', 'articles', 'experience', 'work', 'contact']);
+  assert.deepEqual([...document.querySelectorAll('nav[aria-label="Primary navigation"] a')].map(link => link.textContent), ['Articles', 'Experience', 'Projects']);
+  assert.equal(document.querySelector('h1').textContent, 'Mitko Mitrov');
+  assert.ok(document.querySelector('#home').textContent.trim().split(/\s+/).length <= 40, 'Keep the introduction scannable');
+  assert.equal(document.querySelectorAll('a[href="/CV/CV.html"]').length, 0, 'No CV action in the minimal homepage');
+  assert.equal(document.querySelectorAll('.timeline > li').length, 3);
+  assert.deepEqual([...document.querySelectorAll('.timeline h3')].map(item => item.textContent), ['Meta5Team', 'Freelance', 'SPD Computing']);
+  assert.deepEqual([...document.querySelectorAll('.timeline-period time')].map(time => time.dateTime), ['2022-03', '2021-09', '2019-10', '2021-05']);
+  assert.match(document.querySelector('.timeline').textContent, /50\+ kiosks/);
+  assert.equal(document.querySelector('meta[name="color-scheme"]').content, 'light');
   assert.equal(document.querySelectorAll('main').length, 1);
   assert.equal(document.querySelectorAll('h1').length, 1);
   assert.ok(document.title.includes('Mitko Mitrov'));
@@ -23,27 +31,27 @@ test('homepage renders the agreed hierarchy and shared navigation without JavaSc
 });
 
 test('selected work uses CV-backed facts and distinguishes production, past and development', () => {
-  const work = [...document.querySelectorAll('.work-item')];
+  const work = [...document.querySelectorAll('.project-list > li')];
   assert.equal(work.length, 3);
-  assert.match(work[0].textContent, /Production work.*50\+ kiosks across 25\+ locations/s);
-  assert.match(work[1].textContent, /Past project.*About 1,000 daily users during operation/s);
-  assert.match(work[2].textContent, /In development.*42 categories/s);
+  assert.match(work[0].textContent, /Imenologija.*In development/s);
+  assert.match(work[1].textContent, /Past project.*about 1,000 daily users during operation/s);
+  assert.match(work[2].textContent, /AI Daily Stock Reports.*Past project.*about 30%/s);
   for (const item of work) {
     assert.ok(item.querySelector('h3'));
-    assert.ok(item.querySelector('.work-summary').textContent.length > 50);
+    assert.ok(item.querySelector('.project-summary').textContent.length > 50);
   }
   assert.equal(document.querySelectorAll('a[href*="whowinselections.com"], a[href*="imenologija.mk"]').length, 0, 'Do not advertise unverified products as live');
   assert.doesNotMatch(document.querySelector('main').textContent, /coming soon|lorem ipsum|guarantee zero|15% returning/i);
 });
 
 test('homepage links three real LinkedIn Redis articles in descending publication order', () => {
-  const links = [...document.querySelectorAll('#articles h3 a')];
+  const links = [...document.querySelectorAll('#articles .article-link')];
   assert.equal(links.length, 3);
   assert.deepEqual(links.map(link => link.href), articles.map(article => article.href));
   for (const link of links) assert.equal(new URL(link.href).hostname, 'www.linkedin.com');
   const dates = [...document.querySelectorAll('#articles time')].map(time => time.dateTime);
   assert.deepEqual(dates, [...dates].sort().reverse());
-  assert.match(document.querySelector('#articles').textContent, /published on LinkedIn/);
+  assert.match(document.querySelector('#articles').textContent, /published on LinkedIn/i);
   assert.equal(document.querySelectorAll('a[href^="/articles/"]').length, 0, 'WEB-04 routes are not implemented here');
 });
 
@@ -77,7 +85,7 @@ test('keyboard and semantic access have a skip target, section labels and workin
   const css = await readFile('src/styles/global.css', 'utf8');
   assert.match(css, /a:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--accent\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  // Compare actual palette values, rather than assuming a dark theme is readable.
+  // Check actual foreground/background contrast for either light or dark palettes.
   const luminance = hex => {
     const rgb = hex.match(/[\da-f]{2}/gi).map(value => parseInt(value, 16) / 255).map(value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
     return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
@@ -85,6 +93,7 @@ test('keyboard and semantic access have a skip target, section labels and workin
   const color = name => css.match(new RegExp(`--${name}: (#[0-9a-f]{6})`))[1];
   const background = luminance(color('background'));
   for (const name of ['text', 'muted', 'accent']) {
-    assert.ok((luminance(color(name)) + 0.05) / (background + 0.05) >= 4.5, `${name} text fails AA contrast`);
+    const foreground = luminance(color(name));
+    assert.ok((Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05) >= 4.5, `${name} text fails AA contrast`);
   }
 });

@@ -1,6 +1,6 @@
 # mitko.mk — Web Portfolio
 
-Astro static portfolio for Mitko Mitrov. WEB-03 provides the build foundation; WEB-02 adds the simplified dark homepage and shared navigation. CMS integration is separate.
+Astro static portfolio for Mitko Mitrov. WEB-03 provides the build foundation; WEB-02 adds the minimal light homepage, experience timeline and article-first navigation. CMS integration is separate.
 
 ## Run locally
 
@@ -25,9 +25,9 @@ The preview command serves **built `dist/`**; rebuild before checking source cha
 | Path | Role |
 | --- | --- |
 | `index.html` | Historical homepage retained unchanged for the current branch-based deployment until the separately reviewed Pages cutover. It is not used by Astro. |
-| `src/pages/index.astro` | Homepage: introduction → selected work → LinkedIn articles → contact; compact About follows. All content is rendered at build time. |
+| `src/pages/index.astro` | Homepage: short introduction → LinkedIn articles → experience timeline → selected projects → contact. All content is rendered at build time. |
 | `src/layouts/Document.astro`, `src/components/` | Shared metadata, accessible header, footer and icons for future pages. |
-| `src/data/portfolio.mjs`, `src/styles/global.css` | CV-backed public work summaries, verified LinkedIn article links and responsive dark styles. |
+| `src/data/portfolio.mjs`, `src/styles/global.css` | CV-backed experience/projects, verified LinkedIn article links and responsive light styles. |
 | `assets/`, `CV/`, `CNAME` | Existing public files, copied unchanged into the build. `/CV/CV.html`, home anchors and custom domain remain valid. |
 | `scripts/prepare-public.mjs` | Stages only those public sources into ignored `.generated/public/`; removes stale staged files. |
 | `scripts/verify-build.mjs` | Checks the exact public output allowlist and byte equality of preserved assets/CV/CNAME. |
