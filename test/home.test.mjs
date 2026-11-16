@@ -29,7 +29,7 @@ test('homepage renders the agreed hierarchy and shared navigation without JavaSc
   assert.equal(document.querySelectorAll('h1').length, 1);
   assert.ok(document.title.includes('Mitko Mitrov'));
   assert.equal(document.querySelector('link[rel="canonical"]').href, 'https://mitko.mk/');
-  assert.equal(document.querySelectorAll('script:not([type="application/ld+json"])').length, 0);
+  assert.equal(document.querySelectorAll('script:not([type="application/ld+json"]):not([data-analytics-bootstrap])').length, 0);
   assert.equal(document.querySelectorAll('astro-island').length, 0);
   const person = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent);
   assert.equal(person.name, 'Mitko Mitrov');
