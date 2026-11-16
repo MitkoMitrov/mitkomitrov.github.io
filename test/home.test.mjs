@@ -17,9 +17,11 @@ test('homepage renders the agreed hierarchy and shared navigation without JavaSc
   assert.equal(document.querySelectorAll('a[href="/CV/CV.html"]').length, 0, 'No CV action in the minimal homepage');
   assert.equal(document.querySelectorAll('.timeline > li').length, 3);
   assert.deepEqual([...document.querySelectorAll('.timeline h3')].map(item => item.textContent), ['Meta5Team', 'Freelance', 'SPD Computing']);
-  assert.deepEqual([...document.querySelectorAll('.timeline-period time')].map(time => time.dateTime), ['2022-03', '2021-09', '2019-10', '2021-05']);
+  assert.deepEqual([...document.querySelectorAll('.timeline-period time')].map(time => time.dateTime), ['2022-03', '2021-10', '2026-03', '2019-10', '2021-05']);
+  assert.match(document.querySelectorAll('.timeline-period')[1].textContent, /4 yrs 6 mos/);
   const highlights = document.querySelector('.timeline').textContent;
-  for (const topic of ['Clean Architecture', 'NUnit', 'cashier', 'thermal printer', 'Redux Toolkit', 'SignalR', 'Mentored', 'Vue.js', 'PL/SQL']) assert.ok(highlights.includes(topic), `Missing CV highlight: ${topic}`);
+  for (const topic of ['ASP.NET Core', 'React/Redux Toolkit', 'regression testing', 'structured logging', 'Vue.js', '.NET MAUI']) assert.ok(highlights.includes(topic), `Missing portfolio highlight: ${topic}`);
+  for (const entry of document.querySelectorAll('.timeline-highlights')) assert.ok(entry.children.length <= 3, 'Keep each role focused on selected highlights');
   for (const entry of document.querySelectorAll('.timeline-content')) assert.ok(entry.querySelector('ul > li'), 'Use scannable experience bullets');
   assert.doesNotMatch([...document.querySelectorAll('.timeline-highlights, .project-summary')].map(node => node.textContent).join(' '), /\d|\b(?:daily active users|bookings per month)\b/i, 'Omit operational counts and percentages');
   assert.equal(document.querySelector('meta[name="color-scheme"]').content, 'light');
@@ -56,7 +58,8 @@ test('homepage links three real LinkedIn Redis articles in descending publicatio
   const dates = [...document.querySelectorAll('#articles time')].map(time => time.dateTime);
   assert.deepEqual(dates, [...dates].sort().reverse());
   assert.match(document.querySelector('#articles').textContent, /published on LinkedIn/i);
-  assert.equal(document.querySelectorAll('a[href^="/articles/"]').length, 0, 'WEB-04 routes are not implemented here');
+  assert.equal(document.querySelector('.all-articles-link').getAttribute('href'), '/articles/');
+  assert.equal(document.querySelector('.all-articles-link').textContent.trim(), 'See all articles');
 });
 
 test('every first-party URL, stylesheet and preserved bookmark resolves in the static artifact', async () => {

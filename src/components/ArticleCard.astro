@@ -1,0 +1,29 @@
+---
+import Arrow from './Arrow.astro';
+interface Props {
+  article: {
+    title: string;
+    summary: string;
+    date: string;
+    dateLabel: string;
+    href: string;
+    source: 'linkedin' | 'website';
+    thumbnail?: string;
+  };
+}
+const {article} = Astro.props;
+const sourceLabel = article.source === 'linkedin' ? 'LinkedIn' : 'On this site';
+---
+<article class="article-card">
+  <a class="article-card-link" href={article.href}>
+    <div class="article-card-cover">
+      {article.thumbnail ? <img src={article.thumbnail} alt="" width="1280" height="720" loading="lazy" decoding="async" /> : <div class="article-card-placeholder" aria-hidden="true"><span>Engineering notes</span><span>{article.title}</span></div>}
+    </div>
+    <div class="article-card-content">
+      <div class="article-card-meta"><span class="article-source">{sourceLabel}</span><time datetime={article.date}>{article.dateLabel}</time></div>
+      <h2>{article.title}</h2>
+      <p>{article.summary}</p>
+      <span class="article-card-action">{article.source === 'linkedin' ? 'Read on LinkedIn' : 'Read article'} <Arrow /></span>
+    </div>
+  </a>
+</article>
