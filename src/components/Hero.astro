@@ -17,39 +17,3 @@ const { align = 'center', tagline, title, titleId } = Astro.props;
 	</div>
 	<slot />
 </div>
-
-<style>
-	.hero {
-		font-size: var(--text-lg);
-		text-align: center;
-	}
-
-	.title,
-	.tagline {
-		max-width: 40ch;
-		margin-inline: auto;
-	}
-
-	.title {
-		font-size: clamp(2.25rem, 5vw, 3.25rem);
-		color: var(--gray-0);
-	}
-
-	.tagline {font-size: 1.1rem; color: var(--text);}
-
-	@media (min-width: 50em) {
-		.hero {
-			font-size: var(--text-xl);
-		}
-
-		.start {
-			text-align: start;
-		}
-
-		.start .title,
-		.start .tagline {
-			margin-inline: unset;
-		}
-
-	}
-</style>
