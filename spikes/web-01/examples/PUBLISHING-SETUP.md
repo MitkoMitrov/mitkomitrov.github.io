@@ -1,10 +1,16 @@
-# WEB-01 isolated publishing — prepared, not connected
+# WEB-01 isolated publishing — connected test sandbox
 
 Status 2026-11-17: the separate public test repository exists, its workflow is
 installed, Pages uses Actions, HTTPS is enforced, and WEB01_SOURCE_SHA is pinned
 to `2cbf7bc1ad6b2c8d34b0f85af5d4bfa11ef80bd4`. Bootstrap run 44171970044 passed
-build, deploy, freshness and live-manifest verification. Steps 1–3 below are done.
-The managed Sanity webhook and dispatch credential remain unconfigured.
+build, deploy, freshness and live-manifest verification. Steps 1–5 below are done.
+The owner privately generated the approved dispatch credential and saved it in
+the managed Sanity webhook. The agent has not read or retained its value.
+Webhook `6SGLoEOkQON9ifCb` is enabled for `web01` only, with published article
+create/update/delete events, draft/version triggers off, and the reviewed
+GitHub dispatch projection. Publish run 44180562584, re-publish run 44181042419
+and unpublish run 44181349975 all passed build, deploy and live-manifest
+confirmation. The temporary article is now unpublished and its live route is 404.
 
 GitHub inherits the user site's custom domain, so the actual test site is
 https://mitko.mk/mitko-web01-publishing-test/ rather than a separate origin.
@@ -13,11 +19,11 @@ repository's master branch, homepage, DNS and existing articles are untouched.
 The first run deployed successfully but failed the old host/HTTPS verification;
 the scoped URL guard was corrected and HTTPS enabled before the successful run.
 
-The token form is prepared, not generated: owner MitkoMitrov, only the test
-repository selected, expiry 24 November 2026, Contents currently read-only and
-Metadata read-only. Automatic approval review blocked changing Contents to
-read/write pending explicit owner approval of that exact grant. Token generation
-must be completed privately by the owner; never request its value in chat.
+The owner explicitly approved Contents:read/write for only the test repository,
+expiring 24 November 2026. The form was verified with that scope, required
+Metadata:read-only and no account permissions before private owner generation.
+The expiry requires rotation or revocation after the experiment. Never request
+the token in chat, inspect the saved Authorization value or capture it in images.
 
 `sandbox-pages.yml.template` is deliberately outside `.github/workflows` in the
 portfolio. No workflow or webhook is installed by these files.
@@ -61,10 +67,17 @@ Free it should be public and contain only this synthetic test setup.
 
 ## Remaining acceptance
 
-Committing the template does not create a repository, configure Pages, install a
-webhook/credential or deploy anything. Live publish/re-publish, private edit
-separation, unpublish, duplicate/retried events, failed build/deploy recovery and
-rapid revisions must be tested against the actual sandbox.
+The template itself remains inactive in the portfolio repository. The actual
+sandbox has independently configured hosting and a managed webhook.
+
+Live publish/re-publish and private edit separation passed with synthetic article
+`1cef60d6-05c2-44d0-91ee-4667dcbf5e6a`: revision A stayed public while draft B
+persisted after Studio reload; anonymous raw draft reads returned no document,
+and the draft save did not create an Actions run. Explicit re-publication then
+deployed B, with matching live article/listing/sitemap and revision manifest.
+Unpublish then removed the article from the live listing, manifest and sitemap;
+the previous article route returns HTTP 404. Duplicate/retried events, failed
+build/deploy recovery and rapid revisions remain separate live acceptance gates.
 
 The final Sanity check cannot lock Sanity while Pages deploys. Source changes
 after the check and uncertain remote outcomes after deployment timeout remain

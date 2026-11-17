@@ -267,6 +267,51 @@ Prepared the next authorization form in GitHub: owner MitkoMitrov, expiry seven 
 
 The managed webhook, actual publish/re-publish/unpublish, failure/retry/rapid ordering and Studio status remain pending. Existing Word/non-member/native conflict/full-recovery gates remain open. Evidence images show only public CI state and an ungenerated token form; no credential screenshot is retained. Official custom-domain behavior was verified in [GitHub's documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages).
 
+## Managed webhook and live publication cycle passed — 2026-11-17
+
+This section supersedes the authorization/setup blockers in the earlier dated
+entries. The owner explicitly approved Contents:read/write for only
+`MitkoMitrov/mitko-web01-publishing-test`, expiring 24 November 2026. The form was
+verified with that repository, required Metadata:read-only and zero account
+permissions. The owner generated the credential privately, then personally
+entered its Authorization Bearer header and saved the managed Sanity webhook.
+The agent did not read, copy, log, commit or screenshot the secret. Rotation or
+revocation is required when the expiring test credential is no longer suitable.
+
+Sanity Manage visibly confirms webhook `6SGLoEOkQON9ifCb` is enabled, targeting
+only dataset `web01` and the sandbox repository dispatch endpoint. The prepared
+configuration enables published article create/update/delete, excludes draft
+and version triggers, and projects the reviewed event type, ID, revision and
+publish/unpublish operation. No Sanity write credential was placed in GitHub or
+the static site. GitHub's receipt and successful processing of create, update
+and delete events independently establish usable managed dispatch authentication.
+
+Used a new synthetic article, `1cef60d6-05c2-44d0-91ee-4667dcbf5e6a`, slug
+`web01-publishing-verification`. The owner's existing `WEB-01 draft test` was not
+edited or published. The isolated code pin remains
+`2cbf7bc1ad6b2c8d34b0f85af5d4bfa11ef80bd4`; no production merge/deployment.
+
+| Live check | Evidence and result |
+| --- | --- |
+| First Studio Publish | [Run 44180562584](https://github.com/MitkoMitrov/mitko-web01-publishing-test/actions/runs/44180562584), repository_dispatch, successful build and deploy. Revision `2IAi5tf78JEi8iHYVlpSa6`, snapshot `08f7210755183cd5b444f15df593727ead488078ba2eec1ad0555b23e33e93eb`. Browser showed marker `WEB01_PUBLIC_VERSION_A`; deployment log confirmed matching live manifest. |
+| Private edit separation | Replaced body with synthetic marker `WEB01_PRIVATE_DRAFT_B` without publishing. Studio reload restored that draft. Anonymous raw exact-draft query returned `[]`; published API still returned revision A without B. Direct live manifest/body checks still showed A and excluded B. Actions remained at three total runs with 44180562584 latest: no deployment triggered by draft saves during the observed interval. |
+| Explicit re-publication | [Run 44181042419](https://github.com/MitkoMitrov/mitko-web01-publishing-test/actions/runs/44181042419), successful build/deploy. Revision `MA10NK0JHXlupHUKOnoq4H`, snapshot `5e5e94f1eb71168f0c31a026ae7411bbcc360fb44efa4eab9fa01549a7b28839`. The previously private synthetic B marker appeared only after deliberate Publish; A disappeared. Exact live manifest, listing, article and sitemap were checked. |
+| Studio Unpublish | [Run 44181349975](https://github.com/MitkoMitrov/mitko-web01-publishing-test/actions/runs/44181349975), successful build/deploy. Anonymous published API and live manifest became empty; listing showed No published articles, sitemap omitted the slug, and the prior article route returned HTTP 404. Empty snapshot `4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945`. Deployment logs explicitly confirm current published revisions and matching live snapshot. |
+
+These are actual owner-authorized sandbox UI/API/Pages checks, distinct from the
+31 previously passing local tests. This evidence update changes documentation
+only; unchanged implementation tests were not rerun. Public proof images contain
+only synthetic article content, the webhook list or the empty test site.
+
+WEB-01 and downstream tickets remain open. Live duplicate/retried events, failed
+build/deploy recovery, rapid publication ordering, native Studio deployment-status
+UI, actual Word/size fidelity, native stale/offline conflict UI, a genuine
+authenticated non-member, two physical PCs and full dataset/asset recovery remain
+unverified. A successful normal publication cycle does not establish those gates
+or make the final API-check/Pages-deploy interval atomic. The current prototype's
+static article footer still contains its original unverified-publishing label;
+the live evidence above is authoritative for what has now been exercised.
+
 ## Official references (checked 2026-11-04)
 
 - **S1** [Sanity pricing](https://www.sanity.io/pricing)
