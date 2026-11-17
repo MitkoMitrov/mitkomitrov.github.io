@@ -1,5 +1,24 @@
 # WEB-01 isolated publishing — prepared, not connected
 
+Status 2026-11-17: the separate public test repository exists, its workflow is
+installed, Pages uses Actions, HTTPS is enforced, and WEB01_SOURCE_SHA is pinned
+to `2cbf7bc1ad6b2c8d34b0f85af5d4bfa11ef80bd4`. Bootstrap run 44171970044 passed
+build, deploy, freshness and live-manifest verification. Steps 1–3 below are done.
+The managed Sanity webhook and dispatch credential remain unconfigured.
+
+GitHub inherits the user site's custom domain, so the actual test site is
+https://mitko.mk/mitko-web01-publishing-test/ rather than a separate origin.
+It is a separate repository/deployment under that fixed path. The portfolio
+repository's master branch, homepage, DNS and existing articles are untouched.
+The first run deployed successfully but failed the old host/HTTPS verification;
+the scoped URL guard was corrected and HTTPS enabled before the successful run.
+
+The token form is prepared, not generated: owner MitkoMitrov, only the test
+repository selected, expiry 24 November 2026, Contents currently read-only and
+Metadata read-only. Automatic approval review blocked changing Contents to
+read/write pending explicit owner approval of that exact grant. Token generation
+must be completed privately by the owner; never request its value in chat.
+
 `sandbox-pages.yml.template` is deliberately outside `.github/workflows` in the
 portfolio. No workflow or webhook is installed by these files.
 
