@@ -4,11 +4,12 @@ import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/global.css';
 import {profile} from '../data/portfolio.mjs';
 
-interface Props {title?: string; description?: string; canonicalPath?: string;}
+interface Props {title?: string; description?: string; canonicalPath?: string; ogType?: string; image?: string;}
 const {
   title = 'Mitko Mitrov — Software Engineer | .NET & React',
   description = 'Mitko Mitrov builds and operates useful web products with .NET and React, and shares practical engineering lessons.',
   canonicalPath = '/',
+  ogType = 'website', image,
 } = Astro.props;
 const canonical = new URL(canonicalPath, Astro.site);
 const person = {
@@ -30,8 +31,10 @@ const person = {
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <script type="application/ld+json" set:html={JSON.stringify(person).replace(/</g, '\\u003c')} />
     <slot name="head" />
   </head>

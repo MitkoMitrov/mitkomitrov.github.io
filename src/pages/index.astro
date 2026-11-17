@@ -1,10 +1,12 @@
 ---
 import Document from '../layouts/Document.astro';
-import {articles, experience, profile, selectedWork} from '../data/portfolio.mjs';
+import {experience, profile, selectedWork} from '../data/portfolio.mjs';
+import {getArticleCatalogue} from '../lib/articles';
 import Arrow from '../components/Arrow.astro';
 import Hero from '../components/Hero.astro';
 import ContactLinks from '../components/ContactLinks.astro';
 import ContactIcon from '../components/ContactIcon.astro';
+const articles = await getArticleCatalogue();
 ---
 <Document>
   <section class="intro container" id="home" aria-labelledby="intro-title">
@@ -21,13 +23,13 @@ import ContactIcon from '../components/ContactIcon.astro';
   <section class="section container articles-section" id="articles" aria-labelledby="articles-title">
     <div class="section-heading">
       <h2 id="articles-title">Articles</h2>
-      <p>My Redis series · Published on LinkedIn</p>
+      <p>Practical engineering · My Redis series</p>
     </div>
     <ul class="article-list">
       {articles.slice(0, 3).map(article => (
         <li>
           <article>
-            <a class="article-link" href={article.href}>
+            <a class="article-link" href={article.href} data-article-outbound={article.source === 'linkedin' ? article.id : undefined}>
               <div>
                 <h3>{article.title}</h3>
                 <p>{article.summary}</p>
@@ -67,7 +69,7 @@ import ContactIcon from '../components/ContactIcon.astro';
     <ul class="project-list">
       {selectedWork.map(project => (
         <li id={`work-${project.id}`}>
-          <article aria-labelledby={`title-${project.id}`}>
+          <article aria-labelledby={`title-${project.id}`} data-project-id={project.id}>
             <div class="project-heading">
               <h3 id={`title-${project.id}`}>{project.title}</h3>
               <p class="project-category">{project.category}</p>

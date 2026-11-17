@@ -1,0 +1,45 @@
+---
+import {render} from 'astro:content';
+import Document from '../../layouts/Document.astro';
+import {getPublishedArticles} from '../../lib/articles';
+import articleTools from '../../scripts/article-tools.js?raw';
+
+export async function getStaticPaths() {
+  return (await getPublishedArticles()).map(entry => ({params:{slug:entry.data.slug}, props:{entry}}));
+}
+const {entry} = Astro.props;
+const {Content, headings} = await render(entry);
+const article = entry.data;
+const dateLabel = new Intl.DateTimeFormat('en-GB', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}).format(new Date(article.published));
+const readingMinutes = Math.max(1, Math.ceil((entry.body || '').split(/\s+/).length / 220));
+const canonicalPath = `/articles/${article.slug}/`;
+const structuredData = {
+  '@context':'https://schema.org', '@type':'Article', headline:article.title,
+  description:article.summary, datePublished:article.published,
+  dateModified:article.updated || article.published,
+  author:{'@type':'Person', name:article.author, url:'https://mitko.mk/'},
+  mainEntityOfPage:`https://mitko.mk${canonicalPath}`,
+  ...(article.thumbnail ? {image:`https://mitko.mk${article.thumbnail}`} : {}),
+};
+---
+<Document title={`${article.title} — Mitko Mitrov`} description={article.summary} canonicalPath={canonicalPath} ogType="article" image={article.thumbnail}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData).replace(/</g, '\\u003c')} />
+    <meta property="article:published_time" content={article.published} />
+  </Fragment>
+  <article class="article-page" data-article-id={article.articleId} data-article-topic={article.topic}>
+    <header class="article-header">
+      <a class="back-link" href="/articles/">← All articles</a>
+      <p class="article-eyebrow">{article.topic} · Engineering notes</p>
+      <h1>{article.title}</h1>
+      <p class="article-deck">{article.summary}</p>
+      <p class="article-byline">{article.author} · <time datetime={article.published}>{dateLabel}</time> · {readingMinutes} min read</p>
+      {article.originalUrl && <p class="article-original">Originally published on <a href={article.originalUrl} data-article-outbound={article.articleId}>LinkedIn</a>.</p>}
+    </header>
+    {headings.length > 3 && <nav class="article-toc" aria-label="In this article"><h2>In this article</h2><ul>{headings.filter(heading => heading.depth === 2).map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul></nav>}
+    <div class="article-body" data-article-body><Content /></div>
+    <p class="copy-status" data-copy-status role="status" aria-live="polite"></p>
+    <footer class="article-end"><p>Have a question or a different experience?</p><a href="mailto:mitkomitrov09@gmail.com">Let’s talk engineering →</a><a href="/articles/">Browse all articles →</a></footer>
+  </article>
+  <script is:inline data-article-tools set:html={articleTools} />
+</Document>

@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import {readFile, access} from 'node:fs/promises';
 import {resolve, sep} from 'node:path';
 import {JSDOM} from 'jsdom';
-import {articles} from '../src/data/portfolio.mjs';
+import {articles as external} from '../src/data/portfolio.mjs';
+import {readArticles} from '../scripts/article-metadata.mjs';
+import {mergeCatalogue} from '../src/lib/article-model.mjs';
+const articles = mergeCatalogue(await readArticles(), external).slice(0, 3);
 
 const html = await readFile('dist/index.html', 'utf8');
 const document = new JSDOM(html, {url: 'https://mitko.mk/'}).window.document;
@@ -50,14 +53,14 @@ test('selected work uses CV-backed facts and distinguishes production, past and 
   assert.doesNotMatch(document.querySelector('main').textContent, /coming soon|lorem ipsum|guarantee zero|15% returning/i);
 });
 
-test('homepage links three real LinkedIn Redis articles in descending publication order', () => {
+test('homepage links the latest three published Redis articles in descending publication order', () => {
   const links = [...document.querySelectorAll('#articles .article-link')];
   assert.equal(links.length, 3);
-  assert.deepEqual(links.map(link => link.href), articles.map(article => article.href));
-  for (const link of links) assert.equal(new URL(link.href).hostname, 'www.linkedin.com');
+  assert.deepEqual(links.map(link => link.getAttribute('href')), articles.map(article => article.href));
+  assert.ok(links.some(link => new URL(link.href).hostname === 'mitko.mk'));
   const dates = [...document.querySelectorAll('#articles time')].map(time => time.dateTime);
   assert.deepEqual(dates, [...dates].sort().reverse());
-  assert.match(document.querySelector('#articles').textContent, /published on LinkedIn/i);
+  assert.match(document.querySelector('#articles').textContent, /Practical engineering/i);
   assert.equal(document.querySelector('.all-articles-link').getAttribute('href'), '/articles/');
   assert.equal(document.querySelector('.all-articles-link').textContent.trim(), 'See all articles');
 });

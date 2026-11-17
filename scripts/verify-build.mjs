@@ -3,6 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {join, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {filesUnder, publicSources} from './prepare-public.mjs';
+import {readPublishedArticles} from './article-metadata.mjs';
 
 export async function verifyBuild(root = fileURLToPath(new URL('../', import.meta.url))) {
   const output = join(root, 'dist');
@@ -13,10 +14,17 @@ export async function verifyBuild(root = fileURLToPath(new URL('../', import.met
     assert.ok(html.includes(`id="${id}"`), `Missing important anchor: ${id}`);
   }
   // The build artifact contains the explicit public allowlist, not the repository.
-  // The portfolio and article catalogue are the only generated HTML routes.
+  // Only published article metadata may add generated article routes.
   const catalogue = await readFile(join(output, 'articles/index.html'), 'utf8');
   assert.match(catalogue, /rel="canonical" href="https:\/\/mitko\.mk\/articles\/"/);
-  const expected = ['index.html', 'articles/index.html'];
+  const expected = ['index.html', 'articles/index.html', 'sitemap.xml', 'robots.txt'];
+  for (const {data} of await readPublishedArticles(root)) {
+    const route = `articles/${data.slug}/index.html`;
+    const article = await readFile(join(output, route), 'utf8');
+    assert.ok(article.includes(`data-article-id="${data.articleId}"`));
+    assert.ok(article.includes(`href="https://mitko.mk/articles/${data.slug}/"`));
+    expected.push(route);
+  }
   for (const source of publicSources) {
     for (const path of await filesUnder(join(root, source), source)) {
       expected.push(path);
