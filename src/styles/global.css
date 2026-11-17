@@ -185,6 +185,9 @@ h3 {font-size: 1rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.015e
 .article-body :not(pre) > code {font-size: .88em; background: var(--bio); padding: 2px 5px; border-radius: 4px;}
 .article-body .text-small {font-size: .875rem;}
 .article-body .text-large {font-size: 1.25rem;}
+.article-media {margin-inline: 0; max-width: 100%;}
+.article-media video {display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 10px; background: #0e1721;}
+.article-media video:focus-visible {outline: 2px solid var(--accent); outline-offset: 4px;}
 .article-table {max-width: 100%; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px;}
 .article-table:focus-visible {outline: 2px solid var(--accent); outline-offset: 4px;}
 .article-table table {border-collapse: collapse; min-width: 480px; width: 100%; font-size: .9rem;}

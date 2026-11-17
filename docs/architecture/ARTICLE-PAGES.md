@@ -40,13 +40,25 @@ Redis Part 2 (`redis-cache-aside-ttl-eviction`) and Part 3
 (`when-to-use-redis-and-when-not-to`) use the owner's saved Markdown. The title is
 rendered once; the Markdown body is otherwise preserved, including sources.
 Original publication dates and LinkedIn links remain. No synthetic article is
-listed as published. The catalogue has five verified Redis posts: two local and
-three external. A local article replaces the matching external card.
+listed as published. The catalogue has five verified Redis posts, all local.
+A local article replaces the matching external card.
+
+The remaining three articles were migrated from the owner's complete public
+LinkedIn bodies on 17 November 2026. Text, emphasis, lists and order are preserved;
+LinkedIn's body headings are promoted one level under the page's single H1.
+Recommendations, comments and sign-in interfaces are excluded. Source text
+fingerprints in `REDIS-MIGRATION-SOURCES.json` verify the complete text against
+the initial static HTML, normalizing whitespace and straight/curly apostrophes
+used by the existing typography processor. Original dates, article IDs and attribution are
+preserved. The cache-miss article retains its original three animations,
+locally served with controls, posters and download fallback links; no autoplay,
+external player or new client script is introduced.
 
 Titles/descriptions, self-canonicals, Article JSON-LD, social metadata, sitemap and
-robots render statically. Search Console verification, sitemap submission and
-indexing inspection are still WEB-05 account work; indexing or preference over
-LinkedIn is not guaranteed.
+robots render statically. The owner verified the Search Console Domain property,
+submitted the sitemap (Success), and passed an example live URL test on
+17 November 2026. New published routes enter the same sitemap automatically;
+indexing or preference over LinkedIn is not guaranteed.
 
 ## Verification
 

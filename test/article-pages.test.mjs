@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {JSDOM} from 'jsdom';
 import {createMarkdownProcessor} from '@astrojs/markdown-remark';
 import {readArticles, readPublishedArticles} from '../scripts/article-metadata.mjs';
@@ -9,8 +10,41 @@ import {articleMarkup} from '../src/lib/remark-article.mjs';
 import {filesUnder} from '../scripts/prepare-public.mjs';
 
 const entries = await readPublishedArticles();
+test('migrated LinkedIn articles preserve all original text and locally playable media', async () => {
+  const sources = JSON.parse(await readFile('docs/architecture/REDIS-MIGRATION-SOURCES.json', 'utf8'));
+  assert.equal(sources.length, 3);
+  for (const source of sources) {
+    const entry = entries.find(entry => entry.data.articleId === source.articleId);
+    assert.equal(entry.data.originalUrl, source.originalUrl);
+    assert.equal(entry.data.published, source.published);
+    const html = await readFile(`dist/articles/${source.slug}/index.html`, 'utf8');
+    const document = new JSDOM(html).window.document;
+    const body = document.querySelector('[data-article-body]');
+    const videos = [...body.querySelectorAll('video')];
+    assert.equal(videos.length, source.videos);
+    for (const video of videos) {
+      assert.ok(video.hasAttribute('controls'));
+      assert.equal(video.hasAttribute('autoplay'), false);
+      assert.equal(video.getAttribute('preload'), 'none');
+      assert.ok(video.getAttribute('aria-label'));
+      const path = video.querySelector('source').getAttribute('src');
+      assert.match(path, /^\/assets\/video\/articles\/[a-z-]+\.mp4$/);
+      const bytes = await readFile(`dist${path}`);
+      assert.ok(bytes.subarray(0, 64).includes(Buffer.from('ftyp')));
+      assert.ok((await readFile(`dist${video.getAttribute('poster')}`)).length);
+      assert.equal(video.querySelector('a').getAttribute('href'), path);
+    }
+    body.querySelectorAll('.article-media').forEach(node => node.remove());
+    // The existing typography processor curls apostrophes; words and all other punctuation must match.
+    const text = body.textContent.replace(/\s+/g, ' ').trim().replace(/’/g, "'");
+    assert.equal(createHash('sha256').update(text).digest('hex'), source.normalizedTextSha256, `Original text changed in ${source.articleId}`);
+    assert.equal(text.split(/\s+/).length, source.sourceTextWords);
+    assert.equal(body.querySelectorAll('iframe,script').length, 0);
+    assert.doesNotMatch(body.innerHTML, /media\.licdn\.com|dms\.licdn\.com|Recommended by LinkedIn/);
+  }
+});
 test('published article routes contain the complete body and valid article metadata without client fetching', async () => {
-  assert.equal(entries.length, 2);
+  assert.equal(entries.length, 5);
   for (const {data, body} of entries) {
     const html = await readFile(`dist/articles/${data.slug}/index.html`, 'utf8');
     const document = new JSDOM(html).window.document;

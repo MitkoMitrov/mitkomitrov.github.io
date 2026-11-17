@@ -14,9 +14,16 @@ self-hosted articles. Each record supplies `title`, `summary`, `date` (ISO),
 - `source: 'website'` links to the published local article and displays “Read article”.
 - A missing thumbnail uses a text cover in the same card; it does not produce a broken image.
 
-Redis Parts 2 and 3 are self-hosted using the owner's saved Markdown sources.
-The other three known published Redis posts link to LinkedIn. All five current
-posts have local covers. No CMS connection is introduced by this release.
+All five published Redis articles are self-hosted. Parts 2 and 3 use the owner's
+saved Markdown sources; the other three preserve the complete text retrieved
+from the owner's public LinkedIn articles. All five have local covers. The
+LinkedIn records remain as provenance/fallback metadata and are suppressed by
+the matching published `originalUrl`. No CMS connection is introduced.
+
+The cache-miss article's three original animations are hosted locally as
+MP4 files with native playback controls and local poster images. They do not
+autoplay or require LinkedIn embeds. See `REDIS-MIGRATION-SOURCES.json` for the
+source URLs, retrieval date and original article-text fingerprints.
 
 The three author-owned covers were retrieved from the public Open Graph metadata
 of these original LinkedIn articles on 16 November 2026, then optimized as local
