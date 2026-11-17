@@ -213,6 +213,20 @@ This targets the already configured test Studio app ID, not the portfolio. Hosti
 
 Additional official sources checked 2026-11-15: [Sanity Portable Text configuration](https://www.sanity.io/docs/studio/portable-text-editor-configuration), [custom paste handler contract](https://www.sanity.io/docs/studio/customizing-block-content), [Studio HTML-paste ownership](https://www.sanity.io/docs/changelog/studio-Ni4xMC4x), and the installed MIT-licensed `@portabletext/html` package's [upstream source](https://github.com/portabletext/editor/tree/main/packages/html). Existing quota/pricing claims retain their original 2026-11-04 check date.
 
+## Controlled editor checks and bounded table-paste fix — 2026-11-17
+
+The owner copied a rendered ChatGPT sample into the hosted Studio. Bold and italic visibly survived, and the owner explicitly confirmed these marks remained after refresh. Later screenshots show headings, bullets, numbering and a link preserved, while the simple two-column table became separate paragraphs. Native Table insertion and cell text entry work. A subsequent screenshot shows the table plus an inserted C# code block with highlighting and indentation. These screenshots establish visible editing/rendering; refresh persistence of the complete table/code body was not separately confirmed in words. No actual Word clipboard payload or MIME result was supplied. Named text-size and cross-session checks remain unverified. Further individual screenshot requests were stopped after the owner flagged the burden.
+
+Added a browser-safe HTML table converter to the existing Body paste handler. It uses the already locked `@portabletext/block-tools` dependency and the compiled field schema, inserts structured table blocks at the editor selection, and retains surrounding headings, marks, links and lists. Paste without an HTML table and native Portable Text copy return synchronous `undefined` to preserve native behavior. The offline surrogate importer is still separate. There is no new dependency, network request, credential, draft export or production integration.
+
+Only simple tables supported by the current schema are accepted. Nested/merged cells and row headers are explicitly refused with a local error, rather than silently flattened. Failure rejects the custom paste promise, which the locked editor catches without insertion; an empty `insert` is deliberately avoided because the editor may insert a trailing selection fragment even for an empty array. Clipboard contents are not logged or retained by the diagnostic; no real draft contents enter this repository.
+
+Validation: all **16 tests pass**, including a regression that reproduces native table flattening and verifies the new clipboard conversion through serialization/static rendering, surrounding rich content, headers/cells, Word-shaped synthetic HTML, multiple tables, empty cells, unique nested keys, native fallthrough and unsupported structures. `npm run build`, `npm run studio:build`, the Body input TypeScript check and `git diff --check` pass. Synthetic Word-shaped HTML is not an actual Word paste test. These checks do not establish authenticated Studio insertion, selection/undo behavior or hosted persistence.
+
+This fix is prepared on `web-01/architecture-spike` for draft PR #1. **Not deployed to the hosted Studio; no merge or portfolio deployment.** Sanity deployment still requires the owner's authenticated CLI, which is unavailable to this agent. WEB-01 remains open. Resume with one combined acceptance check after deployment instead of repeated small formatting tests. Outstanding private-draft, conflict, publication and backup gates above remain in scope.
+
+Implementation follows the official [custom paste handler contract](https://www.sanity.io/docs/studio/customizing-block-content), checked 2026-11-17, and the installed Studio/editor source for the locked versions.
+
 ## Official references (checked 2026-11-04)
 
 - **S1** [Sanity pricing](https://www.sanity.io/pricing)
