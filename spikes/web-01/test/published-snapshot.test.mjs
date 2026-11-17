@@ -7,8 +7,20 @@ import {execFileSync} from 'node:child_process';
 import fixture from '../fixtures/article.json' with {type:'json'};
 import {capturePublishedSnapshot, readSnapshot, writeSnapshot, snapshotDigest,
   parsePublicationRequest, assertSnapshotCurrent} from '../lib/published-snapshot.mjs';
-import {assertManifestMatches} from '../scripts/check-public-manifest.mjs';
+import {assertManifestMatches, sandboxLiveUrl} from '../scripts/check-public-manifest.mjs';
 import {loadArticles} from '../lib/content.mjs';
+
+test('sandbox URL accepts the inherited HTTPS domain while refusing the portfolio root and arbitrary destinations', () => {
+  for (const origin of ['https://mitko.mk', 'https://mitkomitrov.github.io']) {
+    assert.equal(sandboxLiveUrl(origin+'/mitko-web01-publishing-test/').origin, origin);
+  }
+  for (const value of ['http://mitko.mk/mitko-web01-publishing-test/', 'https://mitko.mk/',
+    'https://example.com/mitko-web01-publishing-test/', 'https://mitko.mk/other/',
+    'https://user:password@mitko.mk/mitko-web01-publishing-test/',
+    'https://mitko.mk/mitko-web01-publishing-test/?unexpected=1']) {
+    assert.throws(() => sandboxLiveUrl(value));
+  }
+});
 
 test('legacy direct cloud mode is refused so routes cannot make separate cloud reads', async () => {
   const previous = process.env.WEB01_CONTENT_SOURCE;
@@ -98,6 +110,7 @@ test('actual snapshot builds share one listing/article/manifest and unpublish re
     assert.match(article, /data-revision="sample-revision-1"/);
     assert.match(article, /<table>/);
     assert.match(await readFile(join(output,'sitemap.xml'),'utf8'), /mitko-web01-publishing-test\/articles\/a-bounded-cache\//);
+    assert.match(await readFile(join(output,'sitemap.xml'),'utf8'), /https:\/\/mitko.mk\/mitko-web01-publishing-test\//);
     const empty = await capturePublishedSnapshot({fetch:async () => []});
     await writeSnapshot(path, empty);
     build(empty.digest);

@@ -3,6 +3,13 @@ import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 
 const records = items => [...items].sort((a,b) => a.id.localeCompare(b.id));
+export function sandboxLiveUrl(value) {
+  const base = new URL(value);
+  assert.ok(['https://mitko.mk', 'https://mitkomitrov.github.io'].includes(base.origin));
+  assert.equal(base.pathname, '/mitko-web01-publishing-test/');
+  assert.ok(!base.username && !base.password && !base.search && !base.hash);
+  return base;
+}
 export function assertManifestMatches(manifest, documents) {
   assert.match(manifest.snapshot, /^[a-f0-9]{64}$/);
   assert.ok(Array.isArray(manifest.articles));
@@ -21,9 +28,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     assertManifestMatches(manifest, (await response.json()).result);
     console.log('PASS: artifact manifest matches current published revisions.');
     if (process.env.WEB01_LIVE_URL) {
-      const base = new URL(process.env.WEB01_LIVE_URL);
-      assert.equal(base.origin, 'https://mitkomitrov.github.io');
-      assert.equal(base.pathname.toLowerCase(), '/mitko-web01-publishing-test/');
+      const base = sandboxLiveUrl(process.env.WEB01_LIVE_URL);
       let matched = false;
       for (let attempt = 0; attempt < 10; attempt++) {
         try {
