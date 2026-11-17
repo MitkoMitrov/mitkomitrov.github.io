@@ -9,7 +9,8 @@
     "studio:build": "sanity build studio-dist",
     "test": "node --test test/*.test.mjs",
     "fixture": "node lib/import-surrogate.mjs",
-    "backup": "node lib/backup.mjs"
+    "backup": "node lib/backup.mjs",
+    "check:private": "sanity exec scripts/check-private-drafts.mjs --with-user-token"
   },
   "dependencies": {
     "@portabletext/block-tools": "6.0.6",

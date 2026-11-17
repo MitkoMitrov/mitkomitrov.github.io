@@ -227,6 +227,20 @@ This fix is prepared on `web-01/architecture-spike` for draft PR #1. **Not deplo
 
 Implementation follows the official [custom paste handler contract](https://www.sanity.io/docs/studio/customizing-block-content), checked 2026-11-17, and the installed Studio/editor source for the locked versions.
 
+## Hosted acceptance progress and consolidated private API runner — 2026-11-17
+
+The owner checked out `68751e4f60d51d18b511ef3701881ca8259b7ada` in the existing Windows test worktree and successfully deployed the test Studio (build/manifest, 1/1 schemas, hosting). PowerShell blocked `npx.ps1`; `npx.cmd` worked without any execution-policy change. The owner then supplied a correct pasted two-column table, followed by the same table in an explicitly identified incognito session. This proves the visible table's cloud persistence/separate-session restoration and hosted conversion. It does not prove two physical PCs, an actual Word clipboard or restoration of earlier body content not shown.
+
+Independent anonymous non-CDN API checks returned zero published articles, zero raw drafts, zero raw matches for the test title, and exact draft omission for permission. No credentials, mutations or draft contents were used in those checks. Genuine authenticated non-member access remains unverified.
+
+To stop repeated small manual checks, added `npm run check:private` (`npm.cmd run check:private` in Windows PowerShell), implemented using the supported `sanity exec scripts/check-private-drafts.mjs --with-user-token`. It reuses the owner's local CLI login. It refuses targets other than `o3i9jgij/web01`, creates only two randomly named synthetic private drafts, checks full-body round trip through a fresh authenticated SDK client, anonymous read/raw-query/dry-run-write denial, explicit stale API revision rejection, and an actual synthetic NDJSON-to-cloud-draft restore with matching data/render output. Cleanup is ownership- and revision-guarded; failed cleanup fails the overall result and reports only synthetic IDs. No publication, existing owner article read/export, GitHub trigger or production change is performed. This is not full dataset/asset backup recovery.
+
+Local validation: **23 tests pass**, including seven new real-SDK/local-HTTP-transport tests covering success, anonymous leakage, a transport failure distinguished from revision conflict, a response lost after creation, pre-existing ID collision, cleanup failure, and preflight target/auth/ID refusal. Syntax and diff checks pass; the suite reruns static build boundaries. No dependency changes. The runner was invoked in the agent environment and the CLI stopped before script execution because no auth token was available. **The cloud runner has not yet run under owner authentication; no new live acceptance pass is claimed.** Studio redeployment is unnecessary because this change adds a CLI check only.
+
+Remaining distinctions: guarded API writes do not prove native Studio stale/offline UI behavior; fresh SDK clients do not prove separate browser sessions (the owner incognito check is the evidence for that); synthetic Word-shaped HTML is not an actual Word paste. These limits must not be used to silently close WEB-01 or downstream WEB-06–09. Next: run the one consolidated check from the already authenticated owner worktree, then use its result to proceed without repeating completed format checks. Publishing remains unconnected and the owner's draft stays unpublished.
+
+Official references rechecked: [CLI exec authentication](https://www.sanity.io/docs/cli-reference/exec) and [conditional revision patches](https://www.sanity.io/docs/apis-and-sdks/js-client-mutations).
+
 ## Official references (checked 2026-11-04)
 
 - **S1** [Sanity pricing](https://www.sanity.io/pricing)
