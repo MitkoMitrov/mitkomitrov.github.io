@@ -11,6 +11,16 @@
   let loaded = false;
   let choice = null;
   try { choice = localStorage.getItem(storageKey); } catch { /* Private storage can be unavailable. */ }
+  const currentArticle = document.querySelector('[data-article-id]');
+  const articleContext = currentArticle ? {article_id:currentArticle.dataset.articleId, article_topic:currentArticle.dataset.articleTopic} : {};
+  window.portfolioAnalytics = {
+    enabled: () => loaded && choice !== 'denied' && window['ga-disable-' + measurementId] !== true,
+    track(name, parameters) {
+      if (!this.enabled()) return false;
+      window.gtag('event', name, parameters);
+      return true;
+    },
+  };
 
   function loadAnalytics() {
     if (loaded) return;
@@ -27,12 +37,15 @@
     window.gtag('config', measurementId, {
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
+      ...articleContext,
+      ...(new URLSearchParams(location.search || '').get('analytics_debug') === '1' ? {debug_mode:true} : {}),
     });
     const script = document.createElement('script');
     script.async = true;
     script.dataset.analyticsLoader = '';
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
     document.head.appendChild(script);
+    window.dispatchEvent(new window.Event('analytics:enabled'));
   }
 
   function showPreferences(moveFocus = false) {
@@ -64,6 +77,7 @@
 
   function stopAnalytics(reload) {
     window['ga-disable-' + measurementId] = true;
+    window.dispatchEvent(new window.Event('analytics:disabled'));
     // Do not send a consent-update ping after the visitor declines.
     for (const cookie of document.cookie.split(';')) {
       const name = cookie.split('=')[0].trim();
@@ -78,6 +92,18 @@
 
   preferences.hidden = false;
   preferences.addEventListener('click', () => showPreferences(true));
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    const method = href.startsWith('mailto:') ? 'email' : href.startsWith('https://www.linkedin.com/in/') ? 'linkedin' : null;
+    const context = {page_path:location.pathname || '/', ...articleContext};
+    if (method) window.portfolioAnalytics.track('contact_click', {...context, contact_method:method});
+    else if (link.dataset.articleOutbound) window.portfolioAnalytics.track('article_outbound', {...context, article_id:link.dataset.articleOutbound, destination:'linkedin'});
+    else if (link.hasAttribute('data-project-site') && link.closest('[data-project-id]')) {
+      window.portfolioAnalytics.track('project_outbound', {...context, project_id:link.closest('[data-project-id]').dataset.projectId});
+    }
+  });
   accept.addEventListener('click', () => saveChoice('granted'));
   panel.querySelector('[data-analytics-decline]').addEventListener('click', () => saveChoice('denied'));
   window.addEventListener('storage', event => {

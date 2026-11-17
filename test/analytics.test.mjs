@@ -13,7 +13,7 @@ function visit({html = home, url = 'https://mitko.mk/', saved, unavailable = fal
   const {window} = new JSDOM(html, {url});
   if (saved) window.localStorage.setItem(storageKey, saved);
   let reloads = 0;
-  const location = {hostname: new URL(url).hostname, protocol: new URL(url).protocol, reload: () => reloads++};
+  const location = {hostname: new URL(url).hostname, protocol: new URL(url).protocol, pathname:new URL(url).pathname, search:new URL(url).search, reload: () => reloads++};
   const storage = unavailable ? {getItem() {throw Error('blocked');}, setItem() {throw Error('blocked');}} : window.localStorage;
   const bootstraps = window.document.querySelectorAll('[data-analytics-bootstrap]');
   assert.equal(bootstraps.length, 1, 'Exactly one analytics initializer on each page');
@@ -130,4 +130,35 @@ test('invalid saved choices use the default policy without recording consent', (
   assert.equal(page.scripts().length, 1);
   assert.equal(page.panel().hidden, false);
   assert.equal(page.window.localStorage.getItem(storageKey), 'invalid');
+});
+
+test('contact and outbound article events are deduplicated and contain no contact details', () => {
+  const page = visit();
+  page.document.addEventListener('click', event => event.preventDefault());
+  page.document.querySelector('.header-contact').click();
+  page.document.querySelector('[data-article-outbound]').click();
+  const events = page.commands().filter(command => command[0] === 'event');
+  assert.deepEqual(events.map(command => command[1]), ['contact_click', 'article_outbound']);
+  assert.equal(events[0][2].contact_method, 'email');
+  assert.doesNotMatch(JSON.stringify(events), /mailto:|@|linkedin\.com\/in/);
+  page.click('decline');
+  const count = page.commands().length;
+  page.document.querySelector('.header-contact').click();
+  assert.equal(page.commands().length, count);
+});
+
+test('article metadata accompanies GA page views and custom events stop after opt-out', async () => {
+  const page = visit({html:await readFile('dist/articles/redis-cache-aside-ttl-eviction/index.html', 'utf8')});
+  const config = page.commands().find(command => command[0] === 'config');
+  assert.equal(config[2].article_id, 'redis-cache-aside');
+  assert.equal(config[2].article_topic, 'Redis');
+  assert.equal(page.window.portfolioAnalytics.track('article_read', {article_id:'redis-cache-aside', is_estimate:1}), true);
+  page.click('decline');
+  assert.equal(page.window.portfolioAnalytics.enabled(), false);
+  assert.equal(page.window.portfolioAnalytics.track('article_read', {article_id:'redis-cache-aside'}), false);
+});
+
+test('debug mode is explicit and never enabled on ordinary visits', () => {
+  assert.equal(visit().commands().find(command => command[0] === 'config')[2].debug_mode, undefined);
+  assert.equal(visit({url:'https://mitko.mk/?analytics_debug=1'}).commands().find(command => command[0] === 'config')[2].debug_mode, true);
 });

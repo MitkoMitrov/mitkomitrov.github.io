@@ -25,7 +25,10 @@ The preview command serves **built `dist/`**; rebuild before checking source cha
 | Path | Role |
 | --- | --- |
 | `index.html` | Historical homepage retained unchanged for the current branch-based deployment until the separately reviewed Pages cutover. It is not used by Astro. |
-| `src/pages/index.astro` | Homepage: short introduction → LinkedIn articles → experience timeline → selected projects → contact. All content is rendered at build time. |
+| `src/pages/index.astro` | Homepage: short introduction → latest articles → experience timeline → selected projects → contact. All content is rendered at build time. |
+| `src/content/articles/`, `src/content.config.ts` | Validated Markdown articles; only published, non-future entries get public routes. |
+| `src/pages/articles/[slug].astro`, `src/lib/articles.ts` | Static article rendering and the merged local/LinkedIn catalogue. |
+| `src/scripts/analytics.js`, `src/scripts/article-tools.js` | Existing GA4 opt-out, scoped engagement events and accessible copy-code controls. |
 | `src/layouts/Document.astro`, `src/components/` | Shared metadata, accessible header, footer and icons for future pages. |
 | `src/data/portfolio.mjs`, `src/styles/global.css` | CV-backed experience/projects, verified LinkedIn article links and responsive light styles. |
 | `assets/`, `CV/`, `CNAME` | Existing public files, copied unchanged into the build. `/CV/CV.html`, home anchors and custom domain remain valid. |
@@ -36,7 +39,9 @@ The preview command serves **built `dist/`**; rebuild before checking source cha
 
 The production artifact is **`dist/`**, never the repository root. Documentation, tests, dependency files and isolated prototypes are not published by this build. Do not place confidential material in the explicitly public `assets/` or `CV/` directories.
 
-Add future pages under `src/pages/`. When adding a public route, update the artifact allowlist deliberately in `scripts/verify-build.mjs` and extend the route checks. Article models/templates belong to WEB-04; the CMS/editor remains independent.
+Add future pages under `src/pages/`. When adding a public route, update the artifact allowlist deliberately in `scripts/verify-build.mjs` and extend the route checks. Published article metadata supplies the allowed article routes. The CMS/editor remains independent.
+
+See [article authoring and publication rules](docs/architecture/ARTICLE-PAGES.md) and [Analytics events and remaining GA4 account setup](docs/architecture/ANALYTICS.md). The public repository is not private draft storage.
 
 ## GitHub Pages deployment
 
