@@ -15,9 +15,8 @@ self-hosted articles. Each record supplies `title`, `summary`, `date` (ISO),
 - A missing thumbnail uses a text cover in the same card; it does not produce a broken image.
 
 Redis Parts 2 and 3 are self-hosted using the owner's saved Markdown sources.
-The other three known published Redis posts link to LinkedIn. Two newer LinkedIn
-posts (29 October and 10 November 2026) use the text-cover fallback until local
-covers are available. No CMS connection is introduced by this release.
+The other three known published Redis posts link to LinkedIn. All five current
+posts have local covers. No CMS connection is introduced by this release.
 
 The three author-owned covers were retrieved from the public Open Graph metadata
 of these original LinkedIn articles on 16 November 2026, then optimized as local
@@ -26,3 +25,11 @@ WebP thumbnails. Rendering does not depend on LinkedIn image URLs or embeds:
 - https://www.linkedin.com/pulse/when-use-redisand-mitko-mitrov-09cxf
 - https://www.linkedin.com/pulse/redis-practice-cache-aside-ttl-eviction-mitko-mitrov-ilqlf
 - https://www.linkedin.com/pulse/why-redis-what-problem-does-actually-solve-mitko-mitrov-zaepf
+
+The two newer covers were retrieved on 17 November 2026 and optimized as local
+WebP thumbnails. The cost article uses its original cover; the cache-miss
+article uses the original video's high-resolution poster without a play overlay,
+since the card opens an article rather than playing a video:
+
+- https://www.linkedin.com/pulse/redis-practice-cost-adding-when-worth-mitko-mitrov-r8r8f
+- https://www.linkedin.com/pulse/why-redis-cache-miss-can-overload-your-database-mitko-mitrov-riksf

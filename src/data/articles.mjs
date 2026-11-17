@@ -4,6 +4,7 @@
 export const articles = [
   {
     id: 'redis-cache-stampede', topic: 'Redis',
+    thumbnail: '/assets/img/articles/redis-cache-stampede.webp',
     title: 'Why a Redis Cache Miss Can Overload Your Database',
     source: 'linkedin', date: '2026-11-10', dateLabel: '10 Nov 2026',
     summary: 'How concurrent cache misses create duplicate database work, and when request coalescing or distributed coordination is worth adding.',
@@ -11,6 +12,7 @@ export const articles = [
   },
   {
     id: 'redis-operational-cost', topic: 'Redis',
+    thumbnail: '/assets/img/articles/redis-operational-cost.webp',
     title: 'Redis in Practice: The Cost of Adding Redis, and When It Is Worth It',
     source: 'linkedin', date: '2026-10-29', dateLabel: '29 Oct 2026',
     summary: 'The infrastructure, monitoring, consistency and failure-handling decisions that come with adding a cache.',
