@@ -1,0 +1,38 @@
+[
+  {
+    "articleId": "redis-why",
+    "slug": "why-redis",
+    "originalUrl": "https://www.linkedin.com/pulse/why-redis-what-problem-does-actually-solve-mitko-mitrov-zaepf",
+    "published": "2026-09-01",
+    "retrieved": "2026-11-17",
+    "sourceBlocks": 38,
+    "sourceTextWords": 616,
+    "sourceTextSha256": "f19659b266b1ab34559f67b371e9e0622d2a455467a58425430b429150d749fa",
+    "normalizedTextSha256": "777540652ec9a828249b4e4f3b10a0eefdf54f334df132f871731a3cd46fdee4",
+    "videos": 0
+  },
+  {
+    "articleId": "redis-operational-cost",
+    "slug": "the-cost-of-adding-redis",
+    "originalUrl": "https://www.linkedin.com/pulse/redis-practice-cost-adding-when-worth-mitko-mitrov-r8r8f",
+    "published": "2026-10-29",
+    "retrieved": "2026-11-17",
+    "sourceBlocks": 83,
+    "sourceTextWords": 1428,
+    "sourceTextSha256": "c06885fcec5e8bf34a5a1613cb9517644cdcd197c04aec8ee729d92fa22de779",
+    "normalizedTextSha256": "a6ea8eb81d3c2e85f7febf1e3c08da265c93f463d97357016adee04ec85ffe30",
+    "videos": 0
+  },
+  {
+    "articleId": "redis-cache-stampede",
+    "slug": "redis-cache-stampede",
+    "originalUrl": "https://www.linkedin.com/pulse/why-redis-cache-miss-can-overload-your-database-mitko-mitrov-riksf",
+    "published": "2026-11-10",
+    "retrieved": "2026-11-17",
+    "sourceBlocks": 46,
+    "sourceTextWords": 681,
+    "sourceTextSha256": "576fbea733b4c6b34193da0c5279dec2d6223f99a988d7fa31add7f1e3a5faaf",
+    "normalizedTextSha256": "576fbea733b4c6b34193da0c5279dec2d6223f99a988d7fa31add7f1e3a5faaf",
+    "videos": 3
+  }
+]

@@ -132,8 +132,8 @@ test('invalid saved choices use the default policy without recording consent', (
   assert.equal(page.window.localStorage.getItem(storageKey), 'invalid');
 });
 
-test('contact and outbound article events are deduplicated and contain no contact details', () => {
-  const page = visit();
+test('contact and outbound article events are deduplicated and contain no contact details', async () => {
+  const page = visit({html:await readFile('dist/articles/redis-cache-aside-ttl-eviction/index.html', 'utf8')});
   page.document.addEventListener('click', event => event.preventDefault());
   page.document.querySelector('.header-contact').click();
   page.document.querySelector('[data-article-outbound]').click();
