@@ -1,0 +1,329 @@
+{
+  "_id": "web01-sample",
+  "_type": "article",
+  "_rev": "sample-revision-1",
+  "title": "A bounded cache",
+  "slug": {
+    "_type": "slug",
+    "current": "a-bounded-cache"
+  },
+  "summary": "A synthetic public article for WEB-01.",
+  "topic": "Redis",
+  "body": [
+    {
+      "_key": "k15",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cache invalidation in practice",
+          "_key": "k16"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k17",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Use ",
+          "_key": "k18"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "explicit expiry",
+          "_key": "k19"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k20"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "measure the result",
+          "_key": "k21"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Read the ",
+          "_key": "k22"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k1"
+          ],
+          "text": "Redis documentation",
+          "_key": "k23"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k24"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k1",
+          "_type": "link",
+          "href": "https://redis.io/docs/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k2",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Small operational note.",
+          "_key": "k26"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "small"
+    },
+    {
+      "_key": "k3",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Large takeaway: cache only what you can rebuild.",
+          "_key": "k28"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "large"
+    },
+    {
+      "_key": "k29",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Choose a key.",
+          "_key": "k30"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k31",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Set a bounded TTL.",
+          "_key": "k32"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_type": "table",
+      "_key": "k4",
+      "headerRows": 1,
+      "rows": [
+        {
+          "_type": "row",
+          "_key": "k5",
+          "cells": [
+            {
+              "_type": "cell",
+              "_key": "k6",
+              "value": [
+                {
+                  "_key": "k1",
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Operation",
+                      "_key": "k2"
+                    }
+                  ],
+                  "markDefs": [],
+                  "_type": "block",
+                  "style": "normal"
+                }
+              ]
+            },
+            {
+              "_type": "cell",
+              "_key": "k7",
+              "value": [
+                {
+                  "_key": "k1",
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Cost",
+                      "_key": "k2"
+                    }
+                  ],
+                  "markDefs": [],
+                  "_type": "block",
+                  "style": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "row",
+          "_key": "k8",
+          "cells": [
+            {
+              "_type": "cell",
+              "_key": "k9",
+              "value": [
+                {
+                  "_key": "k1",
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Cache hit",
+                      "_key": "k2"
+                    }
+                  ],
+                  "markDefs": [],
+                  "_type": "block",
+                  "style": "normal"
+                }
+              ]
+            },
+            {
+              "_type": "cell",
+              "_key": "k10",
+              "value": [
+                {
+                  "_key": "k1",
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "One lookup",
+                      "_key": "k2"
+                    }
+                  ],
+                  "markDefs": [],
+                  "_type": "block",
+                  "style": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "row",
+          "_key": "k11",
+          "cells": [
+            {
+              "_type": "cell",
+              "_key": "k12",
+              "value": [
+                {
+                  "_key": "k1",
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Cache miss",
+                      "_key": "k2"
+                    }
+                  ],
+                  "markDefs": [],
+                  "_type": "block",
+                  "style": "normal"
+                }
+              ]
+            },
+            {
+              "_type": "cell",
+              "_key": "k13",
+              "value": [
+                {
+                  "_key": "k1",
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Lookup + rebuild",
+                      "_key": "k2"
+                    }
+                  ],
+                  "markDefs": [],
+                  "_type": "block",
+                  "style": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "k33",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The key is ",
+          "_key": "k34"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "code"
+          ],
+          "text": "article:42",
+          "_key": "k35"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k36"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "code",
+      "_key": "k14",
+      "language": "csharp",
+      "code": "if (count < 2 && key != \"\")\n{\n    Console.WriteLine(\"<cache> & ready\");\n}"
+    }
+  ]
+}
