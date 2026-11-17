@@ -1,0 +1,87 @@
+# Copy ONLY to MitkoMitrov/mitko-web01-publishing-test/.github/workflows/pages.yml.
+# This file is deliberately inactive in the portfolio repository.
+name: WEB-01 isolated publication
+on:
+  repository_dispatch:
+    types: [sanity-published]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: web01-sandbox-pages
+  cancel-in-progress: false
+  queue: max
+jobs:
+  build:
+    if: github.repository == 'MitkoMitrov/mitko-web01-publishing-test'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Validate reviewed source pin
+        env:
+          SOURCE_SHA: ${{ vars.WEB01_SOURCE_SHA }}
+        run: node -e 'if (!/^[a-f0-9]{40}$/.test(process.env.SOURCE_SHA || "")) process.exit(1)'
+      - uses: actions/checkout@v4
+        with:
+          repository: MitkoMitrov/mitkomitrov.github.io
+          ref: ${{ vars.WEB01_SOURCE_SHA }}
+          path: source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+          cache-dependency-path: source/spikes/web-01/package-lock.json
+      - name: Install locked dependencies
+        working-directory: source/spikes/web-01
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build one published snapshot
+        working-directory: source/spikes/web-01
+        env:
+          WEB01_EVENT_JSON: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || 'null' }}
+          WEB01_BASE_PATH: /mitko-web01-publishing-test/
+        run: npm run build:published
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web01-manifest
+          path: source/spikes/web-01/dist/publication.json
+          retention-days: 1
+          if-no-files-found: error
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: source/spikes/web-01/dist
+  deploy:
+    needs: build
+    if: github.repository == 'MitkoMitrov/mitko-web01-publishing-test'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: MitkoMitrov/mitkomitrov.github.io
+          ref: ${{ vars.WEB01_SOURCE_SHA }}
+          sparse-checkout: spikes/web-01/scripts/check-public-manifest.mjs
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: web01-manifest
+          path: manifest
+      - name: Refuse an outdated artifact
+        run: node spikes/web-01/scripts/check-public-manifest.mjs manifest/publication.json
+      - uses: actions/deploy-pages@v5
+        id: deployment
+      - name: Verify the live sandbox manifest
+        env:
+          WEB01_LIVE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node spikes/web-01/scripts/check-public-manifest.mjs manifest/publication.json

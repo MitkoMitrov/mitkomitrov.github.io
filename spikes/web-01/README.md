@@ -19,7 +19,7 @@ npm run studio:build
 
 For local viewing, serve `dist/` with any static server or run `npm run dev`. The managed preview CLI's development launch failed in this environment; browser QA instead used a scratch copy of the built static directory with the supported static preview mode.
 
-To resume real integration testing, use the owner runbook in the report. `SANITY_STUDIO_PROJECT_ID` and `SANITY_STUDIO_DATASET` are public identifiers. The optional static loader uses `WEB01_CONTENT_SOURCE=sanity`, `WEB01_PROJECT_ID`, `WEB01_DATASET=web01`; it never accepts a Sanity token and intentionally requires the isolated dataset name. `WEB01_EXPECTED_ID`/`WEB01_EXPECTED_REV` abort a build if the requested published revision is missing or obsolete.
+To resume integration testing, use the owner runbook in the report. `SANITY_STUDIO_PROJECT_ID` and `SANITY_STUDIO_DATASET` are public identifiers. Direct `WEB01_CONTENT_SOURCE=sanity` per-route reads are disabled; use `npm run build:published` for a consistent published snapshot. `WEB01_EXPECTED_ID`/`WEB01_EXPECTED_REV` remain available for synthetic test-file builds.
 
 The surrogate importer, publication request helper and status mapper are small offline experiments. The Studio Body input now separately converts simple HTML tables through `lib/table-paste.mjs`; this bounded handler was deployed and its table result restored in an owner incognito session on 2026-11-17. The managed webhook configuration and future workflow contract are in `examples/`. The workflow contract is deliberately documentation, not an executable workflow.
 
@@ -41,6 +41,24 @@ Output ends with one JSON result. `state: passed`, four checks and an empty `cle
 
 Limits: this API check does not prove actual Word clipboard behavior, Studio selection/undo, stale/offline browser UI/conflict handling, another signed-in non-member's permissions, two physical PCs, full dataset/asset restore or secure publication/deployment. Keep WEB-01 open for those remaining gates. Local HTTP-transport tests exercise the real SDK and runner failure/cleanup boundaries; their success does not imply a live cloud run.
 
-Cloud setup observation (2026-11-04): the unauthenticated published-count query for `o3i9jgij/web01` returned HTTP 200 and zero documents. This verifies connectivity to the empty dataset, not owner login, write permissions or draft privacy.
+## Published snapshot build
+
+`npm run build:published` anonymously captures the published set once, builds
+every route/listing/manifest/sitemap from that validated snapshot, and rechecks
+for changes. `npm run check:published` checks the captured snapshot again.
+Neither command publishes a CMS document or deploys a site. The dependency-free
+`scripts/check-public-manifest.mjs` provides a final deployment guard.
+`WEB01_EVENT_JSON` accepts only validated id/rev/operation values; no event field
+becomes a shell command or source ref.
+
+Owner cloud run at commit 4f604f9 on 2026-11-17: all four private checks passed,
+with `cleanupPending: []`. This proves those API checks and synthetic restore,
+not browser conflict behavior or complete CMS acceptance.
+
+The Pages workflow is prepared under examples, not installed in this repository.
+See [sandbox setup/remaining evidence](examples/PUBLISHING-SETUP.md).
+
+Cloud setup observation (2026-11-04): the anonymous published count returned zero.
+This initial check predates the later owner/private acceptance evidence.
 
 Current browser prerequisite: in the project’s API → CORS origins, allow the exact temporary preview origin `http://127.0.0.1:4173` with credentials for owner sign-in. This is the agent’s remote preview, not a URL to open on your own PC. Remove this temporary origin after testing. No CORS setting has been changed by the agent.

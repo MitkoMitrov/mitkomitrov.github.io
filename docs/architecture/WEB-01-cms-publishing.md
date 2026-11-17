@@ -241,6 +241,20 @@ Remaining distinctions: guarded API writes do not prove native Studio stale/offl
 
 Official references rechecked: [CLI exec authentication](https://www.sanity.io/docs/cli-reference/exec) and [conditional revision patches](https://www.sanity.io/docs/apis-and-sdks/js-client-mutations).
 
+## Owner cloud check passed; published snapshot preparation — 2026-11-17
+
+Owner supplied terminal output at `4f604f9408578d0fbfaf671b3f5d0c57b482ace8`: all four private checks passed (cloud save/fresh-client read, anonymous exact/raw-read and validation-only-write denial, explicit stale API revision rejection, synthetic NDJSON/cloud restore), with `cleanupPending: []`. This is live owner-run evidence. It does not establish native Studio stale/offline UI behavior, a second physical PC or full dataset/asset restore. Existing owner drafts were untouched and nothing was published.
+
+Prepared the next isolated publishing proof: capture the anonymous published set once, validate/fingerprint it, use the same snapshot for every route/index/manifest/sitemap, then reject source changes before deployment. Webhook payload validation rejects malformed IDs/revisions/operations and extra source/ref fields. A publish must match its exact revision; an unpublish must still be absent. Actual synthetic snapshot builds verify matching listing/article/manifest, sandbox base paths, and removal from routes/listing/sitemap after unpublish.
+
+The Pages workflow template is under `spikes/web-01/examples/`, outside the portfolio's active workflows. Its repository guard only permits `MitkoMitrov/mitko-web01-publishing-test`. It requires a reviewed source-SHA variable, separates read-only build from Pages/id-token deployment permissions, uploads dist only, checks current public revisions before deploy and verifies the resulting live sandbox manifest afterward. The disabled webhook design now handles published create/update/delete and contains no token. No webhook/credential or test destination is established by this preparation.
+
+The live anonymous build against web01 succeeded with zero published articles, as expected while the owner's test article stays unpublished. The dependency-free deployment guard also matched its manifest against current anonymous API metadata. This is a real cloud read/local static build, not live Pages/publishing success. All 30 local tests pass, covering malformed/private/duplicate input, snapshot integrity, obsolete events, late source changes, manifest mismatch and unpublish route/listing/sitemap removal. Workflow YAML parses and repository/permission boundaries were inspected. Direct per-route cloud mode is now disabled in favor of the snapshot builder.
+
+The final Sanity check and Pages deploy are not atomic. Source changes in that interval and uncertain remote outcomes after timeout still require end-to-end tests; queueing is not proof of ordering/recovery. Native Studio status UI remains absent. WEB-01/downstream tickets stay open. No production migration, merge, deployment or domain change.
+
+Current setup: [isolated publishing runbook](../../spikes/web-01/examples/PUBLISHING-SETUP.md). Sources checked: [Pages starter](https://github.com/actions/starter-workflows/blob/main/pages/static.yml), [repository dispatch](https://docs.github.com/en/rest/repos/repos), [concurrency](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency), [Sanity webhooks](https://www.sanity.io/docs/content-lake/webhooks).
+
 ## Official references (checked 2026-11-04)
 
 - **S1** [Sanity pricing](https://www.sanity.io/pricing)

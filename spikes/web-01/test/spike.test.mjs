@@ -76,7 +76,7 @@ test('mock transport: draft save sends nothing; published retry uses same id/rev
   assert.equal(a.state,'requested');
   assert.equal(calls.length,2); // delivery may repeat; identity, not transport, is idempotent
   assert.equal(calls[0].headers.Authorization,'Bearer synthetic-test-token');
-  assert.deepEqual(JSON.parse(calls[0].body),{event_type:'sanity-published',client_payload:{id:fixture._id,rev:fixture._rev}});
+  assert.deepEqual(JSON.parse(calls[0].body),{event_type:'sanity-published',client_payload:{id:fixture._id,rev:fixture._rev,operation:'publish'}});
   assert.deepEqual(publishedArticles([fixture]).map(d=>d.slug.current),['a-bounded-cache']);
   await assert.rejects(requestBuild(fixture,{...options,fetchImpl:async()=>({status:401})}),/rejected \(401\)/);
   await assert.rejects(requestBuild(fixture,{...options,fetchImpl:async()=>{throw new Error('offline')}}),/offline/);

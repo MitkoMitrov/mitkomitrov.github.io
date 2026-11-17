@@ -3,15 +3,15 @@
   "name": "WEB-01 isolated publish experiment",
   "type": "document",
   "dataset": "web01",
-  "url": "https://api.github.com/repos/OWNER/ISOLATED_TEST_REPOSITORY/dispatches",
+  "url": "https://api.github.com/repos/MitkoMitrov/mitko-web01-publishing-test/dispatches",
   "httpMethod": "POST",
   "includeDrafts": false,
   "includeAllVersions": false,
   "isDisabledByUser": true,
   "rule": {
-    "on": ["create", "update"],
-    "filter": "_type == 'article' && !(_id in path('drafts.**')) && !(_id in path('versions.**'))",
-    "projection": "{\"event_type\": \"sanity-published\", \"client_payload\": {\"id\": _id, \"rev\": _rev}}"
+    "on": ["create", "update", "delete"],
+    "filter": "coalesce(after()._type, before()._type) == 'article' && !(coalesce(after()._id, before()._id) in path('drafts.**')) && !(coalesce(after()._id, before()._id) in path('versions.**'))",
+    "projection": "{\"event_type\": \"sanity-published\", \"client_payload\": {\"id\": coalesce(after()._id, before()._id), \"rev\": coalesce(after()._rev, before()._rev), \"operation\": select(delta::operation() == 'delete' => 'unpublish', 'publish')}}"
   },
   "headers": {
     "Accept": "application/vnd.github+json",

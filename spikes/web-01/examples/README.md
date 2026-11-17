@@ -1,5 +1,10 @@
 # WEB-01 publish contract — not an installed workflow
 
+**Historical design below.** Current snapshot implementation, inactive workflow
+template, unpublish handling and remaining setup are documented in
+[PUBLISHING-SETUP.md](PUBLISHING-SETUP.md). Neither document installs a webhook or
+workflow; the portfolio's active deployment is untouched.
+
 `webhook.json` is deliberately disabled and has no credential. Remove NOTE before using the provider API; configure it through Manage for the first test. It is not submitted by the prototype.
 
 The candidate uses Sanity's native Publish, then a provider-managed webhook. Add an expiring **fine-grained GitHub PAT**, restricted to the isolated test repository with Contents:write, as the webhook's Authorization header in Sanity Manage. Never paste it in Studio config, source control, CI output, screenshots or chat. This grants Sanity custody of a privileged credential; rotate/revoke it and restrict project membership. A GitHub App token broker has a shorter credential lifetime but adds a service. Decide after the isolated test.

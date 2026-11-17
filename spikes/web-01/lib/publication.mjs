@@ -23,7 +23,7 @@ export async function fetchPublished(projectId, dataset) {
 export function publicationEvent(doc) {
   if (!doc || doc._type !== 'article' || doc._id.includes('.')) return null;
   publishedArticles([doc]);
-  return {event_type:'sanity-published',client_payload:{id:doc._id,rev:doc._rev}};
+  return {event_type:'sanity-published',client_payload:{id:doc._id,rev:doc._rev,operation:'publish'}};
 }
 // A mockable server-side equivalent of a managed Sanity webhook, NOT browser code.
 // Real deployment uses provider-managed delivery, not this helper.

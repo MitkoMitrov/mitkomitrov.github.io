@@ -1,12 +1,15 @@
 import fixture from '../fixtures/article.json' with {type:'json'};
 import {readFile} from 'node:fs/promises';
-import {publishedArticles,fetchPublished,assertRevision} from './publication.mjs';
+import {publishedArticles,assertRevision} from './publication.mjs';
+import {readSnapshot} from './published-snapshot.mjs';
 // Explicit opt-in. Fixture build is offline. File source is only for synthetic local tests.
 export async function loadArticles() {
   let docs;
-  if (process.env.WEB01_CONTENT_SOURCE === 'sanity') {
-    if (!process.env.WEB01_PROJECT_ID || process.env.WEB01_DATASET !== 'web01') throw new Error('Use an isolated web01 dataset');
-    docs = await fetchPublished(process.env.WEB01_PROJECT_ID, process.env.WEB01_DATASET);
+  if (process.env.WEB01_CONTENT_SOURCE === 'snapshot') {
+    if (!process.env.WEB01_SNAPSHOT_FILE) throw new Error('A captured published snapshot is required.');
+    docs = (await readSnapshot(process.env.WEB01_SNAPSHOT_FILE)).articles;
+  } else if (process.env.WEB01_CONTENT_SOURCE === 'sanity') {
+    throw new Error('Direct per-route cloud reads are disabled. Use npm run build:published to capture one snapshot.');
   } else if (process.env.WEB01_CONTENT_SOURCE === 'test-file') {
     docs = publishedArticles(JSON.parse(await readFile(process.env.WEB01_TEST_FILE,'utf8')));
   } else {
