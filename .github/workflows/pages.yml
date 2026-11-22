@@ -1,4 +1,5 @@
 name: Astro build and Pages
+run-name: ${{ github.event_name == 'repository_dispatch' && format('Publish {0}@{1} ({2})', github.event.client_payload.id, github.event.client_payload.rev, github.event.client_payload.operation) || 'Portfolio build' }}
 
 on:
   pull_request:
@@ -6,6 +7,8 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+  repository_dispatch:
+    types: [sanity-published]
 
 permissions:
   contents: read
@@ -18,6 +21,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      manifest: ${{ steps.manifest.outputs.manifest }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -32,7 +37,14 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
       - name: Build and verify static output
+        id: publication
+        env:
+          DEPLOY_SOURCE_SHA: ${{ github.sha }}
+          CMS_PUBLICATION_EVENT: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || '' }}
         run: npm run check
+      - name: Record public publication manifest
+        run: node -e 'const fs=require("node:fs"); fs.appendFileSync(process.env.GITHUB_OUTPUT,"manifest="+JSON.stringify(JSON.parse(fs.readFileSync("dist/publication.json","utf8")))+"\n")'
+        id: manifest
       - name: Upload checked artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
@@ -43,7 +55,7 @@ jobs:
     if: >-
       github.repository == 'MitkoMitrov/mitkomitrov.github.io' &&
       github.ref == 'refs/heads/master' &&
-      (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -55,6 +67,25 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Checkout verified source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+      - name: Refuse superseded content or source
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EXPECTED_PUBLICATION: ${{ needs.build.outputs.manifest }}
+        run: node scripts/verify-publication.mjs
       - name: Deploy checked artifact
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+      - name: Confirm the live publication
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EXPECTED_PUBLICATION: ${{ needs.build.outputs.manifest }}
+          VERIFY_LIVE: '1'
+        run: node scripts/verify-publication.mjs
