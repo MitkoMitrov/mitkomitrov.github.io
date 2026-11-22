@@ -39,12 +39,17 @@ test('homepage renders the agreed hierarchy and shared navigation without JavaSc
   assert.equal(document.querySelectorAll('form, iframe, canvas').length, 0);
 });
 
-test('selected work uses CV-backed facts and distinguishes production, past and development', () => {
+test('selected work highlights a live product alongside past and development projects', () => {
   const work = [...document.querySelectorAll('.project-list > li')];
-  assert.equal(work.length, 3);
-  assert.match(work[0].textContent, /Imenologija.*In development/s);
-  assert.match(work[1].textContent, /Past project.*article categorization.*Nginx caching/s);
-  assert.match(work[2].textContent, /AI Daily Stock Reports.*Past project.*OpenAI API/s);
+  assert.equal(work.length, 4);
+  assert.match(work[0].textContent, /MarketAgent.*Finnhub.*OpenAI/s);
+  const liveProject = work[0].querySelector('a[data-project-site]');
+  assert.equal(liveProject.href, 'https://mitko.mk/MarketAgent/');
+  assert.equal(liveProject.textContent.trim(), 'Explore MarketAgent');
+  assert.equal(liveProject.closest('[data-project-id]').dataset.projectId, 'marketagent');
+  assert.match(work[1].textContent, /Imenologija.*In development/s);
+  assert.match(work[2].textContent, /Past project.*article categorization.*Nginx caching/s);
+  assert.match(work[3].textContent, /AI Daily Stock Reports.*Past project.*OpenAI API/s);
   for (const item of work) {
     assert.ok(item.querySelector('h3'));
     assert.ok(item.querySelector('.project-summary').textContent.length > 50);
@@ -75,6 +80,8 @@ test('every first-party URL, stylesheet and preserved bookmark resolves in the s
     assert.ok(raw && raw !== '#', `Empty link on ${element.outerHTML}`);
     const url = new URL(raw, 'https://mitko.mk/');
     if (url.origin !== 'https://mitko.mk') continue;
+    // This project is deployed by its own repository, outside the portfolio artifact.
+    if (element.matches('a[data-project-site]') && url.href === 'https://mitko.mk/MarketAgent/') continue;
     if (url.hash) assert.ok(document.getElementById(decodeURIComponent(url.hash.slice(1))), `Missing target ${url.hash}`);
     const file = resolve('dist', '.' + decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname));
     assert.ok(file.startsWith(resolve('dist') + sep));
