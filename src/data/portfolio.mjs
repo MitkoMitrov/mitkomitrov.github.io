@@ -46,6 +46,13 @@ export const experience = [
 
 export const selectedWork = [
   {
+    id: 'marketagent',
+    title: 'MarketAgent',
+    category: 'Market intelligence · Python & AI',
+    summary: 'Built a market intelligence platform that turns Finnhub data into filtered, ranked and categorized news, company insights and daily OpenAI briefings. Implemented duplicate-story grouping, API rate limiting and caching, with automated publishing to a live dashboard.',
+    href: 'https://mitko.mk/MarketAgent/',
+  },
+  {
     id: 'imenologija',
     title: 'Imenologija.mk',
     category: 'In development · 2026–present',

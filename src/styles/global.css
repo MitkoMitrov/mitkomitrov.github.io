@@ -83,6 +83,7 @@ h3 {font-size: 1rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.015e
 .project-heading {display: flex; flex-direction: column; gap: 5px;}
 .project-category {color: var(--meta); font-size: 0.72rem;}
 .project-summary {margin-top: 8px; color: var(--muted); font-size: 0.85rem;}
+.project-link {display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; color: var(--accent); font-size: 0.85rem; font-weight: 600;}
 .contact-section {grid-column: 1 / -1; background: var(--contact); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 24px; row-gap: 8px; padding-block: 24px;}
 .contact-section h2 {font-size: 1.2rem;}
 .contact-section > p {flex-basis: 100%; order: 1; color: var(--muted); font-size: 0.85rem;}
