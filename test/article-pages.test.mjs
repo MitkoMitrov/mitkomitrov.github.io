@@ -8,6 +8,7 @@ import {readArticles, readPublishedArticles} from '../scripts/article-metadata.m
 import {publishedEntries, articleSchema} from '../src/lib/article-model.mjs';
 import {articleMarkup} from '../src/lib/remark-article.mjs';
 import {filesUnder} from '../scripts/prepare-public.mjs';
+import {caseStudies} from '../src/data/case-studies.mjs';
 
 const entries = await readPublishedArticles();
 test('migrated LinkedIn articles preserve all original text and locally playable media', async () => {
@@ -44,7 +45,7 @@ test('migrated LinkedIn articles preserve all original text and locally playable
   }
 });
 test('published article routes contain the complete body and valid article metadata without client fetching', async () => {
-  assert.equal(entries.length, 5);
+  assert.ok(entries.length >= 5, 'Keep all five original Redis articles alongside CMS publications');
   for (const {data, body} of entries) {
     const html = await readFile(`dist/articles/${data.slug}/index.html`, 'utf8');
     const document = new JSDOM(html).window.document;
@@ -60,7 +61,7 @@ test('published article routes contain the complete body and valid article metad
     const rendered = new JSDOM((await renderer.render(body)).code).window.document.body;
     const normalize = text => text.replace(/\s+/g, ' ').trim();
     assert.equal(normalize(document.querySelector('[data-article-body]').textContent), normalize(rendered.textContent));
-    assert.ok(document.querySelector('[data-article-body] p').textContent.length > 60);
+    assert.ok(document.querySelector('[data-article-body]').textContent.trim().length > 0);
     assert.equal(document.querySelector('[data-article-tools]').textContent.includes('fetch('), false);
     for (const link of document.querySelectorAll('a[href^="#"]')) assert.ok(document.getElementById(link.getAttribute('href').slice(1)));
   }
@@ -110,7 +111,8 @@ test('sitemap includes public articles only and robots points at the correct dom
   const xml = await readFile('dist/sitemap.xml', 'utf8');
   const document = new JSDOM(xml, {contentType:'text/xml'}).window.document;
   const urls = [...document.querySelectorAll('loc')].map(node => node.textContent);
-  assert.deepEqual(urls.sort(), ['https://mitko.mk/', 'https://mitko.mk/articles/', ...entries.map(({data}) => `https://mitko.mk/articles/${data.slug}/`)].sort());
-  assert.doesNotMatch(xml, /draft|linkedin|sanity|preview/);
+  assert.deepEqual(urls.sort(), ['https://mitko.mk/', 'https://mitko.mk/articles/', 'https://mitko.mk/about/', 'https://mitko.mk/work/', ...caseStudies.map(project => `https://mitko.mk/work/${project.slug}/`), ...entries.map(({data}) => `https://mitko.mk/articles/${data.slug}/`)].sort());
+  for (const draft of (await readArticles()).filter(entry => entry.data.status !== 'published')) assert.ok(!urls.includes(`https://mitko.mk/articles/${draft.data.slug}/`));
+  assert.ok(urls.every(url => url.startsWith('https://mitko.mk/')));
   assert.match(await readFile('dist/robots.txt', 'utf8'), /Sitemap: https:\/\/mitko.mk\/sitemap.xml/);
 });

@@ -1,0 +1,58 @@
+export const caseStudies = [
+  {
+    id:'marketagent', slug:'marketagent', title:'MarketAgent', status:'Live project',
+    summary:'An automated market intelligence dashboard that turns raw market data into curated news and daily AI briefings.',
+    stack:['Python','Finnhub','OpenAI','GitHub Actions'], href:'https://mitko.mk/MarketAgent/',
+    problem:'Following a company watchlist means moving between price feeds, repeated headlines and long news streams. I wanted one place to review the relevant updates and a concise daily briefing.',
+    audience:'People following the companies on a curated watchlist who want a structured view of market and company news.',
+    contribution:'I built the data collection and curation pipeline, the report generation workflow, and the dashboard that presents the results. The same underlying data also supports Telegram reports.',
+    decisions:[
+      ['Curate before generating','Filter and rank the Finnhub news first, group duplicate and similar coverage, and bound the stories passed to OpenAI. The report starts from a controlled input rather than an unfiltered news feed.'],
+      ['Spend API calls deliberately','Apply rate limiting and cache slower-changing company information separately from quotes and news. Update the dashboard on a schedule without generating an AI report on every refresh.'],
+      ['Separate code and generated reports','Keep the application on the main branch and generated report data on a dedicated data branch. Static publishing keeps the reader experience independent of a running application server.'],
+    ],
+    result:'The live dashboard brings together company news, watchlist data, market context and daily reports. The main engineering lesson is that data selection, caching and failure handling matter as much as the model prompt.',
+    related:['/articles/the-cost-of-adding-redis/'],
+  },
+  {
+    id:'imenologija', slug:'imenologija', title:'Imenologija.mk', status:'In development',
+    summary:'A sourced encyclopedia of Macedonian names with connected meanings, origins and editorial review.',
+    stack:['Next.js','Payload CMS','PostgreSQL'],
+    problem:'Name meanings are often scattered across sources, and variants and related names are difficult to explore consistently. This project organizes that information with its source material and relationships.',
+    audience:'Readers researching Macedonian names, and editors reviewing the accuracy and provenance of each entry.',
+    contribution:'I designed the content model and editorial workflow and built the application around linked names, origins, categories and sources.',
+    decisions:[
+      ['Model relationships explicitly','Keep variants and other related names as structured relationships rather than copying text between pages.'],
+      ['Make publication a deliberate step','Separate draft, verification and publication. Validate required source information and avoid exposing unpublished related entries.'],
+      ['Keep operations understandable','Use a relational database, a straightforward deployment and backups that can be operated alongside ongoing editorial work.'],
+    ],
+    result:'The project is in development. The work has focused on content integrity, repeatable imports and editorial review.',
+  },
+  {
+    id:'whowinselections', slug:'election-news', title:'WhoWinSelections.com', status:'Past project · 2024',
+    summary:'An election news aggregator I built and operated, from content categorization to hosting and traffic acquisition.',
+    stack:['News aggregation','Nginx','Web operations'],
+    problem:'Election coverage moves quickly across many publishers. The project collected and categorized articles so readers could follow the coverage from one place.',
+    audience:'Readers looking for organized election news during the election cycle.',
+    contribution:'I owned the aggregation product, infrastructure, monetization work and traffic acquisition.',
+    decisions:[
+      ['Organize a fast-moving stream','Categorize incoming articles so the site is useful beyond a chronological feed.'],
+      ['Use caching in the delivery layer','Use Nginx caching to serve repeated reads efficiently and keep the hosting setup manageable.'],
+      ['Own the product after deployment','Treat hosting, content delivery and distribution as part of the project, not as tasks that end when the first page ships.'],
+    ],
+    result:'This is a past project. It gave me hands-on experience operating a content product and connecting implementation choices with distribution and operating costs.',
+  },
+  {
+    id:'stock-reports', slug:'daily-stock-reports', title:'AI Daily Stock Reports', status:'Past project · 2024–2025',
+    summary:'A market data pipeline that filters important events and produces daily reports through the OpenAI API.',
+    stack:['Data pipelines','OpenAI API','Prompt design'],
+    problem:'Turning a collection of market updates into a readable report requires selecting the useful events and controlling the amount of input sent to the model.',
+    audience:'Readers following daily company and market developments.',
+    contribution:'I built the collection and filtering pipeline and the OpenAI report generation step, including prompt and data-processing improvements.',
+    decisions:[
+      ['Select before summarizing','Filter key events before report generation so the prompt reflects the information the report is meant to explain.'],
+      ['Consider operating cost','Improve prompt structure and data processing together instead of treating model usage as an unlimited resource.'],
+    ],
+    result:'This earlier project developed my approach to data curation and AI report generation, including the importance of controlling input quality and operating cost.',
+  },
+];

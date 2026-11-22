@@ -1,0 +1,20 @@
+---
+import Document from '../../layouts/Document.astro';
+import {caseStudies} from '../../data/case-studies.mjs';
+import {profile} from '../../data/portfolio.mjs';
+export function getStaticPaths() {return caseStudies.map(project => ({params:{slug:project.slug},props:{project}}));}
+const {project} = Astro.props;
+---
+<Document title={`${project.title} — Project Case Study | Mitko Mitrov`} description={project.summary} canonicalPath={`/work/${project.slug}/`}>
+  <article class="section detail-page" data-project-page data-project-id={project.id} aria-labelledby="case-title">
+    <a class="back-link" href="/work/">All projects</a><p class="page-eyebrow">{project.status}</p><h1 id="case-title">{project.title}</h1><p class="page-deck">{project.summary}</p>
+    <ul class="technology-list" aria-label="Technologies and focus">{project.stack.map(item => <li>{item}</li>)}</ul>
+    {project.href && <a class="product-link" href={project.href} data-project-site>Explore {project.title}</a>}
+    <section aria-labelledby="problem-title"><h2 id="problem-title">The problem</h2><p>{project.problem}</p><h3>Who it is for</h3><p>{project.audience}</p></section>
+    <section aria-labelledby="contribution-title"><h2 id="contribution-title">My contribution</h2><p>{project.contribution}</p></section>
+    <section aria-labelledby="decisions-title"><h2 id="decisions-title">Engineering decisions</h2>{project.decisions.map(([title,copy]) => <div class="case-decision"><h3>{title}</h3><p>{copy}</p></div>)}</section>
+    <section aria-labelledby="result-title"><h2 id="result-title">Result and lessons</h2><p>{project.result}</p></section>
+    {project.related && <section aria-labelledby="related-title"><h2 id="related-title">Related engineering note</h2><a href={project.related[0]}>The cost of adding Redis, and when it is worth it</a></section>}
+    <footer class="case-contact"><h2>Have a similar problem to solve?</h2><p>I’m open to conversations about engineering roles and useful software projects.</p><a href={`mailto:${profile.email}`}>Let’s talk</a></footer>
+  </article>
+</Document>

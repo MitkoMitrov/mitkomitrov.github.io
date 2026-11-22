@@ -52,3 +52,15 @@ Merge reviewed changes to `master` to run the checked build, artifact upload and
 Publish **`dist/`**, never the repository root. The root `index.html` is historical and is not the Astro page source. No Sanity setup is required for the current static portfolio.
 
 See [verified release evidence](docs/architecture/WEB-02-release.md), [WEB-02 implementation](docs/architecture/WEB-02-homepage-navigation.md) and [WEB-03 investigation](docs/architecture/WEB-03-astro-ssg.md). Historical domain setup guides do not describe the current Pages publishing source.
+
+## Production editor and remaining integrations
+
+`cms/` contains the production-dataset Studio implementation, separate from the WEB-01 test Studio. The root compiler reads only anonymous published CMS documents and retains the existing Markdown articles. The Studio deployment, production webhook and Cloudflare account connection require the owner setup described below; adding source alone does not connect them.
+
+- [Article authoring](docs/operations/AUTHORING.md)
+- [Production CMS deployment and recovery](docs/operations/CMS-DEPLOYMENT.md)
+- [Monthly reporting template and metric definitions](docs/operations/MONTHLY-REPORT.md)
+- [Branch-preview setup](docs/operations/BRANCH-PREVIEWS.md)
+- [Ticket checkpoint and remaining evidence](docs/operations/REMAINING-TICKETS.md)
+
+The public navigation now includes `/about/`, `/work/` and static case-study routes. `npm run build:preview` creates a separate crawling-disabled preview artifact; the ordinary checked build remains the production artifact. Never publish the repository root or `cms/studio-dist` as the portfolio artifact.

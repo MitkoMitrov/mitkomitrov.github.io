@@ -4,11 +4,11 @@ import {readFile, access} from 'node:fs/promises';
 import {resolve, sep} from 'node:path';
 import {JSDOM} from 'jsdom';
 import {articles} from '../src/data/articles.mjs';
-import {readArticles} from '../scripts/article-metadata.mjs';
+import {readPublishedArticles} from '../scripts/article-metadata.mjs';
 import {mergeCatalogue} from '../src/lib/article-model.mjs';
 
 const document = new JSDOM(await readFile('dist/articles/index.html', 'utf8'), {url: 'https://mitko.mk/articles/'}).window.document;
-const expected = mergeCatalogue(await readArticles(), articles);
+const expected = mergeCatalogue(await readPublishedArticles(), articles);
 
 test('article catalogue renders every published entry as a thumbnail card, newest first', () => {
   assert.equal(document.querySelector('h1').textContent, 'Articles');

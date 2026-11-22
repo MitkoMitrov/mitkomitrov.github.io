@@ -4,9 +4,9 @@ import {readFile, access} from 'node:fs/promises';
 import {resolve, sep} from 'node:path';
 import {JSDOM} from 'jsdom';
 import {articles as external} from '../src/data/portfolio.mjs';
-import {readArticles} from '../scripts/article-metadata.mjs';
+import {readPublishedArticles} from '../scripts/article-metadata.mjs';
 import {mergeCatalogue} from '../src/lib/article-model.mjs';
-const articles = mergeCatalogue(await readArticles(), external).slice(0, 3);
+const articles = mergeCatalogue(await readPublishedArticles(), external).slice(0, 3);
 
 const html = await readFile('dist/index.html', 'utf8');
 const document = new JSDOM(html, {url: 'https://mitko.mk/'}).window.document;

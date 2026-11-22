@@ -7,4 +7,8 @@ export const collections = {
     loader: glob({pattern: '*.md', base: './src/content/articles'}),
     schema: articleSchema,
   }),
+  cmsArticles: defineCollection({
+    loader: glob({pattern: '*.md', base: './.generated/cms'}),
+    schema: articleSchema,
+  }),
 };

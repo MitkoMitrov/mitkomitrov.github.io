@@ -4,6 +4,7 @@ import {join, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {filesUnder, publicSources} from './prepare-public.mjs';
 import {readPublishedArticles} from './article-metadata.mjs';
+import {caseStudies} from '../src/data/case-studies.mjs';
 
 export async function verifyBuild(root = fileURLToPath(new URL('../', import.meta.url))) {
   const output = join(root, 'dist');
@@ -17,7 +18,7 @@ export async function verifyBuild(root = fileURLToPath(new URL('../', import.met
   // Only published article metadata may add generated article routes.
   const catalogue = await readFile(join(output, 'articles/index.html'), 'utf8');
   assert.match(catalogue, /rel="canonical" href="https:\/\/mitko\.mk\/articles\/"/);
-  const expected = ['index.html', 'articles/index.html', 'sitemap.xml', 'robots.txt'];
+  const expected = ['index.html', 'articles/index.html', 'about/index.html', 'work/index.html', 'publication.json', 'sitemap.xml', 'robots.txt', ...caseStudies.map(project => `work/${project.slug}/index.html`)];
   for (const {data} of await readPublishedArticles(root)) {
     const route = `articles/${data.slug}/index.html`;
     const article = await readFile(join(output, route), 'utf8');
