@@ -86,7 +86,7 @@ h3 {font-size: 1rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.015e
 .project-link {display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; color: var(--accent); font-size: 0.85rem; font-weight: 600;}
 .project-link + .project-link {margin-left: 20px;}
 .detail-page {background: var(--surface); grid-column: 1 / -1; font-size: 1rem;}
-.detail-page h1 {font-size: clamp(1.8rem, 5vw, 2.6rem); max-width: 22ch; margin: 10px 0 18px;}
+.detail-page h1 {font-size: clamp(1.8rem, 5vw, 2.6rem); max-width: 22ch; margin: 10px 0 18px; overflow-wrap: anywhere;}
 .detail-page h2 {margin: 32px 0 12px;}
 .detail-page h3 {margin: 16px 0 8px;}
 .detail-page p + p, .prose p + p {margin-top: 14px;}
