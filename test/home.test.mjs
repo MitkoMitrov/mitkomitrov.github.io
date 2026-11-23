@@ -14,6 +14,7 @@ const document = new JSDOM(html, {url: 'https://mitko.mk/'}).window.document;
 test('homepage renders the agreed hierarchy and shared navigation without JavaScript', () => {
   assert.deepEqual([...document.querySelectorAll('main > section')].map(section => section.id), ['home', 'articles', 'experience', 'work', 'contact']);
   assert.deepEqual([...document.querySelectorAll('nav[aria-label="Primary navigation"] a')].map(link => link.textContent), ['Articles', 'Experience', 'Projects']);
+  assert.deepEqual([...document.querySelectorAll('nav[aria-label="Primary navigation"] a')].map(link => link.getAttribute('href')), ['/articles/', '/#experience', '/work/']);
   assert.equal(document.querySelector('h1').textContent, 'Mitko Mitrov');
   const bioWords = document.querySelector('.intro-summary').textContent.trim().split(/\s+/).length;
   assert.ok(bioWords >= 50 && bioWords <= 85, 'Keep the expanded CV-based bio scannable');
@@ -41,7 +42,7 @@ test('homepage renders the agreed hierarchy and shared navigation without JavaSc
 
 test('selected work highlights a live product alongside past and development projects', () => {
   const work = [...document.querySelectorAll('.project-list > li')];
-  assert.equal(work.length, 4);
+  assert.equal(work.length, 3);
   assert.match(work[0].textContent, /MarketAgent.*Finnhub.*OpenAI/s);
   const liveProject = work[0].querySelector('a[data-project-site]');
   assert.equal(liveProject.href, 'https://mitko.mk/MarketAgent/');
@@ -49,7 +50,6 @@ test('selected work highlights a live product alongside past and development pro
   assert.equal(liveProject.closest('[data-project-id]').dataset.projectId, 'marketagent');
   assert.match(work[1].textContent, /Imenologija.*In development/s);
   assert.match(work[2].textContent, /Past project.*article categorization.*Nginx caching/s);
-  assert.match(work[3].textContent, /AI Daily Stock Reports.*Past project.*OpenAI API/s);
   for (const item of work) {
     assert.ok(item.querySelector('h3'));
     assert.ok(item.querySelector('.project-summary').textContent.length > 50);

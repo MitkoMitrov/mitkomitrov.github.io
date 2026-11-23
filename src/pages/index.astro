@@ -75,7 +75,7 @@ const articles = await getArticleCatalogue();
               <p class="project-category">{project.category}</p>
             </div>
             <p class="project-summary">{project.summary}</p>
-            <a class="project-link" href={`/work/${project.id === 'whowinselections' ? 'election-news' : project.id === 'stock-reports' ? 'daily-stock-reports' : project.id}/`}>Read case study</a>
+            <a class="project-link" href={`/work/${project.id === 'whowinselections' ? 'election-news' : project.id}/`}>Read case study</a>
             {project.href && <a class="project-link" href={project.href} data-project-site>Explore {project.title}</a>}
           </article>
         </li>

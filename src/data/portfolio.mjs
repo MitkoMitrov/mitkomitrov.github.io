@@ -10,9 +10,9 @@ export const profile = {
   ],
 };
 
-// Section URLs remain useful until WEB-13, WEB-04 and WEB-10 introduce their pages.
+// Primary navigation points to content pages and the experience timeline.
 export const navigation = [
-  {label: 'Articles', href: '/#articles'},
+  {label: 'Articles', href: '/articles/'},
   {label: 'Experience', href: '/#experience'},
   {label: 'Projects', href: '/work/'},
 ];
@@ -63,12 +63,6 @@ export const selectedWork = [
     title: 'WhoWinSelections.com',
     category: 'Past project · Feb–Nov 2024',
     summary: 'Built and operated an election news aggregator with article categorization and Nginx caching. Owned the infrastructure, monetization and traffic acquisition.',
-  },
-  {
-    id: 'stock-reports',
-    title: 'AI Daily Stock Reports',
-    category: 'Past project · Sep 2024–Feb 2025',
-    summary: 'Built a pipeline that aggregates market data, filters key events and generates daily reports through the OpenAI API. Optimized prompts and data processing to reduce operating costs.',
   },
 ];
 
