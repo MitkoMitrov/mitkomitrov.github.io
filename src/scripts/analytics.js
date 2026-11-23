@@ -13,6 +13,8 @@
   try { choice = localStorage.getItem(storageKey); } catch { /* Private storage can be unavailable. */ }
   const currentArticle = document.querySelector('[data-article-id]');
   const articleContext = currentArticle ? {article_id:currentArticle.dataset.articleId, article_topic:currentArticle.dataset.articleTopic} : {};
+  const currentProject = document.querySelector('[data-project-page][data-project-id]');
+  const projectContext = currentProject ? {project_id:currentProject.dataset.projectId} : {};
   window.portfolioAnalytics = {
     enabled: () => loaded && choice !== 'denied' && window['ga-disable-' + measurementId] !== true,
     track(name, parameters) {
@@ -38,6 +40,7 @@
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
       ...articleContext,
+      ...projectContext,
       ...(new URLSearchParams(location.search || '').get('analytics_debug') === '1' ? {debug_mode:true} : {}),
     });
     const script = document.createElement('script');
@@ -97,7 +100,7 @@
     if (!link) return;
     const href = link.getAttribute('href');
     const method = href.startsWith('mailto:') ? 'email' : href.startsWith('https://www.linkedin.com/in/') ? 'linkedin' : null;
-    const context = {page_path:location.pathname || '/', ...articleContext};
+    const context = {page_path:location.pathname || '/', ...articleContext, ...projectContext};
     if (method) window.portfolioAnalytics.track('contact_click', {...context, contact_method:method});
     else if (link.dataset.articleOutbound) window.portfolioAnalytics.track('article_outbound', {...context, article_id:link.dataset.articleOutbound, destination:'linkedin'});
     else if (link.hasAttribute('data-project-site') && link.closest('[data-project-id]')) {

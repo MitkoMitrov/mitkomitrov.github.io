@@ -15,5 +15,10 @@ export async function readArticles(root = process.cwd()) {
   return entries;
 }
 export async function readPublishedArticles(root = process.cwd()) {
-  return publishedEntries(await readArticles(root));
+  let cms = [];
+  try {
+    const {readCmsSnapshot} = await import('./prepare-cms.mjs');
+    cms = (await readCmsSnapshot(root)).entries;
+  } catch (error) {if (error.code !== 'ENOENT') throw error;}
+  return publishedEntries([...(await readArticles(root)), ...cms]);
 }

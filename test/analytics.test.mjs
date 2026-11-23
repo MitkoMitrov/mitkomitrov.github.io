@@ -162,3 +162,18 @@ test('debug mode is explicit and never enabled on ordinary visits', () => {
   assert.equal(visit().commands().find(command => command[0] === 'config')[2].debug_mode, undefined);
   assert.equal(visit({url:'https://mitko.mk/?analytics_debug=1'}).commands().find(command => command[0] === 'config')[2].debug_mode, true);
 });
+
+test('case-study page views, project clicks and contact intent carry project context once and stop after opt-out', async () => {
+  const page=visit({html:await readFile('dist/work/marketagent/index.html','utf8'),url:'https://mitko.mk/work/marketagent/'});
+  page.document.addEventListener('click', event => event.preventDefault());
+  assert.equal(page.commands().find(c => c[0] === 'config')[2].project_id,'marketagent');
+  page.document.querySelector('[data-project-site]').click();
+  page.document.querySelector('.case-contact a').click();
+  const events=page.commands().filter(c => c[0] === 'event');
+  assert.deepEqual(events.map(c => c[1]),['project_outbound','contact_click']);
+  assert.ok(events.every(c => c[2].project_id === 'marketagent' && c[2].page_path === '/work/marketagent/'));
+  assert.doesNotMatch(JSON.stringify(events),/mailto:|@/);
+  page.click('decline');
+  page.document.querySelector('[data-project-site]').click();
+  assert.equal(page.commands().filter(c => c[0] === 'event').length,2);
+});

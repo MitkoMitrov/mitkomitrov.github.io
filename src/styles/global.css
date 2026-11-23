@@ -84,6 +84,29 @@ h3 {font-size: 1rem; font-weight: 600; line-height: 1.4; letter-spacing: -0.015e
 .project-category {color: var(--meta); font-size: 0.72rem;}
 .project-summary {margin-top: 8px; color: var(--muted); font-size: 0.85rem;}
 .project-link {display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; color: var(--accent); font-size: 0.85rem; font-weight: 600;}
+.project-link + .project-link {margin-left: 20px;}
+.detail-page {background: var(--surface); grid-column: 1 / -1; font-size: 1rem;}
+.detail-page h1 {font-size: clamp(1.8rem, 5vw, 2.6rem); max-width: 22ch; margin: 10px 0 18px;}
+.detail-page h2 {margin: 32px 0 12px;}
+.detail-page h3 {margin: 16px 0 8px;}
+.detail-page p + p, .prose p + p {margin-top: 14px;}
+.page-eyebrow {color: var(--accent); font-size: 0.875rem; margin-top: 16px; font-weight: 600;}
+.page-deck, .prose {max-width: 65ch; color: var(--muted);}
+.detail-page .contact-links {margin-top: 20px;}
+.detail-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 24px;}
+.about-role {margin-block: 24px;}
+.about-role .timeline-highlights {font-size: 1rem;}
+.page-actions {display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 18px;}
+.page-actions a, .product-link {display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); font-weight: 600;}
+.technology-list {display: flex; flex-wrap: wrap; gap: 8px; margin-block: 16px;}
+.technology-list li {padding: 4px 10px; border: 1px solid var(--line); border-radius: 8px; font-size: 0.875rem;}
+.case-list {display: grid; gap: 24px; margin-top: 32px;}
+.case-list > li {border-top: 1px solid var(--line); padding-top: 24px;}
+.case-list h2 {margin: 8px 0 12px;}
+.case-decision {margin-bottom: 22px;}
+.case-contact {margin-top: 40px; border-top: 1px solid var(--line);}
+.footer-navigation {display: flex; flex-wrap: wrap; gap: 16px;}
+.footer-navigation a {display: inline-flex; align-items: center; min-height: 44px;}
 .contact-section {grid-column: 1 / -1; background: var(--contact); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 24px; row-gap: 8px; padding-block: 24px;}
 .contact-section h2 {font-size: 1.2rem;}
 .contact-section > p {flex-basis: 100%; order: 1; color: var(--muted); font-size: 0.85rem;}

@@ -25,6 +25,7 @@ const person = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
+    {import.meta.env.PORTFOLIO_PREVIEW === '1' && <meta name="robots" content="noindex,nofollow" />}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={profile.name} />

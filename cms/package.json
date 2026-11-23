@@ -1,0 +1,26 @@
+{
+  "name": "mitko-mk-studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev --host 0.0.0.0",
+    "build": "sanity build studio-dist",
+    "deploy": "sanity deploy",
+    "backup": "sanity dataset export production",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@portabletext/block-tools": "6.0.6",
+    "@portabletext/to-html": "6.0.0",
+    "@sanity/client": "8.14.1",
+    "@sanity/code-input": "7.3.14",
+    "@sanity/schema": "6.22.0",
+    "astro": "7.4.5",
+    "jsdom": "30.1.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "sanity": "6.22.0",
+    "shiki": "4.6.0",
+    "styled-components": "6.6.0"
+  }
+}

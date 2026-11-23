@@ -1,0 +1,5 @@
+node_modules/
+.sanity/
+studio-dist/
+.env*
+*.tar.gz

@@ -1,0 +1,16 @@
+---
+import Document from '../../layouts/Document.astro';
+import {caseStudies} from '../../data/case-studies.mjs';
+---
+<Document title="Projects & Case Studies — Mitko Mitrov" description="The problems, engineering decisions and lessons behind my independent software projects." canonicalPath="/work/">
+  <section class="section detail-page" aria-labelledby="work-list-title">
+    <a class="back-link" href="/">Back to portfolio</a>
+    <p class="page-eyebrow">Selected work</p><h1 id="work-list-title">From a problem to a working product.</h1>
+    <p class="page-deck">What I built, the decisions behind it, and what I learned along the way.</p>
+    <ul class="case-list">{caseStudies.map(project => <li><article data-project-id={project.id}>
+      <p class="project-category">{project.status}</p><h2><a href={`/work/${project.slug}/`}>{project.title}</a></h2><p>{project.summary}</p>
+      <ul class="technology-list" aria-label="Technologies and focus">{project.stack.map(item => <li>{item}</li>)}</ul>
+      <div class="page-actions"><a href={`/work/${project.slug}/`}>Read case study</a>{project.href && <a href={project.href} data-project-site>Visit {project.title}</a>}</div>
+    </article></li>)}</ul>
+  </section>
+</Document>

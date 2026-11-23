@@ -1,0 +1,24 @@
+---
+import Document from '../layouts/Document.astro';
+import ContactLinks from '../components/ContactLinks.astro';
+import {experience, profile} from '../data/portfolio.mjs';
+---
+<Document title="About Mitko Mitrov — Software Engineer" description="How I approach full-stack engineering, legacy modernization and independent web products." canonicalPath="/about/">
+  <section class="section detail-page" aria-labelledby="about-title">
+    <a class="back-link" href="/">Back to portfolio</a>
+    <p class="page-eyebrow">About</p><h1 id="about-title">Software that earns its place.</h1>
+    <div class="prose">{profile.bio.map(paragraph => <p>{paragraph}</p>)}</div>
+    <ContactLinks />
+    <h2>How I work</h2>
+    <div class="detail-grid">
+      <article><h3>Understand the full workflow</h3><p>I work across APIs, databases and interfaces. I want to understand what happens before and after a request, including how people use the product and how it behaves when something fails.</p></article>
+      <article><h3>Modernize in useful steps</h3><p>My experience includes moving legacy business logic toward modular ASP.NET Core APIs and shared React interfaces while keeping tenant-specific behavior separate.</p></article>
+      <article><h3>Stay responsible after release</h3><p>Regression tests, structured logs, diagnostics and clear handovers are part of delivery. I also enjoy sharing context and helping other developers build their judgment.</p></article>
+    </div>
+    <h2>Experience highlights</h2>
+    {experience.map(job => <article class="about-role"><h3>{job.company}</h3><p class="muted">{job.role} · {job.startLabel}–{job.endLabel}</p><ul class="timeline-highlights">{job.highlights.map(item => <li>{item}</li>)}</ul></article>)}
+    <h2>Beyond client work</h2>
+    <p>I build independent projects to explore ideas beyond a single product: organizing market information with MarketAgent, and building a sourced encyclopedia of Macedonian names with Imenologija. I also write about practical engineering, including the trade-offs behind caching.</p>
+    <div class="page-actions"><a href="/work/">Explore my projects</a><a href="/articles/">Read my articles</a><a href={`mailto:${profile.email}`}>Discuss a role or project</a></div>
+  </section>
+</Document>
