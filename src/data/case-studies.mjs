@@ -42,17 +42,4 @@ export const caseStudies = [
     ],
     result:'This is a past project. It gave me hands-on experience operating a content product and connecting implementation choices with distribution and operating costs.',
   },
-  {
-    id:'stock-reports', slug:'daily-stock-reports', title:'AI Daily Stock Reports', status:'Past project · 2024–2025',
-    summary:'A market data pipeline that filters important events and produces daily reports through the OpenAI API.',
-    stack:['Data pipelines','OpenAI API','Prompt design'],
-    problem:'Turning a collection of market updates into a readable report requires selecting the useful events and controlling the amount of input sent to the model.',
-    audience:'Readers following daily company and market developments.',
-    contribution:'I built the collection and filtering pipeline and the OpenAI report generation step, including prompt and data-processing improvements.',
-    decisions:[
-      ['Select before summarizing','Filter key events before report generation so the prompt reflects the information the report is meant to explain.'],
-      ['Consider operating cost','Improve prompt structure and data processing together instead of treating model usage as an unlimited resource.'],
-    ],
-    result:'This earlier project developed my approach to data curation and AI report generation, including the importance of controlling input quality and operating cost.',
-  },
 ];
